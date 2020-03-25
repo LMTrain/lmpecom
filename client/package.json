@@ -5,11 +5,16 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.6",
     "dotenv": "^8.1.0",
+    "jest": "^24.8.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "3.1.0"
+    "react-scripts": "3.1.0",
+    "webpack": "^4.39.1",
+    "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
