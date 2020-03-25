@@ -8,15 +8,63 @@
 }
 
 .carousel-img {
-  height: 500px;
+  height: 350px;
   width: 1100px; 
   position: relative;
   margin-top: 10px;
-  margin-right: 10px;  
+  margin-left: 400px;  
   vertical-align: middle;
   padding-top:40px ;
   padding-bottom: 80px;
   
+  
+}
+
+.carousel-imgg {
+  height: 600px;
+  width: 1100px; 
+  position: relative;
+  margin-top: 10px;
+  /* margin-left: 200px;   */
+  vertical-align: middle;
+  /* padding-top:40px ;
+  padding-bottom: 80px; */  
+}
+
+.carousel-indicators {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  left: 0;
+  z-index: 15;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-left: 0;
+  margin-right: 20%;
+  margin-left: 1%;
+  list-style: none;  
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+  width: 300px;
+}
+
+.carousel-left-indicator {
+  margin-left: 200px; 
+  color: black;
+  font-size: 24px;  
+}
+
+.carousel-right-indicator { 
+  margin-right: 620px;
+  color: black;
+  font-size: 24px;  
 }
 
 .hero::after {

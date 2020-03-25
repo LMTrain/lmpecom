@@ -6,12 +6,18 @@ import Col from "../components/Col";
 import Card from "../components/Card";
 
 
+
 function About() {
   return (
     <div>
       <Container style={{ marginTop: 10 }}>
-      <Hero />
-      <Card>
+      <Row>
+        <Col size="md-12" style={{ marginTop: 35 }}>
+          <h3> A Personalized e-Commerce StoreFront</h3>
+        </Col>
+      <Hero style={{ marginTop: 30 }}/>
+      </Row>
+      <Card >
         <Row>
           <Col size="md-12">
             

@@ -7,7 +7,7 @@ function Navbar(props) {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <Link className="navbar-brand" to="/">
-        LM Books
+        LM Pecom
       </Link>
   { props.userName !== undefined ? (<div style={{ fontSize: 20, color: "white"}}><b>{props.membername}</b></div>) :
         <div>

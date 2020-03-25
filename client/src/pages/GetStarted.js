@@ -84,13 +84,29 @@ class GetStarted extends Component {
     let userName = String(newAccount.memberemail)
     let email = String(newAccount.memberemail)
     let password = String(newAccount.memberpassword)
+    let formCcard = 0     
+    let formTheme = ""   
+    let formImage = ""
+    let formColor = ""
+    let formTextAlign = ""
+    let formDivFontSize = ""
+    let formpFontSize = ""
+    let formfontFamily = ""
 
     API.saveUser({
       memberId: memberId,
       memberName: memberName,
       userName: userName,
       email: email,
-      password: password,      
+      password: password,
+      cCard: formCcard,
+      userTheme:formTheme,
+      userImage: formImage,
+      colorDb: formColor,
+      textalignDb: formTextAlign,
+      divfontsizeDb: formDivFontSize,
+      pfontsizeDb: formpFontSize,
+      fontfamilyDb: formfontFamily,     
       
     })
       .then(res => {
