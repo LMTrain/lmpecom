@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+#root > div,
+div[data-reactroot] {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  background-image: url(../src/images/home-bg.jpg);
+  /* background-size: cover; */
+  
+  
+}
+
+html {
+  height: 100%;
+ 
+}
+body {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.footer {
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
