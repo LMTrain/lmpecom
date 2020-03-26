@@ -11,7 +11,7 @@
   height: 350px;
   width: 1100px; 
   position: relative;
-  margin-top: 10px;
+  margin-top: -50px;
   margin-left: 400px;  
   vertical-align: middle;
   padding-top:40px ;
@@ -20,17 +20,22 @@
   
 }
 
-.carousel-imgg {
+/* .carousel-imgg {
   height: 600px;
   width: 1100px; 
   position: relative;
+  margin-top: -10px; 
+  vertical-align: middle;   
+} */
+ .carousel-card {
+  height: 300px !important;
+  width: 1400px !important; 
+  position: relative;
   margin-top: 10px;
-  /* margin-left: 200px;   */
+ 
   vertical-align: middle;
-  /* padding-top:40px ;
-  padding-bottom: 80px; */  
-}
-
+  
+ }
 .carousel-indicators {
   position: absolute;
   right: 0;
@@ -56,13 +61,13 @@ img {
 }
 
 .carousel-left-indicator {
-  margin-left: 200px; 
+  margin-left: -200px; 
   color: black;
   font-size: 24px;  
 }
 
 .carousel-right-indicator { 
-  margin-right: 620px;
+  margin-right: -200px;
   color: black;
   font-size: 24px;  
 }

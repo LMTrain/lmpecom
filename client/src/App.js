@@ -8,16 +8,28 @@ import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 import Signin from "./pages/Signin";
 import GetStarted from "./pages/GetStarted";
+
 // import UserPage from "./pages/UserPage";
 
+
 require('dotenv').config();
+
+
 
 class App extends React.Component {
   state = {
     currentUserThemes: "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg",
     theme: "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg",
+    
   }
 
+  // todaysDeals = () => {
+  //   this.shuffle()
+  // }
+
+  
+
+  
   getTheme = () => {    
     
     switch("theme0"){
@@ -79,8 +91,8 @@ class App extends React.Component {
     
           <Wrapper theme={theme}>
     
-            <Route exact path="/" component={About} />
-            <Route exact path="/about" component={About} />
+            <Route exact path="/" component={About} handleShuffleClick={this.shuffle} deals={this.state.deals} />
+            <Route exact path="/about" component={About} handleShuffleClick={this.shuffle} />
             <Route exact path="/Cart" component={Cart} />      
             <Route exact path="/search" component={Search} />
             <Route exact path="/Getstarted" component={GetStarted} />   

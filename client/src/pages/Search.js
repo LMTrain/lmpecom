@@ -5,7 +5,7 @@ import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import ItemDetails from "../components/ItemDetails";
 // import BookDetailModal from "../components/Modals";
-import SearchBookImage from "../components/SearchBookImage";
+import SearchBookImage from "../components/ItemsInAbout";
 import Cart from "./Cart";
 import dataSet from "./db.json";
 import { Redirect } from "react-router-dom";
@@ -255,7 +255,7 @@ class Search extends Component {
                 /> : [] 
             }
             
-            {showItemImage === false ? [] : <SearchBookImage />}         
+            {/* {showItemImage === false ? [] : <SearchBookImage />}          */}
           
           {showItemImage === false && 
            showItemState === false && 

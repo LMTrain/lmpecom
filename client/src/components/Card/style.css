@@ -1,15 +1,17 @@
 .about-card {
   border-radius: 2px;
-  height: 550px;  
+  height: 500px;  
   position: relative;  
   box-shadow: 0 5px 8px #6f6666, 0 5px 8px #6f6666;
   text-align: left;
   font-size: large;
   border-radius: .95rem;
   margin-bottom: 20px; 
-  margin-top: 40px;
-  width: 1300px;
-  margin-left: -100px;
-  background-color: whitesmoke;
-  padding: 20px 20px 20px 20px;
+  margin-top: 20px;
+  width: 1140px;
+  margin-left: -10px;
+  background-color: white;
+  padding: 30px 30px 30px 30px;
+  overflow: auto;
+  overflow-y: hidden;
 }

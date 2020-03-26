@@ -1,15 +1,3 @@
-.btn-success {
-  color: #fff;
-  font-size: 16px;
-  background-color: #28a745;
-  border-color: #28a745;
-  border-radius: .95rem;
-  box-shadow: 0 2px 2px #999, 0 2px 2px #999;
-  margin-left: 5px;
-  margin-bottom: 15px;
-  margin-left: 30px;
-}
-
 ul.search-results img {
   margin: 0 auto;
 }
@@ -25,21 +13,17 @@ ul.search-results img {
 }
 
 .img-container { 
-  height: 30%;
+  height: 35%;
   overflow: hidden;
-  text-align: center;  
-  border-radius: .95rem;
+  text-align: center;
+  width: 50% !important;
 }
 .card > .img-container > img {
-  width: 30%;
-  height: 30%;
+  width: 40%;
+  height: 55%;
   padding-top: 1rem;
-} */
-
-.h3, h3 {
-  font-size: 20px;
-  font-weight: bold;
 }
+
 
 .card-button {
   font-size: 14px;
@@ -117,12 +101,12 @@ ul.search-results img {
 .item-display {
   background:white;
   border-radius: 32px;
-  height: 1340px !important; 
+  height: 580px !important; 
   position: inherit;
-  width: 1550px !important;
+  width: 1140px !important;
   box-shadow: 0 -10px 29px #6f6666, 0 19px 29px #6f6666;
   text-align: left;
-  margin-top: 50px;
+  margin-top: 10px;
   overflow: auto;
   overflow-y: hidden scroll;
   overflow-x: hidden scroll;
@@ -131,27 +115,39 @@ ul.search-results img {
 .item-row-display {
   display: inline-flex;
   flex-wrap: wrap;
-  /* margin-top: -100px; */
-  margin-left: 45px;    
+  margin-left: 45px;
+  overflow: auto; 
+  margin-top: 10px;
 }
 
 .item-card {
   background-image: linear-gradient(45deg, white 0%, white 100%);
-  border: none;
-  color: black;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s;
-  margin-bottom: 10px;
-  width: 200px !important;
-  height: 380px !important; 
-  margin-top: 50px;
+  font-size: small !important;
+  word-wrap: normal !important;
   margin-right: 5px !important;
+  margin-left: 1px;
+  width: 280px;
+  margin-top: 20px;
 }
 .item-card:hover {
     cursor: pointer;
     transform: translateY(-5px);
   }
 
-  .item-card:hover .readMore:before {
-    background: linear-gradient(to right, #ffffff 0%,#ffffff 100%);
+ 
+  .card-button {
+    font-size: 14px;
+    padding:5px;
+    margin-left: 10px;
+    margin-top: -8px;
+    font-weight: bold;
+    display: flex;
+    margin-inline-start: 15px;
+    margin-inline-end: 5px;
   }
-
+  
+  .card-button :hover {
+    color: orangered;
+    cursor: pointer;
+  }
+  

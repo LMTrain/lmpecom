@@ -8,7 +8,7 @@ function SearchForm(props) {
   return (
    <>
     <span>
-      <h3 className="text-center">Search For Items</h3>
+      <h3 className="text-center">Welcome!</h3>
       <span>
         <form className="search">
           
@@ -38,7 +38,7 @@ function SearchForm(props) {
               <div className="menu-bar">
                 <Button type="submit" onClick={props.signOut}color="info" size="sm">Sign Out</Button>{" "}
                 {/* <Button type="submit" onClick={() => props.backToSearch()} color="info" size="sm">Add More Books</Button>{" "} */}
-                <Button type="submit" onClick={props.renderRedirect} color="info" size="sm" >My Favorites</Button>  
+                <Button type="submit" onClick={props.renderRedirect} color="info" size="sm" >Cart</Button>  
               </div>         
             </>
           }
