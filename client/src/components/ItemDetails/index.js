@@ -27,7 +27,7 @@ function Details(props) {
           </span>       
           <br></br>
           <p><b>Name             :</b> {itemDetail.name}</p>
-          <p><b>Price         :</b> {itemDetail.salePrice}</p>
+          <p><b>Price         :</b> ${itemDetail.salePrice}</p>
           <p><b>Rating         :</b> {itemDetail.customerRating}</p>
           
           <p><b>Description :</b> {itemDetail.shortDescription}</p>          

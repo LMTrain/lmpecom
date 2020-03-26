@@ -11,12 +11,12 @@ ul.search-results img {
 
 .card { 
   border-radius: 2px;
-  height: 400px;  
+  height: 400px !important;  
   position: relative;
-  width: 300px;
-  box-shadow: 0 5px 8px #6f6666, 0 5px 8px #6f6666;
+  width: 300px !important;
+  box-shadow: 0 5px 8px #6f6666, 0 5px 8px #6f6666 !important;
   text-align: left;
-  border-radius: .95rem;
+  border-radius: .95rem !important;
   margin-bottom: 15px;
   margin-top: 10px; 
   margin-left: -550px;   

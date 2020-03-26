@@ -55,7 +55,7 @@ form.search button[type="submit"] {
 
 .form-control {
   display: block;
-  width: 40%;
+  width: 40% !important;
   height: 38px;
   text-align: center;    
   padding: .375rem .75rem;

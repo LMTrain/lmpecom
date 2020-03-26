@@ -43,7 +43,7 @@ function CartDetails(props) {
           
           <br></br>
           <p><b>Name             :</b> {cartItem.item}</p>
-          <p><b>Price         :</b> {cartItem.price}</p>
+          <p><b>Price         :</b> ${cartItem.price}</p>
           <p><b>Rating :</b> {cartItem.rating}</p>
           <p><b>Description :</b> {cartItem.description}</p>          
         </li>        

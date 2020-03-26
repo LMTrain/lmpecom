@@ -19,7 +19,7 @@ class GetStarted extends Component {
     createdAccount: 0
   };
 
-  loadSignInPage = () => {    
+  loadPersonalizePage = () => {    
     this.setRedirect()
     
   };
@@ -32,9 +32,9 @@ class GetStarted extends Component {
   };
 
   renderRedirect = () => {
-    if (this.state.redirect) {      
+    if (this.state.redirect) {          
       // this.props.saveMemberID(UsermemberID) 
-      return <Redirect to='/Signin' />
+      return <Redirect to='/PersonalizePage' />
     }
   };  
  
@@ -115,8 +115,8 @@ class GetStarted extends Component {
           console.log(res.data.error)
           document.getElementById("message").textContent = res.data.error;
         }else{
-         
-          this.loadSignInPage()
+          this.loadPersonalizePage()
+        
         }
       
       })

@@ -5,7 +5,6 @@ import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import ItemDetails from "../components/ItemDetails";
 // import BookDetailModal from "../components/Modals";
-import SearchBookImage from "../components/ItemsInAbout";
 import Cart from "./Cart";
 import dataSet from "./db.json";
 import { Redirect } from "react-router-dom";
