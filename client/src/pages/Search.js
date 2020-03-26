@@ -37,16 +37,11 @@ class Search extends Component {
   //     .catch(err => console.log(err));
   // };
 
-  handleInputChange = (e) =>{
-    console.log("THIS IS e =>", e);
-    console.log("THIS IS e.target =>", e.target.value);
-    this.setState({search: e.target.value});
-    console.log("THIS IS search =>", this.state.search); 
+  handleInputChange = (e) =>{   
+    this.setState({search: e.target.value});   
   }
 
-  handleFormSubmit = (e) => {
-    console.log("THIS IS event =>", e); 
-    console.log("THIS IS search =>", this.state.search);
+  handleFormSubmit = (e) => {    
     e.preventDefault();
     var app = this;
     var results = dataSet.filter(item => {
@@ -56,8 +51,7 @@ class Search extends Component {
                     showItemImage: false,
                     showItemState: false, 
                     showCartItems: false 
-                  });
-    console.log("THESE ARE ITEMS =>", this.state.items);
+                  });    
   } 
   
    
@@ -89,8 +83,7 @@ class Search extends Component {
  
 
   handleDetailsSubmit = (id) => {  
-    // Find the id in the state
-    console.log("THIS IS DETAILSUBMIT =>", this.state.items)
+    // Find the id in the state    
     const item = this.state.items.find((item) => item.itemId === id);    
     this.setState({showItem: [item], 
                   detailsItem: [item], 
@@ -126,7 +119,7 @@ class Search extends Component {
 
   
   cartSubmit = (id) => {    
-    const item = this.state.items.find((item) => item.itemId === id);   
+    const item = this.state.items.find((item) => item.itemId === id);  
     this.setState({showItem: [item], 
                     showCartItems: false, 
                     showItemImage: false,
@@ -136,36 +129,38 @@ class Search extends Component {
                   
      if (item.largeImage === undefined) {
       var itemThumbnail = 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg'
-    } else {
+    } else {     
       itemThumbnail = String(item.largeImage)
     }
 
-    if (item.description === undefined) {
+    if (item.shortDescription === undefined) {
       var itemDescription = 'This item does not have a description'
     } else {
-      itemDescription = String(item.description)
+      itemDescription = String(item.shortDescription)
     }
     
+    // let itemDescription = String(item.shortDescription)
     let itemId = String(item.itemId)    
     let itemName = String(item.name)    
     let itemPrice = Number(item.salePrice)
-    let itemLink = String(item.link)
-    let itemQty = 0
+    let itemLink = String(item.productUrl)
+    let itemQty = 1
+    let itemRating = String(item.customerRating)
     let currentUser = String(this.state.memberId)
   
 
-    function truncateString(str, num) {    
-      if (str.length > num && num > 3) {
-              return str.slice(0, (num - 3)) + '...';
-          } else if (str.length > num && num <= 3) {
-              return str.slice(0, num) + '...';
-          } else {
-          return str;
-      }    
-    }
+    // function truncateString(str, num) {    
+    //   if (str.length > num && num > 3) {
+    //           return str.slice(0, (num - 3)) + '...';
+    //       } else if (str.length > num && num <= 3) {
+    //           return str.slice(0, num) + '...';
+    //       } else {
+    //       return str;
+    //   }    
+    // }
      
-    itemDescription = truncateString(itemDescription, 1780);
-    itemName = truncateString(itemName, 40); 
+    // itemDescription = truncateString(itemDescription, 1780);
+    
 
     API.saveCart({
       itemid: itemId,
@@ -175,6 +170,7 @@ class Search extends Component {
       link: itemLink,
       thumbnail: itemThumbnail,
       description: itemDescription,
+      rating: itemRating,
       qty: itemQty,     
     })
       .then(res => {console.log(res)})

@@ -29,7 +29,7 @@ class Cart extends Component {
   };
  
   componentWillMount() { 
-    mId = this.state.memberId 
+    mId = this.state.memberId    
     this.loadCarts();
   }
 
@@ -130,6 +130,15 @@ class Cart extends Component {
   
 
   render() { 
+    function truncateString(str, num) {    
+      if (str.length > num && num > 3) {
+              return str.slice(0, (num - 3)) + '...';
+          } else if (str.length > num && num <= 3) {
+              return str.slice(0, num) + '...';
+          } else {
+          return str;
+      }    
+    }
     const {useritemCartsCount, showCartState, showCart, showitemCarts, itemId} = this.state;
     return (
       <div>
@@ -174,7 +183,7 @@ class Cart extends Component {
                         <CardHeader className="cart-card-header">
                           <Row>
                             <Col md="10">
-                              <b>Name :</b> {cart.item}
+                              <b>Name :</b> {cart.item = truncateString(cart.item, 40)}
                             </Col>
                             <Col md="2">
                               <span className="delete-button">
@@ -183,19 +192,17 @@ class Cart extends Component {
                             </Col>
                           </Row>                            
                         </CardHeader>
-                            <div className="img-container">
+                            <div className="cart-img-container" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details">
                             <img
-                              alt={cart.item} width="40" height="80"
+                              alt={cart.item} width="140" height="180"
                               src={cart.thumbnail}
                           />
                         </div>
                         <CardBody className="content"> 
-                          <p><b>Price :</b>{" "}{cart.price}</p>
-                          <p><b>Date :</b> {cart.date}</p>
-                          <p><b>QTY :</b> {cart.qty}</p>
-                          <div className="fav-card-button">
-                            <p onClick={() => this.cartItemDetailsSubmit(cart._id)}>Details</p>
-                          </div>
+                          <b>Price :</b>{" "}{cart.price}                     
+                          <b>QTY :</b> {cart.qty}
+                          <b>Rating :</b> {cart.rating}
+                          <b>Desc :</b>  {cart.description = truncateString(cart.description, 80)}
                         </CardBody>                                                                
                       </Card>       
                   </Col>

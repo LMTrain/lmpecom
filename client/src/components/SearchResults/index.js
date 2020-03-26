@@ -19,20 +19,20 @@ function SearchResults(props) {
         <div className = "item-row-display">         
           {props.items.map(result => (   
             <Col key={result.itemId} md="3">
-              <div className="item-card" onClick={() => props.handleDetailsSubmit(result.itemId)} title="See Details">
-                <div className="img-container">                
+              <div className="item-card">
+                <div className="img-container" onClick={() => props.handleDetailsSubmit(result.itemId)} title="See Details">                
                   <img 
                       key={result.itemId} 
                       alt={result.name} width="120" height="160" className="img-fluid" 
                       src={result.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.largeImage} />
                 </div>                  
-                <div className="content">
+                <div className="content" onClick={() => props.handleDetailsSubmit(result.itemId)} title="See Details">
                   <p>{result.name = truncateString(result.name, 40)}</p>
                   <b>Rating :</b> {result.customerRating}
                   <p><b>${result.salePrice}</b></p>
                 </div>
                            
-                  <div className="card-button">                   
+                  <div className="result-card-button">                   
                     { props.memberId === null || props.memberId === undefined ? [] :
                       <>
                         <p onClick={() => props.cartSubmit(result.itemId)}>Buy</p>

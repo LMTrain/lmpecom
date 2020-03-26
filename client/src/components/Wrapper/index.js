@@ -1,8 +1,7 @@
 import React from "react";
 import "./style.css";
 
-function Wrapper(props) {
-  console.log(props)
+function Wrapper(props) { 
   return <main className="wrapper" style={{ backgroundImage: `url(${props.theme})` }} {...props} />;
 }
 

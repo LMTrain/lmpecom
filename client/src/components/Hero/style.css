@@ -31,9 +31,9 @@
   height: 300px !important;
   width: 1400px !important; 
   position: relative;
-  margin-top: 10px;
- 
+  margin-top: 10px; 
   vertical-align: middle;
+  margin-left: 1% !important;
   
  }
 .carousel-indicators {

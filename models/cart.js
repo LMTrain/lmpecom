@@ -10,6 +10,7 @@ const cartSchema = new Schema({
   link: {type: String},
   description: {type: String },
   thumbnail: {type: String },
+  rating: {type: String},
   date: { type: Date, default: Date.now }
 });
 
