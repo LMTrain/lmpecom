@@ -16,24 +16,34 @@ import API from "./utils/API";
 
 require('dotenv').config();
 
-var userArray = []
+var userArray = [];
 var userTheme = ""
+var memberInfo = ""
 // var signInUserTheme = ""
 class App extends React.Component {
   state = {
+    user:[],
+    userArray:[],
     currentUser: null,
     currentUserThemes: "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg",
     theme: "theme0",
+    memberId: "",
+    memberName: "",
+    
     
   }
 
   saveMemberID = (mID, mName) => { 
-    
+  memberInfo = mID;
+  console.log("THIS IS mID", memberInfo)
+
     this.setState({
       currentUser: mID,
       memberId: mID,
+      memberName: mName,
      
     })
+    memberInfo = this.state.currentUser
     this.getMemberInfo()
   }
 
@@ -55,7 +65,7 @@ class App extends React.Component {
 
   getAPIuserData = (id) => {
     const app = this;
-    id = this.state.userName
+    id = this.state.memberId
     API.getUser({      
       userName: id               
     })
@@ -210,7 +220,7 @@ class App extends React.Component {
          this.setFinalTheme()
         break;
         case "theme16":
-          colorrr = "Gray";
+          colorrr = "White";
           testalignnn = "center";
           divfontsizeee = "38px";
           pfontsizeee = "16px";
@@ -225,7 +235,7 @@ class App extends React.Component {
           fontfamilyyy = "Calibri";         
     }
    
-    // memberInfo = String(this.state.currentUser)
+    memberInfo = String(this.state.currentUser)
     let memberId = String(this.state.currentUser)
     let memberName = String(this.state.memberName)
     let userName = String(mID)
@@ -388,7 +398,9 @@ class App extends React.Component {
                   updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"
                 />
               } /> 
-            <Route exact path="/Signin" component={Signin} />
+            <Route exact path="/Signin" 
+              render = { () =>
+                <Signin />} saveMemberID={this.saveMemberID} setTheme={this.setTheme}/>
             <Route exact path="/Sign out" render = { () => <About/>}/>         
             {/* <Route exact path="/UserPage" render = { () => <UserPage logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} />}/> */}
           </Wrapper>

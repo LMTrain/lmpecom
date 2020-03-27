@@ -112,4 +112,9 @@ form.search button[type="submit"] {
   color: #d50000;
 }
 
+.create-acc-btn {
+  margin-inline-start: 15px;
+  margin-inline-end: 5px;
+  gap: 10px;
+}
 

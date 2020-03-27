@@ -8,8 +8,13 @@ import Navbar from "../components/Navbar";
 
 
 
+
+
+var userArray = [];
+var divStyle = {};
 class Signin extends Component {
-  state = {    
+  state = { 
+    memberId: "",   
     user:{},
     membername: "",
     userName: null,
@@ -64,8 +69,7 @@ class Signin extends Component {
         
    
     let userName = String(userAccount.memberemail)   
-    let password = String(userAccount.memberpassword)
-   
+    let password = String(userAccount.memberpassword)   
     API.loginUser({     
       userName: userName,      
       password: password,
@@ -96,21 +100,56 @@ class Signin extends Component {
           })
       
       } else {
+        console.log("SIGNIN PROPS", this.props)
     
         this.setState({
           redirect: true,
-          userName: data[0].memberId,          
+          userName: data[0].memberId,
+          memberId: data[0].memberId,          
           membername: data[0].memberName,
         })       
-        
+        this.loadAPIgetUser(this.state.userName)
+        this.props.saveMemberID(userName, data[0].memberName)
       }
      
     })    
     .catch(err => console.log(err));      
   };
 
+  loadAPIgetUser = (id) => {
+    const app = this; 
+    API.getUser({      
+      userName: this.state.userName,               
+    })
+    .then(function(res){
+      return new Promise(function(resolve, reject){
+        app.setState({ user: res.data })
+        resolve(true);
+      })
+    }).then(function(){
+      userArray = [...app.state.user]
+      app.setState({
+        userTheme: userArray[0].userTheme,
+        membername: userArray[0].memberName
+      })
+      app.userTheme(app.state.userTheme);
+    })
+    .catch(err => console.log(err));
+  }
 
-  render() {    
+  userTheme = (id) => { 
+    divStyle = {
+      color: userArray[0].colorDb,
+      textAlign: userArray[0].textalignDb,
+      fontSize: userArray[0].divfontsizeDb,
+      fontFamily: userArray[0].fontfamilyDb,
+    };
+    this.props.setTheme(id)    
+  }
+
+
+  render() {  
+    const {membername} = this.state   
     return (
       <div>
         { this.state.userName !== null ? null :
@@ -160,10 +199,11 @@ class Signin extends Component {
             </div>
           </Container>
         }
-        {this.state.userName === null || this.state.userName === undefined ? [] : <Navbar          
+        {this.state.userName === null || this.state.userName === undefined ? null : <Navbar          
             userName={this.state.userName} membername={this.state.membername}       
-          />}            
-        {this.state.userName === null || this.state.userName === undefined ? [] : <Search          
+          />} 
+          <div style={divStyle}><b> Welcome {membername}!</b></div>           
+        {this.state.userName === null || this.state.userName === undefined ? null : <Search          
             userName={this.state.userName} 
           />}
       </div>

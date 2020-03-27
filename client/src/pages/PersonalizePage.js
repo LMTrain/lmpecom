@@ -159,7 +159,7 @@ class PersonalizePage extends Component {
           fontfamilyy = "Bodoni MT Black"; 
           break;
         case "theme16":
-          colorr = "Gray";
+          colorr = "White";
           testalignn = "center";
           divfontsizee = "38px";
           pfontsizee = "16px";
@@ -349,9 +349,11 @@ class PersonalizePage extends Component {
             </Row>
             <Row>
               <Col size="md-12">              
-                <div className="create-acc-btn"><button title="Sign in" type="submit" onClick={() => this.loadSignInPage()} className="btn btn-primary float-left">Sign in</button></div>
+                <div className="create-acc-btn">
+                  <button title="Sign in" type="submit" onClick={() => this.loadSignInPage()} className="btn btn-primary float-left">Sign in</button>
+                  <button title="Rock Light Waterfall" type="submit" id="theme0" onClick={() => this.choosenTheme(this.state.userThemes[0])} className="btn btn-primary float-left">Default Theme</button>
                 {/* <div className="create-acc-btn"><button type="submit" onClick={() => this.addPicture()} className="btn btn-primary float-left">Add Your Picture</button> </div> */}
-                <div className="create-acc-btn"><button title="Rock Light Waterfall" type="submit" id="theme0" onClick={() => this.choosenTheme(this.state.userThemes[0])} className="btn btn-primary float-left">Default Theme</button> </div>
+                </div>
               </Col>
             </Row>
         </Container>

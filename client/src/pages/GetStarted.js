@@ -5,7 +5,7 @@ import UserForm from "../components/UserForm";
 import { Redirect } from "react-router-dom";
 
 
-
+var UsermemberID = ""
 class GetStarted extends Component {
   state = {
     memberId: "",
@@ -33,7 +33,7 @@ class GetStarted extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {          
-      // this.props.saveMemberID(UsermemberID) 
+      this.props.saveMemberID(UsermemberID) 
       return <Redirect to='/PersonalizePage' />
     }
   };  
@@ -78,7 +78,7 @@ class GetStarted extends Component {
       confirmpassword
     }    
  
-    
+    UsermemberID = String(newAccount.memberemail)
     let memberId = String(newAccount.memberemail)
     let memberName = String(newAccount.membername)
     let userName = String(newAccount.memberemail)

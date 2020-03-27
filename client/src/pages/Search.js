@@ -8,7 +8,7 @@ import ItemDetails from "../components/ItemDetails";
 import Cart from "./Cart";
 import dataSet from "./db.json";
 import { Redirect } from "react-router-dom";
-import images from '../pages/images.json';
+
 
 
 
