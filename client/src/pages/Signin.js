@@ -113,8 +113,8 @@ class Signin extends Component {
   render() {    
     return (
       <div>
-        { this.state.userName !== null ? [] :
-          <Container style={{ marginTop: 150, marginLeft: 750}}>
+        { this.state.userName !== null ? null :
+          <Container style={{ marginTop: 200 }}>
             <div>
               <div className="card card-body">              
                 <div id ="message">{this.message}</div>

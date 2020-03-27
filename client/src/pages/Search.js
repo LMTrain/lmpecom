@@ -8,6 +8,7 @@ import ItemDetails from "../components/ItemDetails";
 import Cart from "./Cart";
 import dataSet from "./db.json";
 import { Redirect } from "react-router-dom";
+import images from '../pages/images.json';
 
 
 
@@ -191,9 +192,8 @@ class Search extends Component {
     const {showItemState, showItem, showItemImage, showCartItems, showSearchForm} = this.state
     
     return (      
-      <div>
-        
-          <Container style={{ minHeight: "100%", width: "100%" }}>
+      <div>        
+          <Container style={{ marginTop: 100, minHeight: "100%", width: "100%" }}>
                       
             {showItemImage === true && 
              showItemState === false && 

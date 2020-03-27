@@ -33,7 +33,7 @@ class About extends Component  {
   render() {
     return (
       <div>
-        <Container style={{ marginTop: 10 }}>
+        <Container style={{ marginTop: 50 }}>
         <Row>
           <Col size="md-12" style={{ marginTop: 55 }}>
             <h3> A Personalized e-Commerce StoreFront</h3>

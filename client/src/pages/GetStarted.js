@@ -133,8 +133,7 @@ class GetStarted extends Component {
     return (
       <div>
         {this.renderRedirect()}
-        <Container style={{ marginTop: 150, marginLeft: 750 }}>        
-
+        <Container style={{ marginTop: 200 }}>
           <UserForm
             id="message"
             membername={this.state.membername}

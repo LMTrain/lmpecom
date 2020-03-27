@@ -217,8 +217,8 @@ class PersonalizePage extends Component {
     return (
       <div>
         {this.renderRedirect()}
-        <div style={divStyle}>Personalize Your Account</div>
-        <Container style={{ marginTop: 60 }}>
+        <Container style={{ marginTop: 50 }}>
+          <div style={divStyle}>Personalize Your Account</div>
             <div style={divStyle}><b>Choose a Theme</b></div>
             <div id="memberinfo" style={pStyle}></div>
             <div id="message"></div>
@@ -226,28 +226,28 @@ class PersonalizePage extends Component {
               <Col size="md-3">
                 <div className="theme"  type="submit" id="theme1" onClick={() => this.choosenTheme(this.state.userThemes[1])}>
                   <div className="img-container">                   
-                    <img alt="Theme 1" width="120" height="120" title="Mountain Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg' />                   
+                    <img alt="Theme 1" width="120" height="120" title="Mountain Waterfall" src={require('../images/theme1.jpg')} />                   
                   </div>                  
                 </div>
               </Col>
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme2" onClick={() => this.choosenTheme(this.state.userThemes[2])}>
                   <div className="img-container">
-                    <img alt="Theme 2" width="120" height="120" title="Rocky Landscape Daylight" src='https://lmtrain.github.io/lm-images/assets/images/ls_daylight.jpg' />           
+                    <img alt="Theme 2" width="120" height="120" title="Rocky Landscape Daylight" src={require('../images/theme2.jpg')} />           
                   </div>                  
                 </div>
               </Col>
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme3" onClick={() => this.choosenTheme(this.state.userThemes[3])}>
                   <div className="img-container">
-                    <img alt="Theme 3" width="120" height="120" title="Desert Landscape Tree" src='https://lmtrain.github.io/lm-images/assets/images/ls_field-cnn.jpg' />           
+                    <img alt="Theme 3" width="120" height="120" title="Desert Landscape Tree" src={require('../images/theme3.jpg')} />           
                   </div>                  
                 </div>
               </Col>
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme4" onClick={() => this.choosenTheme(this.state.userThemes[4])}>
                   <div className="img-container">
-                    <img alt="Theme 4" width="120" height="120" title="Landscape Field Skyfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_field.jpg' />           
+                    <img alt="Theme 4" width="120" height="120" title="Landscape Field Skyfall" src={require('../images/theme4.jpg')} />           
                   </div>                  
                 </div>
               </Col>
@@ -256,28 +256,28 @@ class PersonalizePage extends Component {
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme5" onClick={() => this.choosenTheme(this.state.userThemes[5])}>
                   <div className="img-container">
-                    <img alt="Theme 5" width="120" height="120" title="Iceland Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg' />            
+                    <img alt="Theme 5" width="120" height="120" title="Iceland Waterfall" src={require('../images/theme5.jpg')} />            
                   </div>                  
                 </div>
               </Col>
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme6" onClick={() => this.choosenTheme(this.state.userThemes[6])}>
                   <div className="img-container">
-                    <img alt="Theme 6" width="120" height="120" title="Rocky Waterfall" src='https://lmtrain.github.io/lm-images/assets/images/ls_wf2.jpg' />            
+                    <img alt="Theme 6" width="120" height="120" title="Rocky Waterfall" src={require('../images/theme6.jpg')} />            
                   </div>                  
                 </div>
               </Col>
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme7" onClick={() => this.choosenTheme(this.state.userThemes[7])}>
                   <div className="img-container">
-                    <img alt="Theme 7" width="120" height="120" title="Landscape Day Cloud" src='https://lmtrain.github.io/lm-images/assets/images/ls_field2.jpg' />            
+                    <img alt="Theme 7" width="120" height="120" title="Landscape Day Cloud" src={require('../images/theme7.jpg')} />            
                   </div>                  
                 </div>
               </Col>
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme8" onClick={() => this.choosenTheme(this.state.userThemes[8])}>
                   <div className="img-container">
-                    <img alt="Theme 8" width="120" height="120" title="Sunset at Hale Azarya" src='https://lmtrain.github.io/lm-images/assets/images/ls_hale-azarya.jpg' />            
+                    <img alt="Theme 8" width="120" height="120" title="Sunset at Hale Azarya" src={require('../images/theme8.jpg')} />            
                   </div>                  
                 </div>
               </Col>
@@ -286,28 +286,28 @@ class PersonalizePage extends Component {
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme9" onClick={() => this.choosenTheme(this.state.userThemes[9])}>
                   <div className="img-container">
-                    <img alt="Theme 9" width="120" height="120" title="Black Gold Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_blackgold.jpg' />            
+                    <img alt="Theme 9" width="120" height="120" title="Black Gold Marble" src={require('../images/theme9.jpg')} />            
                   </div>                  
                 </div>
               </Col>
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme10" onClick={() => this.choosenTheme(this.state.userThemes[10])}>
                   <div className="img-container">
-                    <img alt="Theme 10" width="120" height="120" title="Black White Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_blackwhite.jpg' />            
+                    <img alt="Theme 10" width="120" height="120" title="Black White Marble" src={require('../images/theme10.jpg')} />            
                   </div>                  
                 </div>
               </Col>
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme11" onClick={() => this.choosenTheme(this.state.userThemes[11])}>
                   <div className="img-container">
-                    <img alt="Theme 11" width="120" height="120" title="Blue Cledonia Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_bluecledonia.png' />            
+                    <img alt="Theme 11" width="120" height="120" title="Blue Cledonia Marble" src={require('../images/theme11.jpg')} />            
                   </div>                  
                 </div>
               </Col>
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme12" onClick={() => this.choosenTheme(this.state.userThemes[12])}>
                   <div className="img-container">
-                    <img alt="Theme 12" width="120" height="120" title="Brown Circle Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_browncircle.jpg' />            
+                    <img alt="Theme 12" width="120" height="120" title="Brown Circle Marble" src={require('../images/theme12.jpg')} />            
                   </div>                  
                 </div>
               </Col>
@@ -316,7 +316,7 @@ class PersonalizePage extends Component {
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme13" onClick={() => this.choosenTheme(this.state.userThemes[13])}>
                   <div className="img-container">
-                    <img alt="Theme 13" width="120" height="120" title="Gold Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_gold.jpg' />            
+                    <img alt="Theme 13" width="120" height="120" title="Gold Marble" src={require('../images/theme13.jpg')} />            
                   </div>                  
                 </div>
               </Col>
@@ -330,14 +330,14 @@ class PersonalizePage extends Component {
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme15" onClick={() => this.choosenTheme(this.state.userThemes[15])}>
                   <div className="img-container">
-                    <img alt="Theme 15" width="120" height="120" title="Pink Curly Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_pinkmarble.jpg' />            
+                    <img alt="Theme 15" width="120" height="120" title="Pink Curly Marble" src={require('../images/theme15.jpg')} />            
                   </div>                  
                 </div>
               </Col>
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme16" onClick={() => this.choosenTheme(this.state.userThemes[16])}>
                   <div className="img-container">
-                    <img alt="Theme 16" width="120" height="120" title="Whit Gray Marble" src='https://lmtrain.github.io/lm-images/assets/images/marble_whitegray.jpg' />            
+                    <img alt="Theme 16" width="120" height="120" title="White Gray Marble" src={require('../images/theme16.jpg')} />            
                   </div>                  
                 </div>
               </Col>

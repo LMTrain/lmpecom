@@ -8,7 +8,6 @@ import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 import Signin from "./pages/Signin";
 import Getstarted from "./pages/GetStarted";
-
 import PersonalizePage from "./pages/PersonalizePage";
 import API from "./utils/API";
 
@@ -24,7 +23,7 @@ class App extends React.Component {
   state = {
     currentUser: null,
     currentUserThemes: "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg",
-    theme: "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg",
+    theme: "theme0",
     
   }
 
@@ -268,79 +267,93 @@ class App extends React.Component {
 
   setTheme = (id) => {      
     switch(id){
-      case "theme0":
-        userTheme = "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg"
-  
-       this.setFinalTheme()
+      case "theme0":        
+        userTheme = "theme0"
+        this.setFinalTheme()
         break;
+
       case "theme1":
-        userTheme= "https://lmtrain.github.io/lm-images/assets/images/ls_field-wf5.jpg"
-       this.setFinalTheme()
+        userTheme= "theme1"
+        this.setFinalTheme()
         break;
-      case "theme2":
-        
-        userTheme= "https://lmtrain.github.io/lm-images/assets/images/ls_daylight.jpg"
-       this.setFinalTheme()
+
+      case "theme2":        
+        userTheme= "theme2"
+        this.setFinalTheme()
         break;
       case "theme3":
-        userTheme= "https://lmtrain.github.io/lm-images/assets/images/ls_field-cnn.jpg"
-       this.setFinalTheme()
+        userTheme= "theme3"
+        this.setFinalTheme()
         break;
+
       case "theme4":
-        userTheme= "https://lmtrain.github.io/lm-images/assets/images/ls_field.jpg"
-       this.setFinalTheme()
+        userTheme= "theme4"
+        this.setFinalTheme()
         break;
+
       case "theme5":
-        userTheme= "https://lmtrain.github.io/lm-images/assets/images/ls_wf1.jpg"
-       this.setFinalTheme()
-        break;
-      case "theme6":
-        userTheme= "https://lmtrain.github.io/lm-images/assets/images/ls_wf2.jpg"
+        userTheme= "theme5"
        this.setFinalTheme()
         break;
 
-      case "theme7":
-        userTheme= "https://lmtrain.github.io/lm-images/assets/images/ls_field2.jpg"
-       this.setFinalTheme()
-        break;
-        case "theme8":
-        userTheme= "https://lmtrain.github.io/lm-images/assets/images/ls_hale-azarya.jpg"
-       this.setFinalTheme()
-        break;
-        case "theme9":
-        userTheme= "https://lmtrain.github.io/lm-images/assets/images/marble_blackgold.jpg"
-       this.setFinalTheme()
-        break;
-        case "theme10":
-         userTheme= "https://lmtrain.github.io/lm-images/assets/images/marble_blackwhite.jpg"
+      case "theme6":
+        userTheme= "theme6"
         this.setFinalTheme()
         break;
-         case "theme11":
-          userTheme= "https://lmtrain.github.io/lm-images/assets/images/marble_bluecledonia.png"
-         this.setFinalTheme()
+
+      case "theme7":
+        userTheme= "theme7"
+        this.setFinalTheme()
         break;
-          case "theme12":
-          userTheme= "https://lmtrain.github.io/lm-images/assets/images/marble_browncircle.jpg"
-         this.setFinalTheme()
+
+        case "theme8":
+        userTheme= "theme8"
+        this.setFinalTheme()
         break;
-          case "theme13":
-            userTheme= "https://lmtrain.github.io/lm-images/assets/images/marble_gold.jpg"
-         this.setFinalTheme()
+
+        case "theme9":
+        userTheme= "theme9"
+        this.setFinalTheme()
         break;
-          case "theme14":
-          userTheme= ""
-         this.setFinalTheme()
-        break;
-          case "theme15":
-          userTheme= "https://lmtrain.github.io/lm-images/assets/images/marble_pinkmarble.jpg"
+
+        case "theme10":
+          userTheme= "theme10"
           this.setFinalTheme()
-          break;
-          case "theme16":
-          userTheme= "https://lmtrain.github.io/lm-images/assets/images/marble_whitegray.jpg"
+        break;
+
+        case "theme11":
+          userTheme= "theme11"
+          this.setFinalTheme()
+        break;
+
+          case "theme12":
+          userTheme= "theme12"
          this.setFinalTheme()
         break;
+
+        case "theme13":
+          userTheme= "theme13"
+          this.setFinalTheme()
+        break;
+
+        case "theme14":
+          userTheme= "theme14"
+          this.setFinalTheme()
+        break;
+
+        case "theme15":
+          userTheme= "theme15"
+          this.setFinalTheme()
+        break;
+
+        case "theme16":
+          userTheme= "theme16"
+          this.setFinalTheme()
+        break;
+
       default :
-      userTheme= "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg"
+      userTheme= "theme0"
+      this.setFinalTheme()
     }
   }
  
