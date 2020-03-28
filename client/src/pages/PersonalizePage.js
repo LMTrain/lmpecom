@@ -4,6 +4,7 @@ import "./themestyle.css";
 import Row from "../components/Row";
 import Col from "../components/Col";
 import { Redirect } from "react-router-dom";
+import { Button } from 'reactstrap';
 
 
 var divStyle = {}
@@ -19,6 +20,9 @@ class PersonalizePage extends Component {
     reduceTheme:-1,
   };
 
+  addPicture = () => {
+    console.log("THIS WILL BE USER's PICTURE")
+  }
 
   loadSignInPage = () => {    
     this.setRedirect()
@@ -300,7 +304,7 @@ class PersonalizePage extends Component {
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme11" onClick={() => this.choosenTheme(this.state.userThemes[11])}>
                   <div className="img-container">
-                    <img alt="Theme 11" width="120" height="120" title="Blue Cledonia Marble" src={require('../images/theme11.jpg')} />            
+                    <img alt="Theme 11" width="120" height="120" title="Rain Forest Waterfall" src={require('../images/theme11.jpg')} />            
                   </div>                  
                 </div>
               </Col>
@@ -337,7 +341,7 @@ class PersonalizePage extends Component {
               <Col size="md-3">
                 <div className="theme" type="submit" id="theme16" onClick={() => this.choosenTheme(this.state.userThemes[16])}>
                   <div className="img-container">
-                    <img alt="Theme 16" width="120" height="120" title="White Gray Marble" src={require('../images/theme16.jpg')} />            
+                    <img alt="Theme 16" width="120" height="120" title="Galaxy" src={require('../images/theme16.jpg')} />            
                   </div>                  
                 </div>
               </Col>
@@ -350,9 +354,9 @@ class PersonalizePage extends Component {
             <Row>
               <Col size="md-12">              
                 <div className="create-acc-btn">
-                  <button title="Sign in" type="submit" onClick={() => this.loadSignInPage()} className="btn btn-primary float-left">Sign in</button>
-                  <button title="Rock Light Waterfall" type="submit" id="theme0" onClick={() => this.choosenTheme(this.state.userThemes[0])} className="btn btn-primary float-left">Default Theme</button>
-                {/* <div className="create-acc-btn"><button type="submit" onClick={() => this.addPicture()} className="btn btn-primary float-left">Add Your Picture</button> </div> */}
+                  <Button title="Sign in" type="submit" onClick={() => this.loadSignInPage()} color="info" size="sm" >Sign in</Button>
+                  <Button title="Rock Light Waterfall" type="submit" id="theme0" onClick={() => this.choosenTheme(this.state.userThemes[0])} color="info" size="sm" >Default Theme</Button>
+                  <Button title="Add your picture" type="submit" onClick={() => this.addPicture()} color="info" size="sm" >Add Your Picture</Button>
                 </div>
               </Col>
             </Row>

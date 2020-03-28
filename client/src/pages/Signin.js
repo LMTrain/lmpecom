@@ -4,9 +4,6 @@ import "./style.css";
 import API from "../utils/API";
 import { Button } from 'reactstrap';
 import Search from "./Search";
-import Navbar from "../components/Navbar";
-
-
 
 
 
@@ -108,7 +105,7 @@ class Signin extends Component {
           memberId: data[0].memberId,          
           membername: data[0].memberName,
         })       
-        this.loadAPIgetUser(this.state.userName)
+        // this.loadAPIgetUser(this.state.userName)
         this.props.saveMemberID(userName, data[0].memberName)
       }
      
@@ -116,40 +113,40 @@ class Signin extends Component {
     .catch(err => console.log(err));      
   };
 
-  loadAPIgetUser = (id) => {
-    const app = this; 
-    API.getUser({      
-      userName: this.state.userName,               
-    })
-    .then(function(res){
-      return new Promise(function(resolve, reject){
-        app.setState({ user: res.data })
-        resolve(true);
-      })
-    }).then(function(){
-      userArray = [...app.state.user]
-      app.setState({
-        userTheme: userArray[0].userTheme,
-        membername: userArray[0].memberName
-      })
-      app.userTheme(app.state.userTheme);
-    })
-    .catch(err => console.log(err));
-  }
+  // loadAPIgetUser = (id) => {
+  //   const app = this; 
+  //   API.getUser({      
+  //     userName: this.state.userName,               
+  //   })
+  //   .then(function(res){
+  //     return new Promise(function(resolve, reject){
+  //       app.setState({ user: res.data })
+  //       resolve(true);
+  //     })
+  //   }).then(function(){
+  //     userArray = [...app.state.user]
+  //     app.setState({
+  //       userTheme: userArray[0].userTheme,
+  //       membername: userArray[0].memberName
+  //     })
+  //     app.userTheme(app.state.userTheme);
+  //   })
+  //   .catch(err => console.log(err));
+  // }
 
-  userTheme = (id) => { 
-    divStyle = {
-      color: userArray[0].colorDb,
-      textAlign: userArray[0].textalignDb,
-      fontSize: userArray[0].divfontsizeDb,
-      fontFamily: userArray[0].fontfamilyDb,
-    };
-    this.props.setTheme(id)    
-  }
+  // userTheme = (id) => { 
+  //   divStyle = {
+  //     color: userArray[0].colorDb,
+  //     textAlign: userArray[0].textalignDb,
+  //     fontSize: userArray[0].divfontsizeDb,
+  //     fontFamily: userArray[0].fontfamilyDb,
+  //   };
+  //   this.props.setTheme(id)    
+  // }
 
 
   render() {  
-    const {membername} = this.state   
+    const {membername, userName} = this.state   
     return (
       <div>
         { this.state.userName !== null ? null :
@@ -199,13 +196,13 @@ class Signin extends Component {
             </div>
           </Container>
         }
-        {this.state.userName === null || this.state.userName === undefined ? null : <Navbar          
-            userName={this.state.userName} membername={this.state.membername}       
-          />} 
-          <div style={divStyle}><b> Welcome {membername}!</b></div>           
-        {this.state.userName === null || this.state.userName === undefined ? null : <Search          
-            userName={this.state.userName} 
-          />}
+        {/* {userName === null || userName === undefined ? null : <Navbar          
+            userName={userName} membername={membername}       
+        />}  */}
+          {/* <div style={divStyle}><b> Welcome {membername}!</b></div>            */}
+        {userName === null || userName === undefined ? null : <Search          
+            userName={userName} membername={membername}
+        />}
       </div>
     );
   }

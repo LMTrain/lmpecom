@@ -29,8 +29,21 @@ class App extends React.Component {
     theme: "theme0",
     memberId: "",
     memberName: "",
+    navBarDefault: true,  
     
-    
+  }
+
+  navBarOption = (id) => {
+    console.log("NAVBAR OPTION IN APP", id)
+    // if (id === this.state.memberId) {
+    //   console.log("YES ITS THE SAME USERNAME", this.state.memberName)
+    //   this.setState({ userNavBar: true,                      
+    //                 })
+    // }else {
+    //   console.log("IT IS NOT")
+    //   this.setState({ userNavBar: false,
+    //                   currentUser})
+    // }
   }
 
   saveMemberID = (mID, mName) => { 
@@ -41,10 +54,10 @@ class App extends React.Component {
       currentUser: mID,
       memberId: mID,
       memberName: mName,
-     
-    })
-    memberInfo = this.state.currentUser
-    this.getMemberInfo()
+      userName: mID,     
+    }) 
+    console.log("THIS IS currentuser", this.state.currentUser, this.state.memberName) 
+    // this.getMemberInfo()
   }
 
   getMemberInfo = () => {
@@ -375,17 +388,18 @@ class App extends React.Component {
 
   render() {
 
-    const {theme} = this.state;
+    const {theme, deals, navBarDefault, memberName, currentUser} = this.state;
 
     return (
       <Router>
         <div className="container-content">
-          <Navbar />
+          { navBarDefault === true ? 
+            <Navbar navBarOption={this.navBarOption} UserName={currentUser} membername={memberName}/> : null}
     
           <Wrapper theme={theme}>
     
-            <Route exact path="/" component={About} handleShuffleClick={this.shuffle} deals={this.state.deals} />
-            <Route exact path="/about" component={About} handleShuffleClick={this.shuffle} />
+            <Route exact path="/" component={About} handleShuffleClick={this.shuffle} deals={deals} />
+            {/* <Route exact path="/about" component={About} handleShuffleClick={this.shuffle} /> */}
             <Route exact path="/Cart" component={Cart} />      
             <Route exact path="/search" component={Search} />
             <Route exact path="/Getstarted" 
@@ -398,9 +412,7 @@ class App extends React.Component {
                   updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"
                 />
               } /> 
-            <Route exact path="/Signin" 
-              render = { () =>
-                <Signin />} saveMemberID={this.saveMemberID} setTheme={this.setTheme}/>
+            <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} setTheme={this.setTheme}/>} />
             <Route exact path="/Sign out" render = { () => <About/>}/>         
             {/* <Route exact path="/UserPage" render = { () => <UserPage logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} />}/> */}
           </Wrapper>

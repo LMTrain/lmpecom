@@ -3,13 +3,20 @@ import { Link } from "react-router-dom";
 import "./style.css";
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
-function Navbar(props) {  
+var option = ""
+function Navbar(props) {
+  console.log("NAVBAR", props.userName)
+  if (props.userName === null || props.userName === undefined) {
+     option = "from-search"
+  } else {
+     option = props.userName
+  }
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <Link className="navbar-brand" to="/">
-        LM Pecom
+        <span onClick={() => props.navBarOption(option)}>LM Pecom</span>
       </Link>
-  { props.userName !== undefined ? (<div style={{ fontSize: 20, color: "white"}}><b>{props.membername}</b></div>) :
+        { props.userName !== undefined || props.userName !== null  ? (<div style={{ fontSize: 20, color: "white" }}><b>{props.membername}</b></div>) :
         <div>
           <ul className="navbar-nav">
             <li className="nav-item">

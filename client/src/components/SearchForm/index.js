@@ -7,8 +7,7 @@ import { Button } from 'reactstrap';
 function SearchForm(props) { 
   return (
    <>
-    <span>
-      <h3 className="text-center">Welcome!</h3>
+      
       <span>
         <form className="search">
           
@@ -33,7 +32,7 @@ function SearchForm(props) {
               </button>
             </span>
           </div>
-          { props.memberId === undefined ? [] :
+          { props.memberId === undefined ? null :
             <>
               <div className="menu-bar">
                 <Button type="submit" onClick={props.signOut}color="info" size="sm">Sign Out</Button>{" "}
@@ -45,7 +44,7 @@ function SearchForm(props) {
           
         </form>
       </span>
-    </span>
+    
     
   </>
   );

@@ -139,7 +139,7 @@ class Cart extends Component {
           return str;
       }    
     }
-    const {useritemCartsCount, showCartState, showCart, showitemCarts, itemId} = this.state;
+    const {useritemCartsCount, showCartState, showCart, showitemCarts, itemId, userCarts} = this.state;
     return (
       <div>
         <Container style={{ marginTop: 50 }}>
@@ -171,11 +171,11 @@ class Cart extends Component {
                     backToFav={this.backToFav}
                     addQty={this.addQty} 
                     memberId={this.state.memberId}
-                  /> : [] 
+                  /> : null 
               }       
               {showCartState === false &&
               showitemCarts === true &&
-              this.state.userCarts.length ? (
+              userCarts.length ? (
                 <div className="cart-row-display">
                   {this.state.userCarts.map(cart => (
                     <Col key={cart._id} md="3">                  
@@ -213,12 +213,12 @@ class Cart extends Component {
               ) 
                 : showCartState === false &&
                   showitemCarts === true &&
-                  this.state.useritemCartsCount === 0 ?
+                  useritemCartsCount === 0 ?
                   (<div>
                     <h5>No item(s) in your Cart</h5>
                     <Button type="submit" onClick={() => this.props.backToSearch()} color="info" size="sm">Add More Item</Button>{" "}
                   </div>
-                ) : []
+                ) : null
               
             }
             </Container>

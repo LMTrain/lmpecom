@@ -8,6 +8,7 @@ import ItemDetails from "../components/ItemDetails";
 import Cart from "./Cart";
 import dataSet from "./db.json";
 import { Redirect } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 
 
@@ -18,7 +19,8 @@ class Search extends Component {
     search: "",
     favMessage:"",
     id: "",
-    memberId: this.props.userName,      
+    memberId: this.props.userName, 
+    memberName: this.props.membername,     
     items: [],
     error: "",
     showItem: [],
@@ -27,9 +29,23 @@ class Search extends Component {
     showItemImage: true,
     showCartItems: false,
     showSearchForm: true,
+    userNavBar: true,
     redirect: false,
   };
 
+
+  navBarOption = (id) => {
+    console.log("NAVBAR OPTION IN SEARCH", id)
+    if (id === this.state.memberId) {
+      console.log("YES ITS THE SAME USERNAME", this.state.memberName)
+      this.setState({ userNavBar: true,
+                      memberId: id,
+                    })
+    }else {
+      console.log("IT IS NOT")
+      this.setState({userNavBar: false})
+    }
+  };
     
   // searchForBooks = query => {
   //   API.search(query)
@@ -189,7 +205,9 @@ class Search extends Component {
   
  
   render() {   
-    const {showItemState, showItem, showItemImage, showCartItems, showSearchForm} = this.state
+    const {showItemState, showItem, items, showItemImage, memberName, 
+            showCartItems, showSearchForm, search, memberId, userNavBar,
+          } = this.state
     
     return (      
       <div>        
@@ -200,13 +218,13 @@ class Search extends Component {
              showCartItems === false &&
               showSearchForm === true ? 
                 <SearchForm
-                  search={this.state.search}
+                  search={search}
                   handleFormSubmit={this.handleFormSubmit}
                   handleInputChange={this.handleInputChange} 
                   renderRedirect={this.renderRedirect}
                   backToSearch={this.backToSearch}
-                  memberId={this.state.memberId}           
-                /> : []
+                  memberId={memberId}           
+                /> : null
             }
             { !showItemState && 
               showCartItems === false &&
@@ -214,13 +232,13 @@ class Search extends Component {
               showSearchForm === true ?
               
                 <SearchForm
-                search={this.state.search}
+                search={search}
                 handleFormSubmit={this.handleFormSubmit}
                 handleInputChange={this.handleInputChange} 
                 renderRedirect={this.renderRedirect}
                 backToSearch={this.backToSearch}
-                memberId={this.state.memberId}           
-              /> : []
+                memberId={memberId}            
+              /> : null
             }
                     
             { !showItemState && 
@@ -229,14 +247,12 @@ class Search extends Component {
               showSearchForm === true ?
               
                 <SearchResults 
-                  items={this.state.items === undefined ? [] : this.state.items}
+                  items={items === undefined ? null : items}
                   cartSubmit={this.cartSubmit}         
                   handleDetailsSubmit={this.handleDetailsSubmit}
-                  memberId={this.state.memberId}          
-                /> : [] 
-                      
+                  memberId={memberId}          
+                /> : null 
             }
-          
 
             {showItemImage === false && 
              showItemState === true && 
@@ -246,8 +262,8 @@ class Search extends Component {
                  showItem={showItem} 
                   cartSubmit={this.cartSubmit} 
                   backToSearch={this.backToSearch} 
-                  memberId={this.state.memberId}
-                /> : [] 
+                  memberId={memberId}
+                /> : null 
             }
             
             {/* {showItemImage === false ? [] : <SearchBookImage />}          */}
@@ -257,17 +273,35 @@ class Search extends Component {
            showCartItems === true &&
             showSearchForm === false ? 
               <Cart
-                memberId={this.state.memberId}
+                memberId={memberId}
                 backToSearch={this.backToSearch} 
                 renderRedirect={this.renderRedirect}
                 handleDetailsSubmit={this.handleDetailsSubmit}
                 signOut={this.signOut}
-              /> : []
+              /> : null
           }
           </Container>
-    
-       
+          { !userNavBar ? null : <Navbar 
+            search={search}
+            handleFormSubmit={this.handleFormSubmit}
+            handleInputChange={this.handleInputChange} 
+            renderRedirect={this.renderRedirect}
+            backToSearch={this.backToSearch}
+            userName={memberId}
+            membername={memberName}
+            navBarOption={this.navBarOption}
+          />}
 
+          {/* {memberId !== null || memberId !== undefined ? <Navbar 
+            search={search}
+            handleFormSubmit={this.handleFormSubmit}
+            handleInputChange={this.handleInputChange} 
+            renderRedirect={this.renderRedirect}
+            backToSearch={this.backToSearch}
+            userName={memberId}
+            membername={memberName}
+          /> } */}
+          
       </div>
       
     );

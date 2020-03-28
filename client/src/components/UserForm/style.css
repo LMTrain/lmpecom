@@ -6,7 +6,6 @@
 }
 
 .gs-card-card-body {
-/* text-align: center; */
 position: relative;
 }
 
@@ -54,7 +53,7 @@ form.search button[type="submit"] {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  border-radius: .95rem;
+  border-radius: 60px;
   box-shadow: 0 2px 2px #999, 0 2px 2px #999;
   font-size: 12px;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;  
