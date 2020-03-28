@@ -50,9 +50,11 @@ form.search button[type="submit"] {
 .search-form-group {
   display: flex;
   flex-direction: row; 
-  margin-left: -1px;
+  margin-left: 60px;
+  margin-top: 15px;
   height: 40px; 
-  width: 1000px;   
+  width: 700px; 
+  align-items: center;  
 }
 
 

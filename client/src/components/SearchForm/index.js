@@ -5,6 +5,9 @@ import { Button } from 'reactstrap';
 
 // Using the datalist element we can create autofill suggestions based on the props.breeds array
 function SearchForm(props) { 
+  if (props.memberId === undefined) {
+
+  }
   return (
    <>
       
@@ -14,8 +17,8 @@ function SearchForm(props) {
           <div className="search-form-group">
             <label htmlFor="search"></label>
             <input
-              value={props.search}
-              onChange={props.handleInputChange}
+              value={props.appSearch || props.search}
+              onChange={props.apphandleInputChange || props.handleInputChange}
               // onChange={props.setSearch}
               name="search"          
               type="text"
@@ -26,17 +29,17 @@ function SearchForm(props) {
             <span>
               <button 
                 type="submit" 
-                onClick={props.handleFormSubmit} 
+                onClick={props.apphandleFormSubmit || props.handleFormSubmit} 
                 className="btn btn-success">
                 <span><i className="fa fa-search"></i></span>
               </button>
             </span>
-          </div>
+          </div>          
           { props.memberId === undefined ? null :
             <>
               <div className="menu-bar">
                 <Button type="submit" onClick={props.signOut}color="info" size="sm">Sign Out</Button>{" "}
-                {/* <Button type="submit" onClick={() => props.backToSearch()} color="info" size="sm">Add More Books</Button>{" "} */}
+                <Button type="submit" onClick={() => props.backToSearch()} color="info" size="sm">Add items</Button>{" "}
                 <Button type="submit" onClick={props.renderRedirect} color="info" size="sm" >Cart</Button>  
               </div>         
             </>

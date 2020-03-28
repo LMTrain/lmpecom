@@ -5,6 +5,7 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import Card from "../components/Card";
 import ItemsInAbout from "../components/ItemsInAbout";
+import SearchResults from "../components/SearchResults"
 import deals from "../pages/deals.json"
 
 
@@ -15,6 +16,8 @@ var ShuffledDatas = []
 class About extends Component  {
   state = {
     deals,
+    showSearchResult: this.props.showItemState,
+    items: this.props.items
   };
 
   shuffle = () => {
@@ -31,6 +34,9 @@ class About extends Component  {
 
  
   render() {
+    console.log(this.state.items)
+    console.log(this.state.showSearchResult)
+    const {showSearchResult, items} = this.state
     return (
       <div>
         <Container style={{ marginTop: 50 }}>
@@ -49,7 +55,10 @@ class About extends Component  {
           
           <Row>
             <Col size="md-12">
-              <ItemsInAbout handleShuffleClick={this.shuffle} deals={this.state.deals}/>
+              { showSearchResult === false ?
+                <ItemsInAbout handleShuffleClick={this.shuffle} deals={this.state.deals}/> :
+                <ItemsInAbout handleShuffleClick={this.shuffle} deals={items}/>
+              }
             </Col>
           </Row>
         </Card>

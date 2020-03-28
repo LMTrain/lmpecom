@@ -13,5 +13,27 @@ nav.navbar.navbar-default {
   height: 8%;
   grid-row-start: 2;
   grid-row-end: 3;
-  font-size: 18px;
+  font-size: 18px;  
+}
+
+.navbar-brand {
+  margin-left: 100px;
+}
+
+/* .search-in-nav {
+  margin-left: 50px;
+  margin-top: 15px;
+} */
+
+.getstarted-in-nav {
+  margin-right: 100px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255,255,255,.5);
+  margin-inline-start: 60px;
+  margin-inline-end: 60px;
+  margin-top: 15px;
+  /* margin-left: 50px;
+  margin-right: 50px; */
 }

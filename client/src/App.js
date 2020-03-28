@@ -10,6 +10,7 @@ import Signin from "./pages/Signin";
 import Getstarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
 import API from "./utils/API";
+import dataSet from "../src/pages/db.json"
 
 // import UserPage from "./pages/UserPage";
 
@@ -19,6 +20,8 @@ require('dotenv').config();
 var userArray = [];
 var userTheme = ""
 var memberInfo = ""
+var appitems = []
+var appItemsShow = false
 // var signInUserTheme = ""
 class App extends React.Component {
   state = {
@@ -27,9 +30,12 @@ class App extends React.Component {
     currentUser: null,
     currentUserThemes: "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg",
     theme: "theme0",
+    appSearch: "",
+    appItems: [],
     memberId: "",
     memberName: "",
-    navBarDefault: true,  
+    navBarDefault: true, 
+    showItemState: false, 
     
   }
 
@@ -44,6 +50,32 @@ class App extends React.Component {
     //   this.setState({ userNavBar: false,
     //                   currentUser})
     // }
+  }
+
+  apphandleInputChange = (e) =>{   
+    this.setState({appSearch: e.target.value});   
+  }
+
+  apphandleFormSubmit = (e) => {    
+    e.preventDefault();    
+    var app = this;
+    var results = dataSet.filter(item => {
+      return item.name.toLowerCase().indexOf(app.state.appSearch.toLowerCase()) !== -1;
+    })
+    appItemsShow = true;
+    appitems = results
+    app.setState({ items: results, 
+      showItemImage: false,
+      showItemState: false, 
+      showCartItems: false 
+    });    
+
+    console.log("THIS IS STAET", app.state.appItems) 
+    console.log("THIS IS VAR", appitems)   
+  } 
+
+  setSearchResults = () => {
+    console.log("THESE ARE ITEMS FROM SEARCH IN APPS PAGE")
   }
 
   saveMemberID = (mID, mName) => { 
@@ -388,20 +420,33 @@ class App extends React.Component {
 
   render() {
 
-    const {theme, deals, navBarDefault, memberName, currentUser} = this.state;
+    const {theme, memberName, currentUser, showItemState, appItems, appSearch} = this.state;
 
     return (
       <Router>
         <div className="container-content">
-          { navBarDefault === true ? 
-            <Navbar navBarOption={this.navBarOption} UserName={currentUser} membername={memberName}/> : null}
+          {  currentUser === null ? 
+            <Navbar navBarOption={this.navBarOption}
+              appSearch={appSearch}
+              apphandleFormSubmit={this.apphandleFormSubmit}
+              apphandleInputChange={this.apphandleInputChange} 
+            /> : null}
+
+          {  currentUser !== null ? 
+            <Navbar navBarOption={this.navBarOption} 
+              UserName={currentUser} 
+              membername={memberName}
+              appSearch={appSearch}
+              apphandleFormSubmit={this.apphandleFormSubmit}
+              apphandleInputChange={this.apphandleInputChange} 
+            /> : null}
     
           <Wrapper theme={theme}>
     
-            <Route exact path="/" component={About} handleShuffleClick={this.shuffle} deals={deals} />
-            {/* <Route exact path="/about" component={About} handleShuffleClick={this.shuffle} /> */}
+            <Route exact path="/" render = { () => <About showItemState={showItemState} items={appItems}/>} />
+           
             <Route exact path="/Cart" component={Cart} />      
-            <Route exact path="/search" component={Search} />
+            <Route exact path="/search" render = { () => <Search setSearchResults={this.setSearchResults}/>} />
             <Route exact path="/Getstarted" 
               render = { () => 
                 <Getstarted saveMemberID={this.saveMemberID} />} />

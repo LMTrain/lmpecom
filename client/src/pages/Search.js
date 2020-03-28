@@ -213,7 +213,7 @@ class Search extends Component {
       <div>        
           <Container style={{ marginTop: 100, minHeight: "100%", width: "100%" }}>
                       
-            {showItemImage === true && 
+            {/* {showItemImage === true && 
              showItemState === false && 
              showCartItems === false &&
               showSearchForm === true ? 
@@ -239,7 +239,7 @@ class Search extends Component {
                 backToSearch={this.backToSearch}
                 memberId={memberId}            
               /> : null
-            }
+            } */}
                     
             { !showItemState && 
               showCartItems === false &&
