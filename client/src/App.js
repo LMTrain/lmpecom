@@ -20,9 +20,6 @@ require('dotenv').config();
 var userArray = [];
 var userTheme = ""
 var memberInfo = ""
-var appitems = []
-var appItemsShow = false
-// var signInUserTheme = ""
 class App extends React.Component {
   state = {
     user:[],
@@ -30,7 +27,7 @@ class App extends React.Component {
     currentUser: null,
     currentUserThemes: "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg",
     theme: "theme0",
-    appSearch: "",
+    search: "",
     appItems: [],
     memberId: "",
     memberName: "",
@@ -52,78 +49,34 @@ class App extends React.Component {
     // }
   }
 
-  apphandleInputChange = (e) =>{   
-    this.setState({appSearch: e.target.value});   
-  }
+  // handleInputChange = (e) =>{   
+  //   this.setState({appSearch: e.target.value});   
+  // }
 
-  apphandleFormSubmit = (e) => {    
-    e.preventDefault();    
-    var app = this;
-    var results = dataSet.filter(item => {
-      return item.name.toLowerCase().indexOf(app.state.appSearch.toLowerCase()) !== -1;
-    })
-    appItemsShow = true;
-    appitems = results
-    app.setState({ items: results, 
-      showItemImage: false,
-      showItemState: false, 
-      showCartItems: false 
-    });    
+  // handleFormSubmit = (e) => {    
+  //   e.preventDefault();    
+  //   var app = this;
+  //   var results = dataSet.filter(item => {
+  //     return item.name.toLowerCase().indexOf(app.state.appSearch.toLowerCase()) !== -1;
+  //   })
+  //   appItemsShow = true;
+  //   appitems = results
+  //   app.setState({ items: results, 
+      
+  //   });    
 
-    console.log("THIS IS STAET", app.state.appItems) 
-    console.log("THIS IS VAR", appitems)   
-  } 
+  //   console.log("THIS IS STATE", app.state.appItems) 
+  //   console.log("THIS IS VAR", appitems)   
+  // } 
 
-  setSearchResults = () => {
-    console.log("THESE ARE ITEMS FROM SEARCH IN APPS PAGE")
-  }
+  // setSearchResults = () => {
+  //   console.log("THESE ARE ITEMS FROM SEARCH IN APPS PAGE")
+  // }
 
-  saveMemberID = (mID, mName) => { 
-  memberInfo = mID;
-  console.log("THIS IS mID", memberInfo)
 
-    this.setState({
-      currentUser: mID,
-      memberId: mID,
-      memberName: mName,
-      userName: mID,     
-    }) 
-    console.log("THIS IS currentuser", this.state.currentUser, this.state.memberName) 
-    // this.getMemberInfo()
-  }
 
-  getMemberInfo = () => {
-    switch(this.state.currentUser !== null){
-      case true:
-        this.getAPIuserData(this.state.currentUser);
-       
-        break;
-      case false:
-      console.log("WHAT IS INSIDE", this.state.currentUser)
-   
-      break;      
-      default:
-          console.log("FROM DEFAULT MID====>", this.state.currentUser)
-                   
-    }    
-  } 
 
-  getAPIuserData = (id) => {
-    const app = this;
-    id = this.state.memberId
-    API.getUser({      
-      userName: id               
-    })
-    .then(function(res){
-      return new Promise(function(resolve, reject){
-        app.setState({ user: res.data })
-        resolve(true);
-      })
-    }).then(function(){
-      userArray = [...app.state.user]
-    })
-    .catch(err => console.log(err));
-  }
+  
 
 
   //UPDATE THEME IN DB
@@ -320,6 +273,69 @@ class App extends React.Component {
 
   } 
 
+
+  saveMemberID = (mID, mName) => { 
+    memberInfo = mID;
+    console.log("THIS IS mID", memberInfo)
+  
+      this.setState({
+        currentUser: mID,
+        memberId: mID,
+        memberName: mName,
+        userName: mID,     
+      }) 
+      console.log("THIS IS currentuser", this.state.currentUser, this.state.memberName) 
+      // this.getMemberInfo()
+    }
+  
+    getMemberInfo = () => {
+      switch(this.state.currentUser !== null){
+        case true:
+          this.getAPIuserData(this.state.currentUser);
+         
+          break;
+        case false:
+        console.log("WHAT IS INSIDE", this.state.currentUser)
+     
+        break;      
+        default:
+            console.log("FROM DEFAULT MID====>", this.state.currentUser)
+                     
+      }    
+    } 
+  
+    getAPIuserData = (id) => {
+      const app = this;
+      id = this.state.memberId
+      API.getUser({      
+        userName: id               
+      })
+      .then(function(res){
+        return new Promise(function(resolve, reject){
+          app.setState({ user: res.data })
+          resolve(true);
+        })
+      }).then(function(){
+        userArray = [...app.state.user]
+      })
+      .catch(err => console.log(err));
+    }
+
+
+
+  setSearch = (e) =>{
+    this.setState({search:e.target.value});    
+  }
+  searchForItems = (e) => {
+    e.preventDefault();
+    var app = this;
+    var results = dataSet.filter(item => {
+      return item.name.toLowerCase().indexOf(app.state.search.toLowerCase()) !== -1;
+    })
+    app.setState({ Items: results});
+  } 
+
+
   setTheme = (id) => {      
     switch(id){
       case "theme0":        
@@ -420,43 +436,48 @@ class App extends React.Component {
 
   render() {
 
-    const {theme, memberName, currentUser, showItemState, appItems, appSearch} = this.state;
-
+    const {theme, memberName, currentUser, search} = this.state;  
     return (
       <Router>
         <div className="container-content">
-          {  currentUser === null ? 
-            <Navbar navBarOption={this.navBarOption}
-              appSearch={appSearch}
-              apphandleFormSubmit={this.apphandleFormSubmit}
-              apphandleInputChange={this.apphandleInputChange} 
-            /> : null}
-
-          {  currentUser !== null ? 
-            <Navbar navBarOption={this.navBarOption} 
-              UserName={currentUser} 
+            <Navbar
+              userName={currentUser} 
               membername={memberName}
-              appSearch={appSearch}
-              apphandleFormSubmit={this.apphandleFormSubmit}
-              apphandleInputChange={this.apphandleInputChange} 
-            /> : null}
-    
+              search={search}
+              submit={this.searchForItems} 
+              setSearch={this.setSearch}
+            />
+           
           <Wrapper theme={theme}>
     
-            <Route exact path="/" render = { () => <About showItemState={showItemState} items={appItems}/>} />
+            <Route exact path="/" render = { () => <About />} />
            
+            <Route exact path="/search" 
+              render = { () => 
+                <Search 
+                  currentUser={this.state.currentUser}
+                  membername={memberName} 
+                  setTheme={this.setTheme}
+                  setSearchResults={this.setSearchResults}
+                />
+              } 
+            />
+
             <Route exact path="/Cart" component={Cart} />      
-            <Route exact path="/search" render = { () => <Search setSearchResults={this.setSearchResults}/>} />
             <Route exact path="/Getstarted" 
               render = { () => 
-                <Getstarted saveMemberID={this.saveMemberID} />} />
+                <Getstarted saveMemberID={this.saveMemberID} />
+              } 
+            />
             <Route exact path="/PersonalizePage" 
               render = { () => 
                 <PersonalizePage 
                   setTheme={this.setTheme} theme={this.state.theme} currentUser={this.state.currentUser} 
                   updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"
                 />
-              } /> 
+              } 
+            /> 
+
             <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} setTheme={this.setTheme}/>} />
             <Route exact path="/Sign out" render = { () => <About/>}/>         
             {/* <Route exact path="/UserPage" render = { () => <UserPage logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} />}/> */}

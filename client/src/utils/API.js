@@ -76,6 +76,7 @@ export default {
   },
   // Gets the user with the given id
   getUser: function(currentAccount) {
+    console.log("THIS IS getUser =>", currentAccount)
     return axios.get(`/api/users/current/${currentAccount.userName}`);
   },
   // Update the user with the given id

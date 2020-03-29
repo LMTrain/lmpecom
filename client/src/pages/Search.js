@@ -1,25 +1,28 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import Container from "../components/Container";
-import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import ItemDetails from "../components/ItemDetails";
 // import BookDetailModal from "../components/Modals";
 import Cart from "./Cart";
 import dataSet from "./db.json";
 import { Redirect } from "react-router-dom";
-import Navbar from "../components/Navbar";
 
 
 
 
+var userArray = [];
+var usertheme = "";
+var divStyle = {};
+var userName =""
 class Search extends Component {
   
   state = {
+    user: [],
     search: "",
     favMessage:"",
     id: "",
-    memberId: this.props.userName, 
+    userName: this.props.currentUser,
     memberName: this.props.membername,     
     items: [],
     error: "",
@@ -34,18 +37,64 @@ class Search extends Component {
   };
 
 
-  navBarOption = (id) => {
-    console.log("NAVBAR OPTION IN SEARCH", id)
-    if (id === this.state.memberId) {
-      console.log("YES ITS THE SAME USERNAME", this.state.memberName)
-      this.setState({ userNavBar: true,
-                      memberId: id,
-                    })
-    }else {
-      console.log("IT IS NOT")
-      this.setState({userNavBar: false})
+  componentWillMount() {      
+    this.loadUserData();   
+  }
+
+  loadUserData = () => {
+    this.setState({
+      userName: this.props.currentUser
+    })
+    userName = this.state.userName
+  
+    const currentAccount = {     
+      userName,          
     }
-  };
+    this.loadAPIgetUser(currentAccount.userName);
+    console.log("THIS IS loadUserData", this.props.userName)
+  }
+
+  loadAPIgetUser = (id) => {
+    console.log("THIS IS id IN loadAPIgetUser =>", id)
+    const app = this;
+    id = userName  
+    API.getUser({      
+      userName: userName,               
+    })
+    .then(function(res){
+      return new Promise(function(resolve, reject){
+        app.setState({ user: res.data })
+        resolve(true);
+      })
+    }).then(function(){
+      userArray = [...app.state.user]
+      usertheme = userArray[0].userTheme      
+      app.userTheme(usertheme);
+    })
+    .catch(err => console.log(err));
+  }
+
+  userTheme = (id) => { 
+    divStyle = {
+      color: userArray[0].colorDb,
+      textAlign: userArray[0].textalignDb,
+      fontSize: userArray[0].divfontsizeDb,
+      fontFamily: userArray[0].fontfamilyDb,
+    };
+    this.props.setTheme(id)    
+  }
+  // navBarOption = (id) => {
+  //   console.log("NAVBAR OPTION IN SEARCH", id)
+  //   if (id === this.state.memberId) {
+  //     console.log("YES ITS THE SAME USERNAME", this.state.memberName)
+  //     this.setState({ userNavBar: true,
+  //                     memberId: id,
+  //                   })
+  //   }else {
+  //     console.log("IT IS NOT")
+  //     this.setState({userNavBar: false})
+  //   }
+  // };
     
   // searchForBooks = query => {
   //   API.search(query)
@@ -205,8 +254,8 @@ class Search extends Component {
   
  
   render() {   
-    const {showItemState, showItem, items, showItemImage, memberName, 
-            showCartItems, showSearchForm, search, memberId, userNavBar,
+    const {showItemState, showItem, items, showItemImage, 
+            showCartItems, showSearchForm, memberId,
           } = this.state
     
     return (      
@@ -281,7 +330,7 @@ class Search extends Component {
               /> : null
           }
           </Container>
-          { !userNavBar ? null : <Navbar 
+          {/* { !userNavBar ? null : <Navbar 
             search={search}
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange} 
@@ -290,7 +339,7 @@ class Search extends Component {
             userName={memberId}
             membername={memberName}
             navBarOption={this.navBarOption}
-          />}
+          />} */}
 
           {/* {memberId !== null || memberId !== undefined ? <Navbar 
             search={search}

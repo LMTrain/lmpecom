@@ -3,25 +3,39 @@ import Container from "../components/Container";
 import "./style.css";
 import API from "../utils/API";
 import { Button } from 'reactstrap';
-import Search from "./Search";
+import { Redirect } from "react-router-dom";
 
 
 
-var userArray = [];
-var divStyle = {};
 class Signin extends Component {
   state = { 
     memberId: "",   
     user:{},
     membername: "",
     userName: null,
-    memberpassword: "",  
-    redirect: false,
+    memberpassword: "",    
     isError: false,
     errorMessage: '',
     message: '', 
+    redirect: false,
   };
 
+  loadSearchPage = () => {    
+    this.setRedirect()
+    
+  }
+
+  setRedirect = () => {    
+    this.setState({
+      redirect: true,      
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {         
+      return <Redirect to='/Search' />
+    }
+  }
 
   handleInputChange = event => {
     const name = event.target.name;
@@ -146,13 +160,14 @@ class Signin extends Component {
 
 
   render() {  
-    const {membername, userName} = this.state   
+    const {userName} = this.state   
     return (
       <div>
-        { this.state.userName !== null ? null :
+        {this.renderRedirect()}
+        { userName !== null ? null :
           <Container style={{ marginTop: 200 }}>
             <div>
-              <div className="card card-body">              
+              <div className="card card-body">
                 <div id ="message">{this.message}</div>
                 <h5>Sign In</h5>
                 <form className="form-groups">          
@@ -200,9 +215,9 @@ class Signin extends Component {
             userName={userName} membername={membername}       
         />}  */}
           {/* <div style={divStyle}><b> Welcome {membername}!</b></div>            */}
-        {userName === null || userName === undefined ? null : <Search          
+        {/* {userName === null || userName === undefined ? null : <Search          
             userName={userName} membername={membername}
-        />}
+        />} */}
       </div>
     );
   }
