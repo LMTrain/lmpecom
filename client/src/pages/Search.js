@@ -35,7 +35,8 @@ class Search extends Component {
     showItemImage: this.props.showItemImage,
     showItemState: this.props.showItemState,  
     showCartItems: this.props.showCartItems,
-    showItemDetail: false,  
+    showItemDetail: false, 
+    showSearchItem: false, 
     redirect: false,
   };
 
@@ -115,11 +116,10 @@ class Search extends Component {
 
   handleDetailsSubmit = (id) => {  
     // Find the id in the state    
-    const item = this.state.items.find((item) => item.itemId === id);    
+    const item = this.props.Items.find((item) => item.itemId === id);    
     this.setState({showItem: [item], 
                   detailsItem: [item], 
-                  showItemDetail: true, 
-                  showItemImage: false,                  
+                  showItemDetail: true,
                   showCartItems: false,
                   redirect: true
                 })
@@ -154,19 +154,20 @@ class Search extends Component {
                     showItemState: false
                   })
                   
-     if (item.largeImage === undefined) {
-      var itemThumbnail = 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg'
-    } else {     
-      itemThumbnail = String(item.largeImage)
-    }
+    //  if (item.largeImage === undefined) {
+    //   var itemThumbnail = 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg'
+    // } else {     
+    //   itemThumbnail = String(item.largeImage)
+    // }
 
-    if (item.shortDescription === undefined) {
-      var itemDescription = 'This item does not have a description'
-    } else {
-      itemDescription = String(item.shortDescription)
-    }
+    // if (item.shortDescription === undefined) {
+    //   var itemDescription = 'This item does not have a description'
+    // } else {
+    //   itemDescription = String(item.shortDescription)
+    // }
     
-    // let itemDescription = String(item.shortDescription)
+    let itemThumbnail = String(item.largeImage)
+    let itemDescription = String(item.shortDescription)
     let itemId = String(item.itemId)    
     let itemName = String(item.name)    
     let itemPrice = Number(item.salePrice)
@@ -206,18 +207,17 @@ class Search extends Component {
   };
 
   backToSearch = () => {
-    this.setState({showCartItems: false, 
-                    showItemImage: false,
-                    showSearchForm: true, 
-                    showItemState: false
+    this.setState({showCartItems: false,                    
+                    showSearchItem: true,
+                    showItemDetail: false
                   });
   };
 
   
  
   render() {   
-    const {showItem, showItemImage, showItemDetail, 
-            showCartItems, showSearchForm, userDivStyle,
+    const {showItem, showItemDetail, showSearchItem,
+            showCartItems, userDivStyle,
           } = this.state
     
     return (      
@@ -227,7 +227,7 @@ class Search extends Component {
             <div style={divStyle}><b> Welcome {membername}!</b></div>: null
           }
                                
-            { this.props.showItemState === true ?             
+            { this.props.showItemState === true || showSearchItem === true?             
               
                 <SearchResults 
                   items={this.props.Items === undefined ? null : this.props.Items}
@@ -238,12 +238,10 @@ class Search extends Component {
                 /> : null 
             }
 
-            {showItemImage === false && 
-             showItemDetail === true && 
-             showCartItems === false &&
-              showSearchForm === false ? 
+            {showItemDetail === true && 
+             showCartItems === false ? 
                 <ItemDetails 
-                 showItem={showItem} 
+                  showItem={showItem} 
                   cartSubmit={this.cartSubmit} 
                   backToSearch={this.backToSearch} 
                   memberId={this.props.currentUser}

@@ -5,8 +5,9 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import Card from "../components/Card";
 import ItemsInAbout from "../components/ItemsInAbout";
-import deals from "../pages/deals.json"
-import SearchResults from "../components/SearchResults"
+import deals from "../pages/deals.json";
+import SearchResults from "../components/SearchResults";
+import ItemDetails from "../components/ItemDetails";
 
 
 
@@ -17,7 +18,11 @@ class About extends Component  {
   state = {
     deals,
     showSearchResult: this.props.showItemState,
-    items: this.props.items
+    items: this.props.items,
+    showItem: [],
+    detailsItem: [],
+    showItemsSearchInAbout: true,
+    showItemDetailInAbout: false,
   };
 
   shuffle = () => {
@@ -32,10 +37,25 @@ class About extends Component  {
       this.setState({ deals: dealsShuffled });  
   };
 
- 
-  render() {
-    
-    const {deals} = this.state
+  handleDetailsSubmit = (id) => {  
+    // Find the id in the state    
+    const item = this.props.Items.find((item) => item.itemId === id);    
+    this.setState({showItem: [item], 
+                  detailsItem: [item], 
+                  showItemDetailInAbout: true,
+                  showItemsSearchInAbout: false,                 
+                })
+  }
+
+  backToSearch = () => {
+    this.setState({showItemDetailInAbout: false,                    
+                    showItemsSearchInAbout: true,
+                    showItemDetail: false
+                  });
+  };
+
+  render() { 
+    const {deals, showItemDetailInAbout, showItem, showItemsSearchInAbout} = this.state   
     return (
       <div>
         <Container style={{ marginTop: 40 }}>
@@ -61,10 +81,21 @@ class About extends Component  {
           </Row>
         </Card> : null}
 
-        { this.props.itemsInAbout === true ?
-                  <SearchResults 
-                  items={this.props.Items} 
-                  memberId={this.props.currentUser} /> : null}
+        {  this.props.itemsInAbout === true && showItemsSearchInAbout === true ?
+            <SearchResults 
+              items={this.props.Items}
+              handleDetailsSubmit={this.handleDetailsSubmit}
+              memberId={this.props.currentUser} 
+            /> : null
+        }
+        
+        { this.props.itemDetailInAbout === true || showItemDetailInAbout === true ?
+            <ItemDetails 
+              showItem={showItem}             
+              backToSearch={this.backToSearch} 
+              memberId={this.props.currentUser}
+            /> : null 
+        }
         </Container>
       </div>
     );

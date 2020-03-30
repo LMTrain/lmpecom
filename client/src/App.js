@@ -32,6 +32,7 @@ class App extends React.Component {
     memberId: "",
     memberName: "", 
     itemsInAbout: false,
+    itemDetailInAbout: false,
     showItemState: false, 
     showCartItems: false,    
   }
@@ -299,9 +300,7 @@ class App extends React.Component {
 
   handleInputChange = event => {
     const name = event.target.name;
-    const value = event.target.value;
-    console.log(name)
-    console.log(value)
+    const value = event.target.value;   
     this.setState({
       [name]: value
     });
@@ -319,8 +318,7 @@ class App extends React.Component {
   searchForBooks = query => {
     var results = dataSet.filter(item => {
       return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-    })    
-    console.log(results)
+    })
     this.setState({Items: results})
   };
 
@@ -425,7 +423,7 @@ class App extends React.Component {
 
   render() {
 
-    const {theme, memberName, currentUser, search, Items, showItemImage, showItemState, showCartItems, itemsInAbout} = this.state;  
+    const {theme, memberName, currentUser, search, Items, showItemImage, showItemState, showCartItems, itemsInAbout, itemDetailInAbout} = this.state;  
     return (
       <Router>
         <div className="container-content">
@@ -442,7 +440,7 @@ class App extends React.Component {
            
           <Wrapper theme={theme}>
     
-            <Route exact path="/" render = { () => <About Items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser}/>} />
+            <Route exact path="/" render = { () => <About Items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser} itemDetailInAbout={itemDetailInAbout}/>} />
             <Route exact path="/about" render = { () => <About items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser}/>} />
             <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} setTheme={this.setTheme}/>} />
             <Route exact path="/Sign out" render = { () => <About setTheme={this.setTheme}/>}/>
