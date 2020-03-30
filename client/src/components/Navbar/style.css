@@ -17,13 +17,23 @@ nav.navbar.navbar-default {
 }
 
 .navbar-brand {
-  margin-left: 100px;
+  margin-left: 200px;
 }
 
-/* .search-in-nav {
-  margin-left: 50px;
+.nav-link {
+  margin-inline-start: -10px;
+  margin-inline-end: 20px;
+  /* margin-top: 15px; */
+}
+
+.signin-menu-bar {
+  color: white;
+  margin-inline-start: 10px;
+  margin-inline-end: 40px;
   margin-top: 15px;
-} */
+  
+  display: flex;  
+}
 
 .getstarted-in-nav {
   margin-right: 100px;
@@ -31,9 +41,48 @@ nav.navbar.navbar-default {
 
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255,255,255,.5);
-  margin-inline-start: 60px;
-  margin-inline-end: 60px;
+  margin-inline-start: -10px;
+  margin-inline-end: 20px;
   margin-top: 15px;
   /* margin-left: 50px;
   margin-right: 50px; */
 }
+
+form.search button[type="submit"] {
+  float: right;
+  margin-top: 1px;
+  border-radius: .95rem;
+  font-size: small;
+  box-shadow: 0 2px 2px #999, 0 2px 2px #999;
+  margin-left: 10px;
+}
+
+.form-control {
+  display: block;  
+  text-align: center;    
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 60px;
+  box-shadow: 0 2px 2px #999, 0 2px 2px #999;
+  font-size: 12px;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;  
+  
+}
+
+.search-form-group {
+  display: flex;
+  flex-direction: row; 
+  margin-left: 10px;
+  margin-top: 5px;
+  height: 40px; 
+  width: 900px; 
+  align-items: center;  
+}
+
+

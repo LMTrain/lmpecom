@@ -29,6 +29,7 @@ class UserPage extends Component {
   };
 
   componentWillMount() {
+    console.log(this.props.currentUser)
     this.loadUserData();    
   }
 
@@ -62,7 +63,17 @@ class UserPage extends Component {
       app.userTheme(usertheme);
     })
     .catch(err => console.log(err));
-  }  
+  }
+  
+  userTheme = (id) => { 
+    divStyle = {
+      color: userArray[0].colorDb,
+      textAlign: userArray[0].textalignDb,
+      fontSize: userArray[0].divfontsizeDb,
+      fontFamily: userArray[0].fontfamilyDb,
+    };
+    this.props.setTheme(id)    
+  }
 
   
   // GETTING USERS INFO FROM DB

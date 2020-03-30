@@ -11,8 +11,7 @@ import Getstarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
 import API from "./utils/API";
 import dataSet from "../src/pages/db.json"
-
-// import UserPage from "./pages/UserPage";
+import UserPage from "./pages/UserPage";
 
 
 require('dotenv').config();
@@ -20,6 +19,7 @@ require('dotenv').config();
 var userArray = [];
 var userTheme = ""
 var memberInfo = ""
+var searchInput = ""
 class App extends React.Component {
   state = {
     user:[],
@@ -28,10 +28,10 @@ class App extends React.Component {
     currentUserThemes: "https://lmtrain.github.io/lm-images/assets/images/ls_wf3.jpg",
     theme: "theme0",
     search: "",
-    appItems: [],
+    Items: [],
     memberId: "",
-    memberName: "",
-    navBarDefault: true, 
+    memberName: "", 
+    itemsInAbout: false,
     showItemState: false, 
     
   }
@@ -275,16 +275,13 @@ class App extends React.Component {
 
 
   saveMemberID = (mID, mName) => { 
-    memberInfo = mID;
-    console.log("THIS IS mID", memberInfo)
-  
+    memberInfo = mID; 
       this.setState({
         currentUser: mID,
         memberId: mID,
         memberName: mName,
         userName: mID,     
-      }) 
-      console.log("THIS IS currentuser", this.state.currentUser, this.state.memberName) 
+      })       
       // this.getMemberInfo()
     }
   
@@ -323,17 +320,49 @@ class App extends React.Component {
 
 
 
-  setSearch = (e) =>{
-    this.setState({search:e.target.value});    
-  }
+  // setSearch = (e) =>{
+  //   searchInput = e.target.value
+  //   this.setState({search:e.target.value});
+  //   console.log(searchInput)    
+  // }
+
   searchForItems = (e) => {
     e.preventDefault();
     var app = this;
     var results = dataSet.filter(item => {
-      return item.name.toLowerCase().indexOf(app.state.search.toLowerCase()) !== -1;
+      return item.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1;
     })
     app.setState({ Items: results});
-  } 
+    console.log(results)
+    console.log(app.state.Items)
+  }
+
+  handleInputChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+    console.log(name)
+    console.log(value)
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleFormSubmit = event => {   
+    event.preventDefault();
+    this.searchForBooks(this.state.search);  
+    this.setState({itemsInAbout: true,
+                    showItemState: true, 
+                    showCartItems: false
+                  });
+  };
+
+  searchForBooks = query => {
+    var results = dataSet.filter(item => {
+      return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+    })    
+    console.log(results)
+    this.setState({Items: results})
+  };
 
 
   setTheme = (id) => {      
@@ -436,7 +465,7 @@ class App extends React.Component {
 
   render() {
 
-    const {theme, memberName, currentUser, search} = this.state;  
+    const {theme, memberName, currentUser, search, Items, showItemImage, showItemState, showCartItems, itemsInAbout} = this.state;  
     return (
       <Router>
         <div className="container-content">
@@ -444,31 +473,19 @@ class App extends React.Component {
               userName={currentUser} 
               membername={memberName}
               search={search}
-              submit={this.searchForItems} 
-              setSearch={this.setSearch}
+              handleFormSubmit={this.handleFormSubmit}
+              handleInputChange={this.handleInputChange}
+              // submit={this.searchForItems} 
+              // setSearch={this.setSearch}
             />
            
           <Wrapper theme={theme}>
     
-            <Route exact path="/" render = { () => <About />} />
-           
-            <Route exact path="/search" 
-              render = { () => 
-                <Search 
-                  currentUser={this.state.currentUser}
-                  membername={memberName} 
-                  setTheme={this.setTheme}
-                  setSearchResults={this.setSearchResults}
-                />
-              } 
-            />
-
-            <Route exact path="/Cart" component={Cart} />      
-            <Route exact path="/Getstarted" 
-              render = { () => 
-                <Getstarted saveMemberID={this.saveMemberID} />
-              } 
-            />
+            <Route exact path="/" render = { () => <About Items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser}/>} />
+            <Route exact path="/about" render = { () => <About items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser}/>} />
+            <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} setTheme={this.setTheme}/>} />
+            <Route exact path="/Sign out" render = { () => <About setTheme={this.setTheme}/>}/>
+            <Route exact path="/Getstarted" render = { () => <Getstarted saveMemberID={this.saveMemberID} />}/>
             <Route exact path="/PersonalizePage" 
               render = { () => 
                 <PersonalizePage 
@@ -476,11 +493,41 @@ class App extends React.Component {
                   updateDBtheme={this.updateDBtheme} getMemberInfo={this.state.getMemberInfo} id="memberinfo"
                 />
               } 
-            /> 
+            />
+            <Route exact path="/UserPage" 
+              render = { () => 
+                <UserPage
+                  setTheme={this.setTheme} 
+                  logOut={this.logOut} 
+                  saveMemberID={this.saveMemberID} 
+                  currentUser={this.state.currentUser} 
+                />
+              }
+            />
+           
+            <Route exact path="/search" 
+              render = { () => 
+                <Search 
+                  setTheme={this.setTheme}
+                  saveMemberID={this.saveMemberID} 
+                  currentUser={this.state.currentUser}
+                  membername={memberName} 
+                  setSearchResults={this.setSearchResults}
+                  Items={Items}
+                  showItemImage={showItemImage}
+                  showItemState={showItemState}
+                  showCartItems={showCartItems}
+                />
+              } 
+            />
 
-            <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} setTheme={this.setTheme}/>} />
-            <Route exact path="/Sign out" render = { () => <About/>}/>         
-            {/* <Route exact path="/UserPage" render = { () => <UserPage logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} />}/> */}
+            <Route exact path="/Cart" component={Cart} />      
+            
+            
+
+            
+                     
+            
           </Wrapper>
           <Footer />
         </div>

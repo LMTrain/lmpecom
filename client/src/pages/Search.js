@@ -11,10 +11,13 @@ import { Redirect } from "react-router-dom";
 
 
 
-var userArray = [];
+var userArray = []
+var membername = ""
+var userName =""
 var usertheme = "";
 var divStyle = {};
-var userName =""
+var redirectOption = " "
+
 class Search extends Component {
   
   state = {
@@ -24,20 +27,19 @@ class Search extends Component {
     id: "",
     userName: this.props.currentUser,
     memberName: this.props.membername,     
-    items: [],
+    items: this.props.Items,
     error: "",
     showItem: [],
     detailsItem: [],
-    showItemState: false,
-    showItemImage: true,
-    showCartItems: false,
-    showSearchForm: true,
-    userNavBar: true,
+    showItemImage: this.props.showItemImage,
+    showItemState: this.props.showItemState,  
+    showCartItems: this.props.showCartItems,
+    showSearchForm: true, 
     redirect: false,
   };
 
 
-  componentWillMount() {      
+  componentWillMount() {        
     this.loadUserData();   
   }
 
@@ -51,11 +53,9 @@ class Search extends Component {
       userName,          
     }
     this.loadAPIgetUser(currentAccount.userName);
-    console.log("THIS IS loadUserData", this.props.userName)
   }
 
-  loadAPIgetUser = (id) => {
-    console.log("THIS IS id IN loadAPIgetUser =>", id)
+  loadAPIgetUser = (id) => {    
     const app = this;
     id = userName  
     API.getUser({      
@@ -68,7 +68,8 @@ class Search extends Component {
       })
     }).then(function(){
       userArray = [...app.state.user]
-      usertheme = userArray[0].userTheme      
+      usertheme = userArray[0].userTheme
+      membername = userArray[0].memberName     
       app.userTheme(usertheme);
     })
     .catch(err => console.log(err));
@@ -79,7 +80,7 @@ class Search extends Component {
       color: userArray[0].colorDb,
       textAlign: userArray[0].textalignDb,
       fontSize: userArray[0].divfontsizeDb,
-      fontFamily: userArray[0].fontfamilyDb,
+      fontFamily: userArray[0].fontfamilyDb,      
     };
     this.props.setTheme(id)    
   }
@@ -119,33 +120,14 @@ class Search extends Component {
                   });    
   } 
   
-   
-  // handleFormSubmit = event => { 
-  //   console.log("THIS IS event =>", this.state.event); 
-  //   console.log("THIS IS search =>", this.state.search);   
-  //   event.preventDefault();
-  //   this.searchForItems(this.state.search);  
-  //   this.setState({showItemImage: false,
-  //                   showItemState: false, 
-  //                   showCartItems: false
-  //                 });
-  // };
-
+  
   signOut = () => {
     this.setState({ redirect: true})
     if (this.state.redirect) {       
       return <Redirect to='/' />
     }
   };
-  // handleInputChange = event => {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
-
- 
+  
 
   handleDetailsSubmit = (id) => {  
     // Find the id in the state    
@@ -180,15 +162,16 @@ class Search extends Component {
                   });
   };
 
-  
+  cartSubmits =(id) => {
+    console.log("THIS IS CART ID =>", id)
+  }
 
   
   cartSubmit = (id) => {    
-    const item = this.state.items.find((item) => item.itemId === id);  
+    const item = this.props.Items.find((item) => item.itemId === id);  
     this.setState({showItem: [item], 
                     showCartItems: false, 
-                    showItemImage: false,
-                    showSearchForm: true, 
+                    showItemImage: false,                  
                     showItemState: false
                   })
                   
@@ -211,7 +194,7 @@ class Search extends Component {
     let itemLink = String(item.productUrl)
     let itemQty = 1
     let itemRating = String(item.customerRating)
-    let currentUser = String(this.state.memberId)
+    let currentUser = String(this.props.currentUser)
   
 
     // function truncateString(str, num) {    
@@ -260,46 +243,16 @@ class Search extends Component {
     
     return (      
       <div>        
-          <Container style={{ marginTop: 100, minHeight: "100%", width: "100%" }}>
-                      
-            {/* {showItemImage === true && 
-             showItemState === false && 
-             showCartItems === false &&
-              showSearchForm === true ? 
-                <SearchForm
-                  search={search}
-                  handleFormSubmit={this.handleFormSubmit}
-                  handleInputChange={this.handleInputChange} 
-                  renderRedirect={this.renderRedirect}
-                  backToSearch={this.backToSearch}
-                  memberId={memberId}           
-                /> : null
-            }
-            { !showItemState && 
-              showCartItems === false &&
-              showItemImage === false &&
-              showSearchForm === true ?
-              
-                <SearchForm
-                search={search}
-                handleFormSubmit={this.handleFormSubmit}
-                handleInputChange={this.handleInputChange} 
-                renderRedirect={this.renderRedirect}
-                backToSearch={this.backToSearch}
-                memberId={memberId}            
-              /> : null
-            } */}
-                    
-            { !showItemState && 
-              showCartItems === false &&
-              showItemImage === false &&
-              showSearchForm === true ?
+          <Container style={{ marginTop: 60, minHeight: "100%", width: "100%" }}>
+          <div style={divStyle}><b> Welcome {membername}!</b></div>                      
+                               
+            { this.props.showItemState === true ?             
               
                 <SearchResults 
-                  items={items === undefined ? null : items}
+                  items={this.props.Items === undefined ? null : this.props.Items}
                   cartSubmit={this.cartSubmit}         
                   handleDetailsSubmit={this.handleDetailsSubmit}
-                  memberId={memberId}          
+                  memberId={this.props.currentUser}          
                 /> : null 
             }
 
@@ -311,7 +264,7 @@ class Search extends Component {
                  showItem={showItem} 
                   cartSubmit={this.cartSubmit} 
                   backToSearch={this.backToSearch} 
-                  memberId={memberId}
+                  memberId={this.props.currentUser}
                 /> : null 
             }
             
@@ -322,7 +275,7 @@ class Search extends Component {
            showCartItems === true &&
             showSearchForm === false ? 
               <Cart
-                memberId={memberId}
+                memberId={this.props.currentUser}
                 backToSearch={this.backToSearch} 
                 renderRedirect={this.renderRedirect}
                 handleDetailsSubmit={this.handleDetailsSubmit}

@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const BASEURL = process.env.REACT_APP_BASEURL
 const APIKEY = process.env.REACT_APP_APIKEY
 // Export an object containing methods we'll use for accessing the Google Book API
@@ -12,8 +11,8 @@ const APIKEY = process.env.REACT_APP_APIKEY
 export default { 
   search: function(query) {
     return axios.get(BASEURL + query + APIKEY);
-  },
-  
+  }, 
+
   searchId: function(keyId) {
     return axios.get("https://www.googleapis.com/books/v1/volumes/" + keyId);
   },
@@ -75,8 +74,7 @@ export default {
     return axios.get("/api/users");
   },
   // Gets the user with the given id
-  getUser: function(currentAccount) {
-    console.log("THIS IS getUser =>", currentAccount)
+  getUser: function(currentAccount) {    
     return axios.get(`/api/users/current/${currentAccount.userName}`);
   },
   // Update the user with the given id

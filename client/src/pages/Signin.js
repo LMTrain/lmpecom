@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 import { Redirect } from "react-router-dom";
 
 
-
+var UsermemberID = ""
 class Signin extends Component {
   state = { 
     memberId: "",   
@@ -20,23 +20,7 @@ class Signin extends Component {
     redirect: false,
   };
 
-  loadSearchPage = () => {    
-    this.setRedirect()
-    
-  }
-
-  setRedirect = () => {    
-    this.setState({
-      redirect: true,      
-    })
-  }
-
-  renderRedirect = () => {
-    if (this.state.redirect) {         
-      return <Redirect to='/Search' />
-    }
-  }
-
+  
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -80,7 +64,8 @@ class Signin extends Component {
         
    
     let userName = String(userAccount.memberemail)   
-    let password = String(userAccount.memberpassword)   
+    let password = String(userAccount.memberpassword)
+    UsermemberID = String(userAccount.memberemail)  
     API.loginUser({     
       userName: userName,      
       password: password,
@@ -110,9 +95,7 @@ class Signin extends Component {
             message: res.data.error
           })
       
-      } else {
-        console.log("SIGNIN PROPS", this.props)
-    
+      } else {            
         this.setState({
           redirect: true,
           userName: data[0].memberId,
@@ -160,10 +143,13 @@ class Signin extends Component {
 
 
   render() {  
-    const {userName} = this.state   
+    const {userName} = this.state 
+    if (this.state.redirect) {
+      this.props.saveMemberID(UsermemberID)
+      return <Redirect to='/search' />
+    }  
     return (
-      <div>
-        {this.renderRedirect()}
+      <div>     
         { userName !== null ? null :
           <Container style={{ marginTop: 200 }}>
             <div>

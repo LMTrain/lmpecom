@@ -6,6 +6,7 @@ import Col from "../components/Col";
 import Card from "../components/Card";
 import ItemsInAbout from "../components/ItemsInAbout";
 import deals from "../pages/deals.json"
+import SearchResults from "../components/SearchResults"
 
 
 
@@ -37,14 +38,16 @@ class About extends Component  {
     const {deals} = this.state
     return (
       <div>
-        <Container style={{ marginTop: 50 }}>
+        <Container style={{ marginTop: 40 }}>
         <Row>
-          <Col size="md-12" style={{ marginTop: 55 }}>
-            <h3> A Personalized e-Commerce StoreFront</h3>
+          <Col size="md-12" style={{ marginTop: 50}}>
+            <h2 style={{color: "white" }}> A Personalized e-Commerce StoreFront</h2>
           </Col>
-        <Hero style={{ marginTop: 30 }}/>
+        <Hero style={{ marginTop: 40 }}/>
         </Row>
-        <Card >
+
+        { this.props.itemsInAbout === false ?
+          <Card >
           <Row>
             <Col size="md-12">
               <h3>Todays Deal</h3>
@@ -53,12 +56,15 @@ class About extends Component  {
           
           <Row>
             <Col size="md-12">
-            
-                <ItemsInAbout handleShuffleClick={this.shuffle} deals={deals}/>
-                
+                  <ItemsInAbout handleShuffleClick={this.shuffle} deals={deals}/>
             </Col>
           </Row>
-        </Card>
+        </Card> : null}
+
+        { this.props.itemsInAbout === true ?
+                  <SearchResults 
+                  items={this.props.Items} 
+                  memberId={this.props.currentUser} /> : null}
         </Container>
       </div>
     );
