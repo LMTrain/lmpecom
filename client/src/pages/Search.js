@@ -24,6 +24,7 @@ class Search extends Component {
     user: [],
     search: "",
     favMessage:"",
+    userDivStyle: {},
     id: "",
     userName: this.props.currentUser,
     memberName: this.props.membername,     
@@ -34,7 +35,7 @@ class Search extends Component {
     showItemImage: this.props.showItemImage,
     showItemState: this.props.showItemState,  
     showCartItems: this.props.showCartItems,
-    showSearchForm: true, 
+    showItemDetail: false,  
     redirect: false,
   };
 
@@ -82,27 +83,10 @@ class Search extends Component {
       fontSize: userArray[0].divfontsizeDb,
       fontFamily: userArray[0].fontfamilyDb,      
     };
+    this.setState({userDivStyle: divStyle})
     this.props.setTheme(id)    
   }
-  // navBarOption = (id) => {
-  //   console.log("NAVBAR OPTION IN SEARCH", id)
-  //   if (id === this.state.memberId) {
-  //     console.log("YES ITS THE SAME USERNAME", this.state.memberName)
-  //     this.setState({ userNavBar: true,
-  //                     memberId: id,
-  //                   })
-  //   }else {
-  //     console.log("IT IS NOT")
-  //     this.setState({userNavBar: false})
-  //   }
-  // };
-    
-  // searchForBooks = query => {
-  //   API.search(query)
-  //     .then(res => this.setState({ items: res.data.items }))         
-  //     .catch(err => console.log(err));
-  // };
-
+ 
   handleInputChange = (e) =>{   
     this.setState({search: e.target.value});   
   }
@@ -134,9 +118,8 @@ class Search extends Component {
     const item = this.state.items.find((item) => item.itemId === id);    
     this.setState({showItem: [item], 
                   detailsItem: [item], 
-                  showItemState: true, 
-                  showItemImage: false,
-                  showSearchForm: false,
+                  showItemDetail: true, 
+                  showItemImage: false,                  
                   showCartItems: false,
                   redirect: true
                 })
@@ -154,19 +137,15 @@ class Search extends Component {
     this.showFavoriteBooks();
   };
 
-  showFavoriteBooks = () => {
-    this.setState({showCartItems: true, 
-                    showItemImage: false,
-                    showSearchForm: false, 
-                    showItemState: false
-                  });
-  };
+  // showUsersCart = () => {
+  //   this.setState({showCartItems: true, 
+  //                   showItemImage: false,
+  //                   showSearchForm: false, 
+  //                   showItemState: false
+  //                 });
+  // };
 
-  cartSubmits =(id) => {
-    console.log("THIS IS CART ID =>", id)
-  }
-
-  
+   
   cartSubmit = (id) => {    
     const item = this.props.Items.find((item) => item.itemId === id);  
     this.setState({showItem: [item], 
@@ -237,14 +216,16 @@ class Search extends Component {
   
  
   render() {   
-    const {showItemState, showItem, items, showItemImage, 
-            showCartItems, showSearchForm, memberId,
+    const {showItem, showItemImage, showItemDetail, 
+            showCartItems, showSearchForm, userDivStyle,
           } = this.state
     
     return (      
       <div>        
           <Container style={{ marginTop: 60, minHeight: "100%", width: "100%" }}>
-          <div style={divStyle}><b> Welcome {membername}!</b></div>                      
+          { this.props.currentUser ?
+            <div style={divStyle}><b> Welcome {membername}!</b></div>: null
+          }
                                
             { this.props.showItemState === true ?             
               
@@ -252,12 +233,13 @@ class Search extends Component {
                   items={this.props.Items === undefined ? null : this.props.Items}
                   cartSubmit={this.cartSubmit}         
                   handleDetailsSubmit={this.handleDetailsSubmit}
-                  memberId={this.props.currentUser}          
+                  memberId={this.props.currentUser}
+                  userDivStyle={userDivStyle}          
                 /> : null 
             }
 
             {showItemImage === false && 
-             showItemState === true && 
+             showItemDetail === true && 
              showCartItems === false &&
               showSearchForm === false ? 
                 <ItemDetails 
@@ -265,45 +247,22 @@ class Search extends Component {
                   cartSubmit={this.cartSubmit} 
                   backToSearch={this.backToSearch} 
                   memberId={this.props.currentUser}
+                  userDivStyle={userDivStyle}
                 /> : null 
-            }
-            
-            {/* {showItemImage === false ? [] : <SearchBookImage />}          */}
-          
-          {showItemImage === false && 
-           showItemState === false && 
-           showCartItems === true &&
-            showSearchForm === false ? 
+            }            
+                     
+          {this.props.showCartItems === true ? 
               <Cart
                 memberId={this.props.currentUser}
                 backToSearch={this.backToSearch} 
                 renderRedirect={this.renderRedirect}
                 handleDetailsSubmit={this.handleDetailsSubmit}
                 signOut={this.signOut}
+                userDivStyle={userDivStyle}
               /> : null
           }
           </Container>
-          {/* { !userNavBar ? null : <Navbar 
-            search={search}
-            handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange} 
-            renderRedirect={this.renderRedirect}
-            backToSearch={this.backToSearch}
-            userName={memberId}
-            membername={memberName}
-            navBarOption={this.navBarOption}
-          />} */}
-
-          {/* {memberId !== null || memberId !== undefined ? <Navbar 
-            search={search}
-            handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange} 
-            renderRedirect={this.renderRedirect}
-            backToSearch={this.backToSearch}
-            userName={memberId}
-            membername={memberName}
-          /> } */}
-          
+         
       </div>
       
     );

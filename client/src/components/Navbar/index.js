@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button } from 'reactstrap';
 import "./style.css";
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
@@ -17,7 +16,6 @@ function Navbar(props) {
             <label htmlFor="search"></label>
             <input
               value={props.search}
-              // onChange={props.setSearch}
               onChange={props.handleInputChange}                             
               name="search"                   
               type="text"
@@ -27,8 +25,7 @@ function Navbar(props) {
             />
             <span>
               <button 
-                type="submit" 
-                // onClick={props.submit}
+                type="submit"
                 onClick={props.handleFormSubmit}
                 className="btn btn-success">
                 <span><i className="fa fa-search"></i></span>
@@ -65,21 +62,19 @@ function Navbar(props) {
           <div className="signin-menu-bar">
             <b>{props.membername}</b> 
           </div>
-          <div className="signin-menu-bar">
-            <Link 
-              to="/cart"
+          <div className="cart-menu-bar">
+            <span 
+              onClick={props.showUsersCart} 
               className={window.location.pathname === "/getstarted" ? "nav-link active" : "nav-link"}
               >
                 Cart
-            </Link>
+            </span>
             <Link 
                 to="/getstarted"
                 className={window.location.pathname === "/getstarted" ? "nav-link active" : "nav-link"}
               >
                   Sign Out
             </Link>
-            {/* onClick={props.renderRedirect} color="info" size="sm" >Cart  
-            <Button type="submit" onClick={props.signOut}color="info" size="sm">Sign Out</Button>{" "}                 */}
           </div>            
         </>
       }

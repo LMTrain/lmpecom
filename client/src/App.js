@@ -33,49 +33,15 @@ class App extends React.Component {
     memberName: "", 
     itemsInAbout: false,
     showItemState: false, 
-    
+    showCartItems: false,    
   }
 
-  navBarOption = (id) => {
-    console.log("NAVBAR OPTION IN APP", id)
-    // if (id === this.state.memberId) {
-    //   console.log("YES ITS THE SAME USERNAME", this.state.memberName)
-    //   this.setState({ userNavBar: true,                      
-    //                 })
-    // }else {
-    //   console.log("IT IS NOT")
-    //   this.setState({ userNavBar: false,
-    //                   currentUser})
-    // }
-  }
-
-  // handleInputChange = (e) =>{   
-  //   this.setState({appSearch: e.target.value});   
-  // }
-
-  // handleFormSubmit = (e) => {    
-  //   e.preventDefault();    
-  //   var app = this;
-  //   var results = dataSet.filter(item => {
-  //     return item.name.toLowerCase().indexOf(app.state.appSearch.toLowerCase()) !== -1;
-  //   })
-  //   appItemsShow = true;
-  //   appitems = results
-  //   app.setState({ items: results, 
-      
-  //   });    
-
-  //   console.log("THIS IS STATE", app.state.appItems) 
-  //   console.log("THIS IS VAR", appitems)   
-  // } 
-
-  // setSearchResults = () => {
-  //   console.log("THESE ARE ITEMS FROM SEARCH IN APPS PAGE")
-  // }
-
-
-
-
+  showUsersCart = () => {
+    this.setState({showCartItems: true,
+                    
+                  });
+    console.log("THIS IS SHOWCARTITEMS")
+  };
   
 
 
@@ -317,14 +283,8 @@ class App extends React.Component {
       })
       .catch(err => console.log(err));
     }
-
-
-
-  // setSearch = (e) =>{
-  //   searchInput = e.target.value
-  //   this.setState({search:e.target.value});
-  //   console.log(searchInput)    
-  // }
+ 
+  
 
   searchForItems = (e) => {
     e.preventDefault();
@@ -475,6 +435,7 @@ class App extends React.Component {
               search={search}
               handleFormSubmit={this.handleFormSubmit}
               handleInputChange={this.handleInputChange}
+              showUsersCart={this.showUsersCart}
               // submit={this.searchForItems} 
               // setSearch={this.setSearch}
             />

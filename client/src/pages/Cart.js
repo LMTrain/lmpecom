@@ -20,7 +20,7 @@ class Cart extends Component {
     useritemCartsCount: 0,
     showCart: [],
     detailsItemCart: [],
-    showCartState: false,    
+    showCartItemDetail: false,    
     showitemCarts: true,
     qty: 0,
     itemId: "",
@@ -67,14 +67,6 @@ class Cart extends Component {
     });   
   };
 
-  // handleInputChange = event => {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
-
   handleFormSubmit = event => {   
     event.preventDefault();
     console.log(event)
@@ -89,14 +81,15 @@ class Cart extends Component {
     this.setState({showCart: [usercart], 
                   detailsItemCart: [usercart],
                   itemId: id, 
-                  showCartState: true,
+                  showCartItemDetail: true,
                   showitemCarts: false,
                   redirect: true
                 })
           
   };
 
-  backToFav = () => {   
+  backToCart = () => {
+    this.setState({showCartItemDetail: false}) 
     this.loadCarts();
   }
 
@@ -139,28 +132,62 @@ class Cart extends Component {
           return str;
       }    
     }
-    const {useritemCartsCount, showCartState, showCart, showitemCarts, itemId, userCarts} = this.state;
+    const {useritemCartsCount, showCartItemDetail, showCart, showitemCarts, itemId, userCarts} = this.state;
     return (
       <div>
-        <Container style={{ marginTop: 50 }}>
-
-            <Row>
-              <Col ms="12">
-                <h3 className="text-center">Cart Items</h3> 
-              </Col>
-            </Row>
+        
           <Row> 
             <Container> 
-              <Row>
-                <Col className="fav-menu-bar">
-                  <Button onClick={this.props.renderRedirect} color="info" size="sm"><b>{useritemCartsCount}</b>{" "}Carts</Button>{" "}    
-                  <Button onClick={() => this.props.backToSearch()} color="info" size="sm">Add More items</Button>{" "}
-                  <Link to="/"><Button type="submit" color="info" size="sm">Sign Out</Button></Link>
-                </Col>
-              </Row>
+              { showitemCarts === true ?
+                <Row>
+                  <Card className="item-display">
+                    <h5 className="text-center">Cart Items</h5> 
+                      {showitemCarts === true &&
+                      userCarts.length ? (                          
+                        <div className="cart-row-display">
+                            {this.state.userCarts.map(cart => (
+                              <Row key={cart._id} md="3"> 
+                                <Col md="10">                                
+                                  {/* <span onClick={() => this.loaditemCarts(cart._id)}> */}
+                                  <div className="cart-card" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details">                    
+                                    <div className="cart-img-container" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details">
+                                      <img className="cart-image"
+                                        alt={cart.item} width="40" height="80"
+                                        src={cart.thumbnail}
+                                      />
+                                    </div>
+                                    <div style={{ color: "black", marginTop: 5}}>
+                                      <p>{cart.item}</p>
+                                      <p>${cart.price} </p> 
+                                      <p> <b>QTY :</b> {cart.qty} <b style={{ color: "white"}}>____</b>{" "}<b>Rating :</b> {cart.rating}</p>
+                                      <p><b>Desc :</b>  {cart.description = truncateString(cart.description, 180)}</p>
+                                    </div>                                    
+                                  </div>       
+                                </Col>
+                                <Col md="2">
+                                <span className="delete-button">
+                                  <Button onClick={() => this.deleteCart(cart._id)} color="danger" size="sm"><b>X</b></Button>                              
+                                </span>
+                                </Col>                 
+                              </Row>
+                            ))
+                          }
+                        </div>
+                      ) 
+                          : showCartItemDetail === false &&
+                            showitemCarts === true &&
+                            useritemCartsCount === 0 ?
+                            (<div>
+                              <h5>No item(s) in your Cart</h5>
+                              <Button type="submit" onClick={() => this.props.backToSearch()} color="info" size="sm">Add More Item</Button>{" "}
+                            </div>
+                          ) : null                
+                      }
+                  </Card>
+                </Row> : null
+              }
               { 
-                showCartState === true &&
-                showitemCarts !== true ? 
+                showCartItemDetail === true ? 
                   <CartDetails
                     note={this.state.qty}
                     handleFormSubmit={this.handleFormSubmit}
@@ -168,62 +195,15 @@ class Cart extends Component {
                     showCart={showCart}
                     itemId={itemId} 
                     cartSubmit={this.cartSubmit} 
-                    backToFav={this.backToFav}
+                    backToCart={this.backToCart}
                     addQty={this.addQty} 
                     memberId={this.state.memberId}
                   /> : null 
               }       
-              {showCartState === false &&
-              showitemCarts === true &&
-              userCarts.length ? (
-                <div className="cart-row-display">
-                  {this.state.userCarts.map(cart => (
-                    <Col key={cart._id} md="3">                  
-                      {/* <span onClick={() => this.loaditemCarts(cart._id)}> */}
-                        <Card className="cart-card">                    
-                          <CardHeader className="cart-card-header">
-                            <Row>
-                              <Col md="10">
-                                <b>Name :</b> {cart.item = truncateString(cart.item, 40)}
-                              </Col>
-                              <Col md="2">
-                                <span className="delete-button">
-                                  <span onClick={() => this.deleteCart(cart._id)}><b>X</b></span>                              
-                                </span>
-                              </Col>
-                            </Row>                            
-                          </CardHeader>
-                              <div className="cart-img-container" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details">
-                              <img
-                                alt={cart.item} width="140" height="180"
-                                src={cart.thumbnail}
-                            />
-                          </div>
-                          <CardBody className="content"> 
-                            <b>Price :</b>{" "}{cart.price}                     
-                            <b>QTY :</b> {cart.qty}
-                            <b>Rating :</b> {cart.rating}
-                            <b>Desc :</b>  {cart.description = truncateString(cart.description, 80)}
-                          </CardBody>                                                                
-                        </Card>       
-                    </Col>
-                  ))
-                }
-              </div>
-              ) 
-                : showCartState === false &&
-                  showitemCarts === true &&
-                  useritemCartsCount === 0 ?
-                  (<div>
-                    <h5>No item(s) in your Cart</h5>
-                    <Button type="submit" onClick={() => this.props.backToSearch()} color="info" size="sm">Add More Item</Button>{" "}
-                  </div>
-                ) : null
-              
-            }
+                 
             </Container>
           </Row>      
-        </Container>
+     
       </div>
     );
   }

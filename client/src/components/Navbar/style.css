@@ -23,17 +23,29 @@ nav.navbar.navbar-default {
 .nav-link {
   margin-inline-start: -10px;
   margin-inline-end: 20px;
-  /* margin-top: 15px; */
 }
 
 .signin-menu-bar {
   color: white;
   margin-inline-start: 10px;
   margin-inline-end: 40px;
-  margin-top: 15px;
-  
-  display: flex;  
+  margin-top: 15px;  
+  display: flex;
 }
+
+.cart-menu-bar { 
+  color: grey;
+  margin-inline-start: 10px;
+  margin-inline-end: 40px;
+  margin-top: 15px;  
+  display: flex; 
+}
+
+.cart-menu-bar :hover{ 
+  color: white; 
+  cursor: pointer;  
+}
+
 
 .getstarted-in-nav {
   margin-right: 100px;
@@ -44,9 +56,7 @@ nav.navbar.navbar-default {
   margin-inline-start: -10px;
   margin-inline-end: 20px;
   margin-top: 15px;
-  /* margin-left: 50px;
-  margin-right: 50px; */
-}
+ }
 
 form.search button[type="submit"] {
   float: right;
