@@ -16,8 +16,6 @@ var membername = ""
 var userName =""
 var usertheme = "";
 var divStyle = {};
-var redirectOption = " "
-
 class Search extends Component {
   
   state = {
@@ -137,20 +135,42 @@ class Search extends Component {
     this.showFavoriteBooks();
   };
 
-  // showUsersCart = () => {
-  //   this.setState({showCartItems: true, 
-  //                   showItemImage: false,
-  //                   showSearchForm: false, 
-  //                   showItemState: false
-  //                 });
-  // };
+  addItemToSaveForLater = (id) => {
+    const item = this.props.Items.find((item) => item.itemId === id);  
+    this.setState({showItem: [item], 
+                    showCartItems: false,
+                    showItemState: false
+                  })
+    let itemThumbnail = String(item.largeImage)
+    let itemDescription = String(item.shortDescription)
+    let itemId = String(item.itemId)    
+    let itemName = String(item.name)    
+    let itemPrice = Number(item.salePrice)
+    let itemLink = String(item.productUrl)
+    let itemQty = 1
+    let itemRating = String(item.customerRating)
+    let currentUser = String(this.props.currentUser)
+    
+    API.SavedItems({
+      itemid: itemId,
+      memberId: currentUser,
+      item: itemName,
+      price: itemPrice,
+      link: itemLink,
+      thumbnail: itemThumbnail,
+      description: itemDescription,
+      rating: itemRating,
+      qty: itemQty,     
+    })
+      .then(res => {console.log(res)})
+      .catch(err => console.log(err)); 
+  };
 
    
   cartSubmit = (id) => {    
     const item = this.props.Items.find((item) => item.itemId === id);  
     this.setState({showItem: [item], 
-                    showCartItems: false, 
-                    showItemImage: false,                  
+                    showCartItems: false,
                     showItemState: false
                   })
                   
@@ -222,7 +242,7 @@ class Search extends Component {
     
     return (      
       <div>        
-          <Container style={{ marginTop: 60, minHeight: "100%", width: "100%" }}>
+          <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
           { this.props.currentUser ?
             <div style={divStyle}><b> Welcome {membername}!</b></div>: null
           }
@@ -231,7 +251,8 @@ class Search extends Component {
               
                 <SearchResults 
                   items={this.props.Items === undefined ? null : this.props.Items}
-                  cartSubmit={this.cartSubmit}         
+                  cartSubmit={this.cartSubmit} 
+                  addItemToSaveForLater={this.addItemToSaveForLater}        
                   handleDetailsSubmit={this.handleDetailsSubmit}
                   memberId={this.props.currentUser}
                   userDivStyle={userDivStyle}          

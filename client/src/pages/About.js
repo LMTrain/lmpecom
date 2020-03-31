@@ -8,7 +8,8 @@ import ItemsInAbout from "../components/ItemsInAbout";
 import deals from "../pages/deals.json";
 import SearchResults from "../components/SearchResults";
 import ItemDetails from "../components/ItemDetails";
-
+import Cart from "../pages/Cart";
+import API from "../utils/API";
 
 
 var shuffleData = ""
@@ -24,6 +25,12 @@ class About extends Component  {
     showItemsSearchInAbout: true,
     showItemDetailInAbout: false,
   };
+
+  // componentWillMount() {
+  //   if (this.props.showCartItems === true) {
+  //     this.setState({showItemsSearchInAbout: false, showItemDetailInAbout: false})
+  //   }
+  // }
 
   shuffle = () => {
     let dealsArray = [...this.state.deals];
@@ -54,7 +61,71 @@ class About extends Component  {
                   });
   };
 
+  addItemToSaveForLater = (id) => {
+    const item = this.props.Items.find((item) => item.itemId === id);  
+    this.setState({showItem: [item], 
+                    showCartItems: false,                                       
+                    showItemState: false
+                  })
+    let itemThumbnail = String(item.largeImage)
+    let itemDescription = String(item.shortDescription)
+    let itemId = String(item.itemId)    
+    let itemName = String(item.name)    
+    let itemPrice = Number(item.salePrice)
+    let itemLink = String(item.productUrl)
+    let itemQty = 1
+    let itemRating = String(item.customerRating)
+    let currentUser = String(this.props.currentUser)
+    
+    API.SavedItems({
+      itemid: itemId,
+      memberId: currentUser,
+      item: itemName,
+      price: itemPrice,
+      link: itemLink,
+      thumbnail: itemThumbnail,
+      description: itemDescription,
+      rating: itemRating,
+      qty: itemQty,     
+    })
+      .then(res => {console.log(res)})
+      .catch(err => console.log(err)); 
+  };
+  
+
+  cartSubmit = (id) => {    
+    const item = this.props.Items.find((item) => item.itemId === id);  
+    this.setState({showItem: [item], 
+                    showCartItems: false,                                   
+                    showItemState: false
+                  })
+    let itemThumbnail = String(item.largeImage)
+    let itemDescription = String(item.shortDescription)
+    let itemId = String(item.itemId)    
+    let itemName = String(item.name)    
+    let itemPrice = Number(item.salePrice)
+    let itemLink = String(item.productUrl)
+    let itemQty = 1
+    let itemRating = String(item.customerRating)
+    let currentUser = String(this.props.currentUser)
+    
+    API.saveCart({
+      itemid: itemId,
+      memberId: currentUser,
+      item: itemName,
+      price: itemPrice,
+      link: itemLink,
+      thumbnail: itemThumbnail,
+      description: itemDescription,
+      rating: itemRating,
+      qty: itemQty,     
+    })
+      .then(res => {console.log(res)})
+      .catch(err => console.log(err)); 
+  };
+
   render() { 
+    console.log(this.props)
     const {deals, showItemDetailInAbout, showItem, showItemsSearchInAbout} = this.state   
     return (
       <div>
@@ -66,7 +137,7 @@ class About extends Component  {
         <Hero style={{ marginTop: 40 }}/>
         </Row>
 
-        { this.props.itemsInAbout === false ?
+        { this.props.itemsInAbout === true ?
           <Card >
           <Row>
             <Col size="md-12">
@@ -81,9 +152,10 @@ class About extends Component  {
           </Row>
         </Card> : null}
 
-        {  this.props.itemsInAbout === true && showItemsSearchInAbout === true ?
+        {  this.props.itemsInAbout === false && showItemsSearchInAbout === true ?
             <SearchResults 
               items={this.props.Items}
+              cartSubmit={this.cartSubmit}  
               handleDetailsSubmit={this.handleDetailsSubmit}
               memberId={this.props.currentUser} 
             /> : null
@@ -91,11 +163,20 @@ class About extends Component  {
         
         { this.props.itemDetailInAbout === true || showItemDetailInAbout === true ?
             <ItemDetails 
-              showItem={showItem}             
+              showItem={showItem}
+              cartSubmit={this.cartSubmit}            
               backToSearch={this.backToSearch} 
               memberId={this.props.currentUser}
             /> : null 
         }
+
+        { this.props.showCartItems === true ?          
+          
+            <Cart
+              memberId={this.props.currentUser}
+            /> : null 
+        }   
+
         </Container>
       </div>
     );

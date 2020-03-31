@@ -110,37 +110,6 @@ class Signin extends Component {
     .catch(err => console.log(err));      
   };
 
-  // loadAPIgetUser = (id) => {
-  //   const app = this; 
-  //   API.getUser({      
-  //     userName: this.state.userName,               
-  //   })
-  //   .then(function(res){
-  //     return new Promise(function(resolve, reject){
-  //       app.setState({ user: res.data })
-  //       resolve(true);
-  //     })
-  //   }).then(function(){
-  //     userArray = [...app.state.user]
-  //     app.setState({
-  //       userTheme: userArray[0].userTheme,
-  //       membername: userArray[0].memberName
-  //     })
-  //     app.userTheme(app.state.userTheme);
-  //   })
-  //   .catch(err => console.log(err));
-  // }
-
-  // userTheme = (id) => { 
-  //   divStyle = {
-  //     color: userArray[0].colorDb,
-  //     textAlign: userArray[0].textalignDb,
-  //     fontSize: userArray[0].divfontsizeDb,
-  //     fontFamily: userArray[0].fontfamilyDb,
-  //   };
-  //   this.props.setTheme(id)    
-  // }
-
 
   render() {  
     const {userName} = this.state 
@@ -197,13 +166,7 @@ class Signin extends Component {
             </div>
           </Container>
         }
-        {/* {userName === null || userName === undefined ? null : <Navbar          
-            userName={userName} membername={membername}       
-        />}  */}
-          {/* <div style={divStyle}><b> Welcome {membername}!</b></div>            */}
-        {/* {userName === null || userName === undefined ? null : <Search          
-            userName={userName} membername={membername}
-        />} */}
+       
       </div>
     );
   }

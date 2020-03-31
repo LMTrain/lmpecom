@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import "./style.css";
 import API from "../utils/API";
-import Container from "../components/Container";
-import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
+import { Card, Button, Row, Col} from 'reactstrap';
 import CartDetails from "../components/CartDetails";
-import { Link } from "react-router-dom";
-
-
 
 
 var mId ="";
 var allUsersCarts = [];
-// var useritemCarts = 0,
+
 class Cart extends Component {
     state = {
     cart: {},
@@ -137,7 +133,7 @@ class Cart extends Component {
       <div>
         
           <Row> 
-            <Container> 
+         
               { showitemCarts === true ?
                 <Row>
                   <Card className="item-display">
@@ -178,8 +174,7 @@ class Cart extends Component {
                             showitemCarts === true &&
                             useritemCartsCount === 0 ?
                             (<div>
-                              <h5>No item(s) in your Cart</h5>
-                              <Button type="submit" onClick={() => this.props.backToSearch()} color="info" size="sm">Add More Item</Button>{" "}
+                              <h5>No item(s) in your Cart</h5>                              
                             </div>
                           ) : null                
                       }
@@ -201,7 +196,7 @@ class Cart extends Component {
                   /> : null 
               }       
                  
-            </Container>
+          
           </Row>      
      
       </div>

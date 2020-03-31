@@ -31,17 +31,15 @@ class App extends React.Component {
     Items: [],
     memberId: "",
     memberName: "", 
-    itemsInAbout: false,
+    itemsInAbout: true,
     itemDetailInAbout: false,
     showItemState: false, 
-    showCartItems: false,    
+    showCartItems: false, 
+     
   }
 
   showUsersCart = () => {
-    this.setState({showCartItems: true,
-                    
-                  });
-    console.log("THIS IS SHOWCARTITEMS")
+    this.setState({showCartItems: true});    
   };
   
 
@@ -309,7 +307,7 @@ class App extends React.Component {
   handleFormSubmit = event => {   
     event.preventDefault();
     this.searchForBooks(this.state.search);  
-    this.setState({itemsInAbout: true,
+    this.setState({itemsInAbout: false,
                     showItemState: true, 
                     showCartItems: false
                   });
@@ -423,7 +421,9 @@ class App extends React.Component {
 
   render() {
 
-    const {theme, memberName, currentUser, search, Items, showItemImage, showItemState, showCartItems, itemsInAbout, itemDetailInAbout} = this.state;  
+    const {theme, memberName, currentUser, search, Items, showItemImage, 
+            showItemState, showCartItems, itemsInAbout, itemDetailInAbout, 
+            } = this.state;  
     return (
       <Router>
         <div className="container-content">
@@ -440,7 +440,7 @@ class App extends React.Component {
            
           <Wrapper theme={theme}>
     
-            <Route exact path="/" render = { () => <About Items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser} itemDetailInAbout={itemDetailInAbout}/>} />
+            <Route exact path="/" render = { () => <About Items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser} itemDetailInAbout={itemDetailInAbout} showCartItems={showCartItems}/>} />
             <Route exact path="/about" render = { () => <About items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser}/>} />
             <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} setTheme={this.setTheme}/>} />
             <Route exact path="/Sign out" render = { () => <About setTheme={this.setTheme}/>}/>
