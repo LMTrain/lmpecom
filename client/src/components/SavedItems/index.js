@@ -1,16 +1,8 @@
 import React, { Component} from "react";
 import "./style.css";
 import { Card, Row, Col} from 'reactstrap';
+import API from "../../utils/API"
 
-function truncateString(str, num) {    
-  if (str.length > num && num > 3) {
-          return str.slice(0, (num - 3)) + '...';
-      } else if (str.length > num && num <= 3) {
-          return str.slice(0, num) + '...';
-      } else {
-      return str;
-  }    
-}
 
 
 var mId ="";
@@ -29,7 +21,8 @@ class SavedItems extends Component {
  
 
   componentWillMount() { 
-    mId = this.state.memberId    
+    mId = this.state.memberId   
+    console.log("THIS IS MID IN SAVED =>", mId) 
     this.loadSavedItems();
   }
 
@@ -57,6 +50,7 @@ class SavedItems extends Component {
       }
       )
       .catch(err => console.log(err));
+      
   };
 
   savedItemDetailsSubmit = (id) => {  
@@ -73,35 +67,37 @@ class SavedItems extends Component {
           
   };
 
+  
+
   render() {
     const {useritemSavedCount, userSavedItems} = this.state
     return (             
       <Row>
         <Card className="item-display">
           <div className = "item-row-display">
-            { userSavedItems.length ? 
-            ( <div>
+            { userSavedItems.length ?  (
+              <div>,
               {userSavedItems.map(result => (   
                   <Col key={result.itemId} md="3">
                     <div className="item-card">
-                      <div className="img-container" onClick={() => props.handleDetailsSubmit(result.itemId)} title="See Details">                
+                      <div className="img-container" onClick={() => this.savedItemDetailsSubmit(result._id)} title="See Details">                
                         <img 
-                            key={result.itemId} 
-                            alt={result.name} width="120" height="160" className="img-fluid" 
-                            src={result.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.largeImage} />
+                            key={result._id} 
+                            alt={result.item} width="120" height="160" className="img-fluid" 
+                            src={result.thumbnail == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.thumbnail} />
                       </div>                  
-                      <div className="content" onClick={() => props.handleDetailsSubmit(result.itemId)} title="See Details">
-                        <p>{result.name = truncateString(result.name, 40)}</p>
-                        <b>Rating :</b> {result.customerRating} {useritemSavedCount}
-                        <p><b>${result.salePrice}</b></p>
+                      <div className="content" onClick={() => this.savedItemDetailsSubmit(result.itemId)} title="See Details">
+                        <p>{result.item} </p>
+                        <b>Rating :</b> {result.rating} {useritemSavedCount}
+                        <p><b>${result.price}</b></p>
                       </div>                              
                       <div className="result-card-button">                   
-                        { props.memberId === null || props.memberId === undefined ? [] :
+                        { this.state.memberId === null || this.state.memberId === undefined ? [] :
                           <>
-                            <p onClick={() => props.cartSubmit(result.itemId)}>Buy</p>
+                            <p onClick={() => this.cartSubmit(result.itemId)}>Buy</p>
                             <p style={{ color: "white"}}> Add</p>
                 
-                            <p onClick={() => props.addItemToSaveForLater(result.itemId)}>Save </p>
+                            <p onClick={() => this.deleteSavedItems(result.itemId)}>Delete </p>
                           </>
                         }
                       </div>                        
@@ -109,16 +105,15 @@ class SavedItems extends Component {
                   </Col>
               ))
               } 
-
               </div>
-              
-            ) 
+            )             
               : useritemSavedCount === 0 ?
                 (<div>
                   <h5>You have to Saved items</h5>
                 </div>
               ) : null
           }         
+          </div>
         </Card>
       </Row>    
     );
