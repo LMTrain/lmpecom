@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import Hero from "../components/Hero";
-import Container from "../components/Container";
-import Row from "../components/Row";
-import Col from "../components/Col";
+// import Container from "../components/Container";
+// import Row from "../components/Row";
+// import Col from "../components/Col";
 import Card from "../components/Card";
+import { Row, Col, Container} from 'reactstrap';
 import ItemsInAbout from "../components/ItemsInAbout";
 import deals from "../pages/deals.json";
 import SearchResults from "../components/SearchResults";
@@ -129,54 +130,52 @@ class About extends Component  {
     const {deals, showItemDetailInAbout, showItem, showItemsSearchInAbout} = this.state   
     return (
       <div>
-        <Container style={{ marginTop: 40 }}>
-        <Row>
-          <Col size="md-12" style={{ marginTop: 50}}>
-            <h2 style={{color: "white", marginLeft: -350}}> A Personalized e-Commerce StoreFront</h2>
-          </Col>
-        <Hero style={{ marginTop: 40 }}/>
-        </Row>
-
-        { this.props.itemsInAbout === true ?
-          <Card >
-          <Row>
-            <Col size="md-12">
-              <h3>Todays Deal</h3>
-            </Col>
+        <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
+          <Row style={{color: "white", fontSize: 30, marginLeft: 150}}>          
+            <h1> A Personalized e-Commerce StoreFront</h1>       
           </Row>
-          
+
           <Row>
-            <Col size="md-12">
-                  <ItemsInAbout handleShuffleClick={this.shuffle} deals={deals}/>
-            </Col>
-          </Row>
-        </Card> : null}
-
-        {  this.props.itemsInAbout === false && showItemsSearchInAbout === true ?
-            <SearchResults 
-              items={this.props.Items}
-              cartSubmit={this.cartSubmit}  
-              handleDetailsSubmit={this.handleDetailsSubmit}
-              memberId={this.props.currentUser} 
-            /> : null
-        }
-        
-        { this.props.itemDetailInAbout === true || showItemDetailInAbout === true ?
-            <ItemDetails style={{color: "white", marginLeft: -280, width: ""}}
-              showItem={showItem}
-              cartSubmit={this.cartSubmit}            
-              backToSearch={this.backToSearch} 
-              memberId={this.props.currentUser}
-            /> : null 
-        }
-
-        { this.props.showCartItems === true ?          
+            <Col>            
+              <Hero />
           
-            <Cart
-              memberId={this.props.currentUser}
-            /> : null 
-        }   
+              <>
+                { this.props.itemsInAbout === true ?
+                  <Card >
+                    <h3>Todays Deal</h3>
+                    <ItemsInAbout handleShuffleClick={this.shuffle} deals={deals}/>
+                  </Card> : null}
+              </>
+              <div className="about-col">
+                {  this.props.itemsInAbout === false && showItemsSearchInAbout === true ?
+                    <SearchResults 
+                      items={this.props.Items}
+                      cartSubmit={this.cartSubmit}  
+                      handleDetailsSubmit={this.handleDetailsSubmit}
+                      memberId={this.props.currentUser} 
+                    /> : null
+                }
+             
+              
+                { this.props.itemDetailInAbout === true || showItemDetailInAbout === true ?
+                    <ItemDetails style={{color: "white", marginLeft: -280}}
+                      showItem={showItem}
+                      cartSubmit={this.cartSubmit}            
+                      backToSearch={this.backToSearch} 
+                      memberId={this.props.currentUser}
+                    /> : null 
+                }
 
+                { this.props.showCartItems === true ?          
+                  
+                    <Cart
+                      memberId={this.props.currentUser}
+                    /> : null 
+                }
+              </div> 
+            </Col>
+       
+          </Row>
         </Container>
       </div>
     );

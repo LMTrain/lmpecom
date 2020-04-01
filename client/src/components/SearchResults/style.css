@@ -38,34 +38,17 @@ ul.search-results img {
   margin-left:20px;
 }
 
-.searched-item-display {
+.card-item-display {
   background:white;
   border-radius: 32px;
   height: 580px !important; 
-  /* position: inherit; */
   width: 1400px !important;
   box-shadow: 0 -10px 29px #6f6666, 0 19px 29px #6f6666;
   text-align: left;
-  margin-top: 10px;
-  overflow: auto;
-  margin-left: -280px !important;
-  /* overflow-y: hidden scroll;
-  overflow-x: hidden scroll; */
-}
-
-.item-display {
-  background:white;
-  border-radius: 32px;
-  height: 580px !important; 
-  /* position: inherit; */
-  width: auto !important;
-  box-shadow: 0 -10px 29px #6f6666, 0 19px 29px #6f6666;
-  text-align: left;
-  margin-top: 10px;
-  overflow: auto;
-  margin-left: auto !important;
-  /* overflow-y: hidden scroll;
-  overflow-x: hidden scroll; */
+  margin-top: 10px; 
+  margin-left: 5px !important; 
+  margin-right: -195px !important; 
+ 
 }
 
 
@@ -75,6 +58,7 @@ ul.search-results img {
   margin-left: 45px;
   overflow: auto; 
   margin-top: 10px;
+  overflow-y:  scroll;
 }
 
 .item-card {

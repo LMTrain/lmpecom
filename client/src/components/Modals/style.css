@@ -20,8 +20,7 @@ ul.search-results img {
   .list-group-item:last-child {  
     border-bottom-right-radius: .25rem;
     border-bottom-left-radius: .25rem;  
-    margin-bottom: 20px;
-    /* margin-left: -400px; */
+    margin-bottom: 20px; 
     border-radius: .95rem;
   }
 }
@@ -60,4 +59,13 @@ ul.search-results img {
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;  
   display: flex;
   margin-top: 25px;
+}
+
+.list-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; 
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: -20px;
 }

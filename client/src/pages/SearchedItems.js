@@ -55,8 +55,7 @@ class SavedItems extends Component {
 
   savedItemDetailsSubmit = (id) => {  
     // Find the id in the state
-    const usercart = this.state.userSavedItems.find((cart) => cart._id === id);
-    // console.log("THIS IS FAVDATAIL", usercart) 
+    const usercart = this.state.userSavedItems.find((cart) => cart._id === id);  
     this.setState({showCart: [usercart], 
                   detailsItemCart: [usercart],
                   itemId: id, 
@@ -65,6 +64,42 @@ class SavedItems extends Component {
                   redirect: true
                 })
           
+  };
+
+  cartSubmit = (id) => { 
+    console.log("CARTSUBMIT=>", this.state.userSavedItems )   
+    const item = this.state.userSavedItems.find((item) => item.itemid === id); 
+    
+    this.setState({showItem: [item], 
+                    showCartItems: false,
+                    showItemState: false
+                  })
+    console.log("THUMBNAIL =>", item.itemid, item.thumbnail ) 
+    let itemThumbnail = String(item.thumbnail)
+    let itemDescription = String(item.description)
+    let itemId = String(item.itemid)    
+    let itemName = String(item.item)    
+    let itemPrice = Number(item.price)
+    let itemLink = String(item.link)
+    let itemQty = 1
+    let itemRating = String(item.rating)
+    let currentUser = String(this.state.memberId)
+  
+
+    API.saveCart({
+      itemid: itemId,
+      memberId: currentUser,
+      item: itemName,
+      price: itemPrice,
+      link: itemLink,
+      thumbnail: itemThumbnail,
+      description: itemDescription,
+      rating: itemRating,
+      qty: itemQty,     
+    })
+      .then(res => {console.log(res)})
+      .catch(err => console.log(err));  
+    
   };
   
   
@@ -93,7 +128,7 @@ class SavedItems extends Component {
                         <img 
                             key={result._id} 
                             alt={result.item} width="120" height="160" className="img-fluid" 
-                            src={result.thumbnail == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.thumbnail} />
+                            src={result.thumbnail} />
                       </div>                  
                       <div className="content" onClick={() => this.savedItemDetailsSubmit(result.itemId)} title="See Details">
                         <p>{result.item = truncateString(result.item, 40)} </p>

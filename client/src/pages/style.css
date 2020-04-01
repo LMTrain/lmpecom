@@ -34,7 +34,7 @@ ul.search-results img {
 .cart-image {
   vertical-align: middle;
   border-style: none;
-  width: 70px !important;
+  width: 65px !important;
 }
 
 .cart-card {
@@ -45,13 +45,13 @@ ul.search-results img {
   margin-bottom: 10px;  
   padding-right: 5px;
   margin-left: -35px !important;
-  height: 150px !important;
+  height: 180px !important;
   width: 450px !important;
   display: flex;
   flex-direction: row;
   align-items:center;
   font-size: 14px;
-  padding:.5px;  
+  padding:5px;  
   margin-top: -15px;
   /* margin-left: 50px;   */
 }
@@ -88,8 +88,8 @@ ul.search-results img {
   flex-direction: row;
   align-items:center;
   font-size: 10px;
-  padding:.5px;  
-  margin-top: 3px;
+  padding:5px;  
+  margin-top: -3px;
   margin-left: 50px;  
   color: black;  
 }
@@ -285,6 +285,18 @@ ul.search-results img {
 
 .search-card-col1{
   width: 150px !important;
+}
+
+.about-col {
+  position: relative;
+  width: 100%;
+  /* min-height: 1px; */
+  /* margin-right: -10px; */
+  margin-left: -270px;
+  margin-top: 10px;
+  padding-left: -80px;
+  padding-right: 0px;
+  padding-top: -1px;
 }
 
 .container {

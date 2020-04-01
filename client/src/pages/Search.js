@@ -225,18 +225,18 @@ class Search extends Component {
     return (      
       <div>        
         <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
-          { this.props.currentUser ?
-            <div style={divStyle}><b style={{marginLeft: -350}}> Welcome {membername}!</b></div>: null
-          }
           <Row>
-            {/* <Col className="search-col-md-3l">
-              <Card className="search-card-col1">
-                Love It
-              </Card>
-            </Col> */}
+            { this.props.currentUser ?
+              <div style={divStyle}><b style={{marginLeft: -350}}> Welcome {membername}!</b></div>: null
+            }
+          </Row>
+
+          <Row>           
             <Col className="search-col-md-6">            
               {
-                <SavedItems memberId={this.props.currentUser}/>
+                <SavedItems memberId={this.props.currentUser}
+                cartSubmit={this.cartSubmit} 
+                />
               }
 
               { this.props.showItemState === true || showSearchItem === true?             

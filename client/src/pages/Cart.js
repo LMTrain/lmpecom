@@ -3,6 +3,7 @@ import "./style.css";
 import API from "../utils/API";
 import { Card, Button, Row, Col} from 'reactstrap';
 import CartDetails from "../components/CartDetails";
+import DetailModal from "../components/Modals"
 
 
 var mId ="";
@@ -21,6 +22,7 @@ class Cart extends Component {
     qty: 0,
     itemId: "",
     memberId: this.props.memberId,
+    setModal: false,
     isOpen: false   
   };
  
@@ -79,6 +81,7 @@ class Cart extends Component {
                   itemId: id, 
                   showCartItemDetail: true,
                   showitemCarts: true,
+                  setModal: true,
                   redirect: true
                 })
           
@@ -128,7 +131,7 @@ class Cart extends Component {
           return str;
       }    
     }
-    const {useritemCartsCount, showCartItemDetail, showCart, showitemCarts, itemId, userCarts} = this.state;
+    const {useritemCartsCount, showCartItemDetail, showCart, showitemCarts, itemId, userCarts, setModal} = this.state;
     return (
       <div>
           { showitemCarts === true ?
@@ -142,8 +145,19 @@ class Cart extends Component {
                           <Row key={cart._id} md="3"> 
                             <Col md="10">                                
                               {/* <span onClick={() => this.loaditemCarts(cart._id)}> */}
-                              <div className="cart-card" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details">                    
-                                <div className="cart-img-container" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details">
+                              <div className="cart-card" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details"> 
+                                <DetailModal
+                                  note={this.state.qty}
+                                  handleFormSubmit={this.handleFormSubmit}
+                                  handleInputChange={this.handleInputChange}  
+                                  showCart={showCart}
+                                  itemId={itemId} 
+                                  cartSubmit={this.cartSubmit} 
+                                  backToCart={this.backToCart}
+                                  addQty={this.addQty} 
+                                  memberId={this.state.memberId}
+                                ></DetailModal>                  
+                                <div className="cart-img-container">
                                   <img className="cart-image"
                                     alt={cart.item} width="40" height="80"
                                     src={cart.thumbnail}
@@ -178,7 +192,7 @@ class Cart extends Component {
               </Card>
             </Row> : null
           }
-          { 
+          {/* { 
             showCartItemDetail === true ? 
               <CartDetails
                 note={this.state.qty}
@@ -191,7 +205,8 @@ class Cart extends Component {
                 addQty={this.addQty} 
                 memberId={this.state.memberId}
               /> : null 
-          }  
+          }  */}
+        
       </div>
     );
   }

@@ -19,7 +19,7 @@ function SearchResults(props) {
   console.log("PROPS", props.items ) 
   return (             
     <Row>
-      <Card className="searched-item-display">
+      <Card className="card-item-display">
         <div className = "item-row-display">         
           {props.items.map(result => (   
             <Col key={result.itemId} md="3">

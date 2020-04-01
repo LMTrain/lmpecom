@@ -94,13 +94,4 @@ const Hero = (props) => {
   );
 }
 
-// function Hero(props) {
-//   console.log("THIS IS PROPS FROM HERO", props)
-//   return (
-//     <div className="hero text-center" style={{ items: `url(${props.items})` }}>      
-//       {props.children}
-//     </div>
-//   );
-// }
-
 export default Hero;
