@@ -1,8 +1,8 @@
 import React, { Component} from "react";
 import "./style.css";
-import { Card, Row, Col} from 'reactstrap';
+import { Card, Col} from 'reactstrap';
 import API from "../utils/API";
-
+import SavedItemModal from "../components/SavedItemModal";
 
 
 var mId ="";
@@ -12,6 +12,7 @@ class SavedItems extends Component {
     savedItems: {},
     userSavedItems: [],
     savedItemCart: [],
+    savedItemDetail: [],
     useritemSavedCount: 0,
     showCartItemDetail: false,    
     showitemCarts: true,
@@ -49,58 +50,63 @@ class SavedItems extends Component {
           } 
       }
       )
-      .catch(err => console.log(err));
-      
+      .catch(err => console.log(err));      
   };
-
-  savedItemDetailsSubmit = (id) => {  
-    // Find the id in the state
-    const usercart = this.state.userSavedItems.find((cart) => cart._id === id);  
-    this.setState({showCart: [usercart], 
-                  detailsItemCart: [usercart],
-                  itemId: id, 
-                  showCartItemDetail: true,
-                  showitemCarts: false,
-                  redirect: true
-                })
-          
-  };
-
-  cartSubmit = (id) => { 
-    console.log("CARTSUBMIT=>", this.state.userSavedItems )   
-    const item = this.state.userSavedItems.find((item) => item.itemid === id); 
-    
-    this.setState({showItem: [item], 
-                    showCartItems: false,
-                    showItemState: false
-                  })
-    console.log("THUMBNAIL =>", item.itemid, item.thumbnail ) 
-    let itemThumbnail = String(item.thumbnail)
-    let itemDescription = String(item.description)
-    let itemId = String(item.itemid)    
-    let itemName = String(item.item)    
-    let itemPrice = Number(item.price)
-    let itemLink = String(item.link)
-    let itemQty = 1
-    let itemRating = String(item.rating)
-    let currentUser = String(this.state.memberId)
   
 
-    API.saveCart({
-      itemid: itemId,
-      memberId: currentUser,
-      item: itemName,
-      price: itemPrice,
-      link: itemLink,
-      thumbnail: itemThumbnail,
-      description: itemDescription,
-      rating: itemRating,
-      qty: itemQty,     
-    })
-      .then(res => {console.log(res)})
-      .catch(err => console.log(err));  
+    savedItemDetailsSubmit = (id) => {  
+        // Find the id in the state
+        const usercart = this.state.userSavedItems.find((cart) => cart._id === id);  
+        this.setState({savedItemDetail: [usercart], 
+                    detailsItemCart: [usercart],
+                    itemId: id, 
+                    showCartItemDetail: true,
+                    showitemCarts: false,
+                    redirect: true
+                    })
+            
+    };
+
+    cartSubmit = (id) => {      
+        const item = this.state.userSavedItems.find((item) => item._id === id); 
+        
+        this.setState({showItem: [item], 
+                        showCartItems: false,
+                        showItemState: false
+                    })
+        let itemThumbnail = String(item.thumbnail)
+        let itemDescription = String(item.description)
+        let itemId = String(item.itemid)    
+        let itemName = String(item.item)    
+        let itemPrice = Number(item.price)
+        let itemLink = String(item.link)
+        let itemQty = 1
+        let itemRating = String(item.rating)
+        let currentUser = String(this.state.memberId)
     
-  };
+
+        API.saveCart({
+        itemid: itemId,
+        memberId: currentUser,
+        item: itemName,
+        price: itemPrice,
+        link: itemLink,
+        thumbnail: itemThumbnail,
+        description: itemDescription,
+        rating: itemRating,
+        qty: itemQty,     
+        })
+        .then(res => {console.log(res)})
+        .catch(err => console.log(err));  
+        
+    };
+
+
+    deleteSavedItems = id => {       
+        API.deleteSavedItem(id)
+        .then(res => this.loadSavedItems())
+        .catch(err => console.log(err));
+    };  
   
   
 
@@ -114,7 +120,7 @@ class SavedItems extends Component {
           return str;
       }    
     }
-    const {useritemSavedCount, userSavedItems} = this.state
+    const {useritemSavedCount, userSavedItems, savedItemDetail} = this.state
     return (             
       <>
         <Card className="saved-item-card">
@@ -122,7 +128,7 @@ class SavedItems extends Component {
             { userSavedItems.length ?  (
               <div>
               {userSavedItems.map(result => (   
-                  <span key={result.itemId} className="saved-item-row-display">
+                  <span key={result._id} className="saved-item-row-display">
                     <Col md="col-5" className="saved-item-card">
                       <div className="saved-img-container" onClick={() => this.savedItemDetailsSubmit(result._id)} title="See Details">                
                         <img 
@@ -130,7 +136,10 @@ class SavedItems extends Component {
                             alt={result.item} width="120" height="160" className="img-fluid" 
                             src={result.thumbnail} />
                       </div>                  
-                      <div className="content" onClick={() => this.savedItemDetailsSubmit(result.itemId)} title="See Details">
+                      <div className="content" onClick={() => this.savedItemDetailsSubmit(result._id)} title="See Details">
+                        <SavedItemModal
+                            showCart={savedItemDetail}
+                        ></SavedItemModal>
                         <p>{result.item = truncateString(result.item, 40)} </p>
                         <b>Rating :</b> {result.rating} {useritemSavedCount}
                         <p><b>${result.price}</b></p>
@@ -138,10 +147,10 @@ class SavedItems extends Component {
                       <div className="saved-result-card-button">                   
                         { this.state.memberId === null || this.state.memberId === undefined ? [] :
                           <>
-                            <p onClick={() => this.cartSubmit(result.itemId)}>Buy</p>
+                            <p onClick={() => this.cartSubmit(result._id)}>Buy</p>
                             <p style={{ color: "white"}}> Add</p>
                 
-                            <p onClick={() => this.deleteSavedItems(result.itemId)}>Delete </p>
+                            <p onClick={() => this.deleteSavedItems(result._id)}>Delete </p>
                           </>
                         }
                       </div>                        

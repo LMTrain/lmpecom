@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./style.css";
 import API from "../utils/API";
 import { Card, Button, Row, Col} from 'reactstrap';
-import CartDetails from "../components/CartDetails";
 import DetailModal from "../components/Modals"
 
 
@@ -74,8 +73,7 @@ class Cart extends Component {
 
   cartItemDetailsSubmit = (id) => {  
     // Find the id in the state
-    const usercart = this.state.userCarts.find((cart) => cart._id === id);
-    // console.log("THIS IS FAVDATAIL", usercart) 
+    const usercart = this.state.userCarts.find((cart) => cart._id === id);  
     this.setState({showCart: [usercart], 
                   detailsItemCart: [usercart],
                   itemId: id, 
@@ -112,8 +110,7 @@ class Cart extends Component {
     
   }
   
-  deleteCart = id => {
-    console.log(id)
+  deleteCart = id => { 
     API.deleteCart(id)
       .then(res => this.loadCarts())
       .catch(err => console.log(err));
@@ -131,7 +128,7 @@ class Cart extends Component {
           return str;
       }    
     }
-    const {useritemCartsCount, showCartItemDetail, showCart, showitemCarts, itemId, userCarts, setModal} = this.state;
+    const {useritemCartsCount, showCartItemDetail, showCart, showitemCarts, itemId, userCarts} = this.state;
     return (
       <div>
           { showitemCarts === true ?
@@ -192,20 +189,6 @@ class Cart extends Component {
               </Card>
             </Row> : null
           }
-          {/* { 
-            showCartItemDetail === true ? 
-              <CartDetails
-                note={this.state.qty}
-                handleFormSubmit={this.handleFormSubmit}
-                handleInputChange={this.handleInputChange}  
-                showCart={showCart}
-                itemId={itemId} 
-                cartSubmit={this.cartSubmit} 
-                backToCart={this.backToCart}
-                addQty={this.addQty} 
-                memberId={this.state.memberId}
-              /> : null 
-          }  */}
         
       </div>
     );

@@ -18,7 +18,7 @@ module.exports = {
   },
 
   create: function(req, res) {
-    console.log(req.body.item),
+    
     db.cart
       .create(req.body)
       .then(dbModel => res.json(dbModel))

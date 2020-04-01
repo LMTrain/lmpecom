@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import { Card, Row, Col} from 'reactstrap';
+import SearchedModal from "../SearchedModal"
 
 function truncateString(str, num) {    
   if (str.length > num && num > 3) {
@@ -31,6 +32,12 @@ function SearchResults(props) {
                       src={result.largeImage} />
                 </div>                  
                 <div className="content" onClick={() => props.handleDetailsSubmit(result.itemId)} title="See Details">
+                <SearchedModal 
+                  showItem={props.showItem} 
+                  cartSubmit={props.cartSubmit}                  
+                  memberId={props.memberId}
+                  
+                />
                   <p>{result.name = truncateString(result.name, 40)}</p>
                   <b>Rating :</b> {result.customerRating}
                   <p><b>${result.salePrice}</b></p>

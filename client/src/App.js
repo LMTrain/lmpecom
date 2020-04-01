@@ -19,7 +19,6 @@ require('dotenv').config();
 var userArray = [];
 var userTheme = ""
 var memberInfo = ""
-var searchedResults = []
 class App extends React.Component {
   state = {
     user:[],

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-// import Container from "../components/Container";
 import SearchResults from "../components/SearchResults";
-import ItemDetails from "../components/ItemDetails";
-// import BookDetailModal from "../components/Modals";
+// import ItemDetails from "../components/ItemDetails";
 import Cart from "./Cart";
 import { Redirect } from "react-router-dom";
 import SavedItems from "./SearchedItems";
-import { Card,Row, Col, Container} from 'reactstrap';
+import { Row, Col, Container} from 'reactstrap';
+
 
 
 
@@ -206,6 +205,7 @@ class Search extends Component {
       .then(res => {console.log(res)})
       .catch(err => console.log(err));  
     
+      this.backToSearch();
   };
 
   backToSearch = () => {
@@ -235,7 +235,7 @@ class Search extends Component {
             <Col className="search-col-md-6">            
               {
                 <SavedItems memberId={this.props.currentUser}
-                cartSubmit={this.cartSubmit} 
+                
                 />
               }
 
@@ -243,6 +243,7 @@ class Search extends Component {
                 
                 <SearchResults 
                   items={this.props.Items}
+                  showItem={showItem} 
                   cartSubmit={this.cartSubmit} 
                   addItemToSaveForLater={this.addItemToSaveForLater}        
                   handleDetailsSubmit={this.handleDetailsSubmit}
@@ -251,16 +252,6 @@ class Search extends Component {
                 /> : null 
               }
 
-              {showItemDetail === true && 
-              showCartItems === false ? 
-                <ItemDetails 
-                  showItem={showItem} 
-                  cartSubmit={this.cartSubmit} 
-                  backToSearch={this.backToSearch} 
-                  memberId={this.props.currentUser}
-                  userDivStyle={userDivStyle}
-                /> : null 
-              }            
             </Col>
             <Col className="search-col-md-3r">           
               <Cart

@@ -64,7 +64,7 @@ export default {
     return axios.post("/api/saveditems/", savedItem);   
   },
   // Deletes the Saved Item with the given id
-  deleteSavedItem: function(id) {    
+  deleteSavedItem: function(id) {        
     return axios.delete("/api/saveditems/" + id);
   }, 
 

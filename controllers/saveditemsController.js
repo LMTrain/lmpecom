@@ -37,8 +37,8 @@ module.exports = {
   
 
   
-  remove: function(req, res) {
-    db.SavedItems
+  remove: function(req, res) {  
+    db.savedItems
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))

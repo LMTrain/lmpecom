@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Row, Col } from 'reactstrap';
 
-const DetailModal = (props) => {
-  const {
+const SavedItemModal = (props) => {
+  const {    
     className
   } = props;
 
@@ -63,5 +63,4 @@ const DetailModal = (props) => {
     </div>
   );
 }
-
-export default DetailModal;
+export default SavedItemModal;

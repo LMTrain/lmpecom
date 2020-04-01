@@ -150,6 +150,7 @@ class About extends Component  {
                 {  this.props.itemsInAbout === false && showItemsSearchInAbout === true ?
                     <SearchResults 
                       items={this.props.Items}
+                      showItem={showItem} 
                       cartSubmit={this.cartSubmit}  
                       handleDetailsSubmit={this.handleDetailsSubmit}
                       memberId={this.props.currentUser} 
@@ -157,14 +158,14 @@ class About extends Component  {
                 }
              
               
-                { this.props.itemDetailInAbout === true || showItemDetailInAbout === true ?
+                {/* { this.props.itemDetailInAbout === true || showItemDetailInAbout === true ?
                     <ItemDetails style={{color: "white", marginLeft: -280}}
                       showItem={showItem}
                       cartSubmit={this.cartSubmit}            
                       backToSearch={this.backToSearch} 
                       memberId={this.props.currentUser}
                     /> : null 
-                }
+                } */}
 
                 { this.props.showCartItems === true ?          
                   
