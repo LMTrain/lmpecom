@@ -12,10 +12,14 @@ function truncateString(str, num) {
   }    
 }
 
-function SearchResults(props) { 
+
+
+
+function SearchResults(props) {
+  console.log("PROPS", props.items ) 
   return (             
     <Row>
-      <Card className="item-display">
+      <Card className="searched-item-display">
         <div className = "item-row-display">         
           {props.items.map(result => (   
             <Col key={result.itemId} md="3">
@@ -24,7 +28,7 @@ function SearchResults(props) {
                   <img 
                       key={result.itemId} 
                       alt={result.name} width="120" height="160" className="img-fluid" 
-                      src={result.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.largeImage} />
+                      src={result.largeImage} />
                 </div>                  
                 <div className="content" onClick={() => props.handleDetailsSubmit(result.itemId)} title="See Details">
                   <p>{result.name = truncateString(result.name, 40)}</p>

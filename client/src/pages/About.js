@@ -132,7 +132,7 @@ class About extends Component  {
         <Container style={{ marginTop: 40 }}>
         <Row>
           <Col size="md-12" style={{ marginTop: 50}}>
-            <h2 style={{color: "white" }}> A Personalized e-Commerce StoreFront</h2>
+            <h2 style={{color: "white", marginLeft: -350}}> A Personalized e-Commerce StoreFront</h2>
           </Col>
         <Hero style={{ marginTop: 40 }}/>
         </Row>
@@ -162,7 +162,7 @@ class About extends Component  {
         }
         
         { this.props.itemDetailInAbout === true || showItemDetailInAbout === true ?
-            <ItemDetails 
+            <ItemDetails style={{color: "white", marginLeft: -280, width: ""}}
               showItem={showItem}
               cartSubmit={this.cartSubmit}            
               backToSearch={this.backToSearch} 

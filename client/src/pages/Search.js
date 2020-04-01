@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import Container from "../components/Container";
+// import Container from "../components/Container";
 import SearchResults from "../components/SearchResults";
 import ItemDetails from "../components/ItemDetails";
 // import BookDetailModal from "../components/Modals";
 import Cart from "./Cart";
-import dataSet from "./db.json";
 import { Redirect } from "react-router-dom";
-import SavedItems from "../components/SavedItems"
-
+import SavedItems from "./SearchedItems";
+import { Card,Row, Col, Container} from 'reactstrap';
 
 
 
@@ -27,7 +26,7 @@ class Search extends Component {
     id: "",
     userName: this.props.currentUser,
     memberName: this.props.membername,     
-    items: this.props.Items,
+    // items: this.props.Items,
     error: "",
     showItem: [],
     detailsItem: [],
@@ -39,8 +38,8 @@ class Search extends Component {
     redirect: false,
   };
 
-
-  componentWillMount() {        
+  
+  componentWillMount() {          
     this.loadUserData();   
   }
 
@@ -87,22 +86,6 @@ class Search extends Component {
     this.props.setTheme(id)    
   }
  
-  handleInputChange = (e) =>{   
-    this.setState({search: e.target.value});   
-  }
-
-  handleFormSubmit = (e) => {    
-    e.preventDefault();
-    var app = this;
-    var results = dataSet.filter(item => {
-      return item.name.toLowerCase().indexOf(app.state.search.toLowerCase()) !== -1;
-    })
-    app.setState({ items: results, 
-                    showItemImage: false,
-                    showItemState: false, 
-                    showCartItems: false 
-                  });    
-  } 
   
   
   signOut = () => {
@@ -147,8 +130,7 @@ class Search extends Component {
     let itemId = String(item.itemId)    
     let itemName = String(item.name)    
     let itemPrice = Number(item.salePrice)
-    let itemLink = String(item.productUrl)
-    let itemQty = 1
+    let itemLink = String(item.productUrl)    
     let itemRating = String(item.customerRating)
     let currentUser = String(this.props.currentUser)
     
@@ -160,8 +142,7 @@ class Search extends Component {
       link: itemLink,
       thumbnail: itemThumbnail,
       description: itemDescription,
-      rating: itemRating,
-      qty: itemQty,     
+      rating: itemRating,          
     })
       .then(res => {console.log(res)})
       .catch(err => console.log(err)); 
@@ -235,35 +216,43 @@ class Search extends Component {
   };
 
   
- 
   render() {   
     const {showItem, showItemDetail, showSearchItem,
             showCartItems, userDivStyle,
           } = this.state
+   
     
     return (      
       <div>        
-          <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
+        <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
           { this.props.currentUser ?
-            <div style={divStyle}><b> Welcome {membername}!</b></div>: null
+            <div style={divStyle}><b style={{marginLeft: -350}}> Welcome {membername}!</b></div>: null
           }
-            {
-              <SavedItems memberId={this.props.currentUser}/>
-            }                  
-            { this.props.showItemState === true || showSearchItem === true?             
-              
+          <Row>
+            {/* <Col className="search-col-md-3l">
+              <Card className="search-card-col1">
+                Love It
+              </Card>
+            </Col> */}
+            <Col className="search-col-md-6">            
+              {
+                <SavedItems memberId={this.props.currentUser}/>
+              }
+
+              { this.props.showItemState === true || showSearchItem === true?             
+                
                 <SearchResults 
-                  items={this.props.Items === undefined ? null : this.props.Items}
+                  items={this.props.Items}
                   cartSubmit={this.cartSubmit} 
                   addItemToSaveForLater={this.addItemToSaveForLater}        
                   handleDetailsSubmit={this.handleDetailsSubmit}
                   memberId={this.props.currentUser}
                   userDivStyle={userDivStyle}          
                 /> : null 
-            }
+              }
 
-            {showItemDetail === true && 
-             showCartItems === false ? 
+              {showItemDetail === true && 
+              showCartItems === false ? 
                 <ItemDetails 
                   showItem={showItem} 
                   cartSubmit={this.cartSubmit} 
@@ -271,9 +260,9 @@ class Search extends Component {
                   memberId={this.props.currentUser}
                   userDivStyle={userDivStyle}
                 /> : null 
-            }            
-                     
-          {this.props.showCartItems === true ? 
+              }            
+            </Col>
+            <Col className="search-col-md-3r">           
               <Cart
                 memberId={this.props.currentUser}
                 backToSearch={this.backToSearch} 
@@ -281,10 +270,10 @@ class Search extends Component {
                 handleDetailsSubmit={this.handleDetailsSubmit}
                 signOut={this.signOut}
                 userDivStyle={userDivStyle}
-              /> : null
-          }
-          </Container>
-         
+              /> 
+            </Col>                      
+          </Row>
+        </Container>         
       </div>
       
     );

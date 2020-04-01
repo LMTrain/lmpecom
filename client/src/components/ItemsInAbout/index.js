@@ -23,7 +23,7 @@ function ItemsInAbout(props) {
                     <img 
                         key={result.itemId} 
                         alt={result.name} width="120" height="160" className="img-fluid" 
-                        src={result.largeImage == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.largeImage} />
+                        src={result.largeImage}/>
                   </div>                  
                   <div className="content">
                     <p>{result.name = truncateString(result.name, 30)}</p>

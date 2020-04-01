@@ -59,23 +59,29 @@ function Navbar(props) {
         </>           
         :          
         <>
-          <div className="signin-menu-bar">
-            <b>{props.membername}</b> 
-          </div>
-          <div className="cart-menu-bar">
+        <ul className="navbar-nav">
+          <li className="nav-item"> 
+          
+            <Link to="/search" className={window.location.pathname === "/search" ? "nav-link active" : "nav-link"}><b>{props.membername}</b></Link>
+               
+          </li>
+          <li>
             <span 
               onClick={props.showUsersCart} 
               className={window.location.pathname === "/getstarted" ? "nav-link active" : "nav-link"}
               >
                 Cart
             </span>
+          </li>
+          <li>
             <Link 
                 to="/getstarted"
                 className={window.location.pathname === "/getstarted" ? "nav-link active" : "nav-link"}
               >
                   Sign Out
-            </Link>
-          </div>            
+            </Link> 
+          </li>        
+        </ul>
         </>
       }
     </nav>

@@ -19,7 +19,7 @@ require('dotenv').config();
 var userArray = [];
 var userTheme = ""
 var memberInfo = ""
-var searchInput = ""
+var searchedResults = []
 class App extends React.Component {
   state = {
     user:[],
@@ -285,39 +285,44 @@ class App extends React.Component {
  
   
 
-  searchForItems = (e) => {
-    e.preventDefault();
-    var app = this;
-    var results = dataSet.filter(item => {
-      return item.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1;
-    })
-    app.setState({ Items: results});
-    console.log(results)
-    console.log(app.state.Items)
-  }
+  // searchForItems = (e) => {
+  //   e.preventDefault();
+  //   var app = this;
+  //   var results = dataSet.filter(item => {
+  //     return item.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1;
+  //   })
+  //   app.setState({ Items: results});
+  //   console.log(results)
+  //   console.log(app.state.Items)
+  // }
 
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;   
     this.setState({
-      [name]: value
+      [name]: value,
+      itemsInAbout: true,
+      showItemState: false,
+       
     });
   };
 
+
   handleFormSubmit = event => {   
     event.preventDefault();
-    this.searchForBooks(this.state.search);  
+    this.searchForItems(this.state.search);  
     this.setState({itemsInAbout: false,
-                    showItemState: true, 
+                    showItemState: true,
                     showCartItems: false
                   });
   };
 
-  searchForBooks = query => {
+  searchForItems = query => {    
     var results = dataSet.filter(item => {
       return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
     })
-    this.setState({Items: results})
+    this.setState({Items: results })
+   
   };
 
 
@@ -480,12 +485,7 @@ class App extends React.Component {
               } 
             />
 
-            <Route exact path="/Cart" component={Cart} />      
-            
-            
-
-            
-                     
+            <Route exact path="/Cart" component={Cart} />  
             
           </Wrapper>
           <Footer />

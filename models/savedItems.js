@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const savedItemsSchema = new Schema({
-  memberId: { type: String, required: true }, 
   itemid: { type: String },
+  memberId: { type: String, required: true }, 
   item: { type: String },
   price: {type: Number},
-  qty: {type: Number},
   link: {type: String},
-  description: {type: String },
   thumbnail: {type: String },
+  description: {type: String },
+  rating: {type: String},
   date: { type: Date, default: Date.now }
 });
 

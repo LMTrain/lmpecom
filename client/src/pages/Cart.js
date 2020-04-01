@@ -78,7 +78,7 @@ class Cart extends Component {
                   detailsItemCart: [usercart],
                   itemId: id, 
                   showCartItemDetail: true,
-                  showitemCarts: false,
+                  showitemCarts: true,
                   redirect: true
                 })
           
@@ -131,74 +131,67 @@ class Cart extends Component {
     const {useritemCartsCount, showCartItemDetail, showCart, showitemCarts, itemId, userCarts} = this.state;
     return (
       <div>
-        
-          <Row> 
-         
-              { showitemCarts === true ?
-                <Row>
-                  <Card className="item-display">
-                    <h5 className="text-center">Cart Items</h5> 
-                      {showitemCarts === true &&
-                      userCarts.length ? (                          
-                        <div className="cart-row-display">
-                            {this.state.userCarts.map(cart => (
-                              <Row key={cart._id} md="3"> 
-                                <Col md="10">                                
-                                  {/* <span onClick={() => this.loaditemCarts(cart._id)}> */}
-                                  <div className="cart-card" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details">                    
-                                    <div className="cart-img-container" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details">
-                                      <img className="cart-image"
-                                        alt={cart.item} width="40" height="80"
-                                        src={cart.thumbnail}
-                                      />
-                                    </div>
-                                    <div style={{ color: "black", marginTop: 5}}>
-                                      <p>{cart.item}</p>
-                                      <p>${cart.price} </p> 
-                                      <p> <b>QTY :</b> {cart.qty} <b style={{ color: "white"}}>____</b>{" "}<b>Rating :</b> {cart.rating}</p>
-                                      <p><b>Desc :</b>  {cart.description = truncateString(cart.description, 180)}</p>
-                                    </div>                                    
-                                  </div>       
-                                </Col>
-                                <Col md="2">
-                                <span className="delete-button">
-                                  <Button onClick={() => this.deleteCart(cart._id)} color="danger" size="sm"><b>X</b></Button>                              
-                                </span>
-                                </Col>                 
-                              </Row>
-                            ))
-                          }
-                        </div>
-                      ) 
-                          : showCartItemDetail === false &&
-                            showitemCarts === true &&
-                            useritemCartsCount === 0 ?
-                            (<div>
-                              <h5>No item(s) in your Cart</h5>                              
-                            </div>
-                          ) : null                
+          { showitemCarts === true ?
+            <Row>
+              <Card className="cart-item-display">
+                <h5 className="text-center">Cart Items</h5> 
+                  {showitemCarts === true &&
+                  userCarts.length ? (                          
+                    <div className="cart-row-display">
+                        {this.state.userCarts.map(cart => (
+                          <Row key={cart._id} md="3"> 
+                            <Col md="10">                                
+                              {/* <span onClick={() => this.loaditemCarts(cart._id)}> */}
+                              <div className="cart-card" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details">                    
+                                <div className="cart-img-container" onClick={() => this.cartItemDetailsSubmit(cart._id)} title="See Details">
+                                  <img className="cart-image"
+                                    alt={cart.item} width="40" height="80"
+                                    src={cart.thumbnail}
+                                  />
+                                </div>
+                                <div style={{ color: "black", marginTop: 5, gap: -5}}>
+                                  <p>{cart.item}</p>
+                                  <p>${cart.price} </p> 
+                                  <p> <b>QTY :</b> {cart.qty} <b style={{ color: "white"}}>____</b>{" "}<b>Rating :</b> {cart.rating}</p>
+                                  <p><b>Desc :</b>  {cart.description = truncateString(cart.description, 180)}</p>
+                                </div>                                    
+                              </div>       
+                            </Col>
+                            <Col md="2">
+                            <span className="delete-button">
+                              <Button onClick={() => this.deleteCart(cart._id)} color="danger" size="sm"><b>X</b></Button>                              
+                            </span>
+                            </Col>                 
+                          </Row>
+                        ))
                       }
-                  </Card>
-                </Row> : null
-              }
-              { 
-                showCartItemDetail === true ? 
-                  <CartDetails
-                    note={this.state.qty}
-                    handleFormSubmit={this.handleFormSubmit}
-                    handleInputChange={this.handleInputChange}  
-                    showCart={showCart}
-                    itemId={itemId} 
-                    cartSubmit={this.cartSubmit} 
-                    backToCart={this.backToCart}
-                    addQty={this.addQty} 
-                    memberId={this.state.memberId}
-                  /> : null 
-              }       
-                 
-          
-          </Row>      
-     
+                    </div>
+                  ) 
+                      : showCartItemDetail === false &&
+                        showitemCarts === true &&
+                        useritemCartsCount === 0 ?
+                        (<div>
+                          <h5>No item(s) in your Cart</h5>                              
+                        </div>
+                      ) : null                
+                  }
+              </Card>
+            </Row> : null
+          }
+          { 
+            showCartItemDetail === true ? 
+              <CartDetails
+                note={this.state.qty}
+                handleFormSubmit={this.handleFormSubmit}
+                handleInputChange={this.handleInputChange}  
+                showCart={showCart}
+                itemId={itemId} 
+                cartSubmit={this.cartSubmit} 
+                backToCart={this.backToCart}
+                addQty={this.addQty} 
+                memberId={this.state.memberId}
+              /> : null 
+          }  
       </div>
     );
   }

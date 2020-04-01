@@ -1,7 +1,7 @@
 import React, { Component} from "react";
 import "./style.css";
 import { Card, Row, Col} from 'reactstrap';
-import API from "../../utils/API"
+import API from "../utils/API";
 
 
 
@@ -66,32 +66,41 @@ class SavedItems extends Component {
                 })
           
   };
-
+  
   
 
   render() {
+    function truncateString(str, num) {    
+      if (str.length > num && num > 3) {
+              return str.slice(0, (num - 3)) + '...';
+          } else if (str.length > num && num <= 3) {
+              return str.slice(0, num) + '...';
+          } else {
+          return str;
+      }    
+    }
     const {useritemSavedCount, userSavedItems} = this.state
     return (             
-      <Row>
-        <Card className="item-display">
-          <div className = "item-row-display">
+      <>
+        <Card className="saved-item-card">
+          {/* <div className = "saved-item-row-display"> */}
             { userSavedItems.length ?  (
-              <div>,
+              <div>
               {userSavedItems.map(result => (   
-                  <Col key={result.itemId} md="3">
-                    <div className="item-card">
-                      <div className="img-container" onClick={() => this.savedItemDetailsSubmit(result._id)} title="See Details">                
+                  <span key={result.itemId} className="saved-item-row-display">
+                    <Col md="col-5" className="saved-item-card">
+                      <div className="saved-img-container" onClick={() => this.savedItemDetailsSubmit(result._id)} title="See Details">                
                         <img 
                             key={result._id} 
                             alt={result.item} width="120" height="160" className="img-fluid" 
                             src={result.thumbnail == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.thumbnail} />
                       </div>                  
                       <div className="content" onClick={() => this.savedItemDetailsSubmit(result.itemId)} title="See Details">
-                        <p>{result.item} </p>
+                        <p>{result.item = truncateString(result.item, 40)} </p>
                         <b>Rating :</b> {result.rating} {useritemSavedCount}
                         <p><b>${result.price}</b></p>
                       </div>                              
-                      <div className="result-card-button">                   
+                      <div className="saved-result-card-button">                   
                         { this.state.memberId === null || this.state.memberId === undefined ? [] :
                           <>
                             <p onClick={() => this.cartSubmit(result.itemId)}>Buy</p>
@@ -101,21 +110,21 @@ class SavedItems extends Component {
                           </>
                         }
                       </div>                        
-                    </div>               
-                  </Col>
+                    </Col>               
+                  </span>
               ))
               } 
               </div>
             )             
               : useritemSavedCount === 0 ?
                 (<div>
-                  <h5>You have to Saved items</h5>
+                  <h5>You have no Saved items</h5>
                 </div>
               ) : null
           }         
-          </div>
+          {/* </div> */}
         </Card>
-      </Row>    
+      </>
     );
     
   }
