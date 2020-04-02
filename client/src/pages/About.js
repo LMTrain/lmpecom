@@ -4,7 +4,8 @@ import Card from "../components/Card";
 import { Row, Container} from 'reactstrap';
 import ItemsInAbout from "../components/ItemsInAbout";
 import deals from "../pages/deals.json";
-import SearchResults from "../components/SearchResults";
+import ItemDetails from "../components/ItemDetails";
+import AboutSearchedResult from "../components/AboutSearchedResult";
 import API from "../utils/API";
 
 
@@ -118,7 +119,7 @@ class About extends Component  {
 
   render() { 
     console.log(this.props)
-    const {deals, showItem, showItemsSearchInAbout} = this.state   
+    const {deals, showItem, showItemsSearchInAbout, showItemDetailInAbout} = this.state   
     return (
       <div>
         <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
@@ -134,15 +135,23 @@ class About extends Component  {
                     <ItemsInAbout handleShuffleClick={this.shuffle} deals={deals}/>
                   </Card> : null}
               </>
-            <div>
-              {  this.props.itemsInAbout === false && showItemsSearchInAbout === true ?
-                  <SearchResults 
+              {  this.props.itemsInAbout === false && showItemsSearchInAbout === true ? 
+                  <AboutSearchedResult 
                     items={this.props.Items}
-                    showItem={showItem} 
                     cartSubmit={this.cartSubmit}  
                     handleDetailsSubmit={this.handleDetailsSubmit}
                     memberId={this.props.currentUser} 
                   /> : null
+            
+              }
+            <div>
+              {  this.props.itemDetailInAbout === true || showItemDetailInAbout === true ?
+                  <ItemDetails
+                    showItem={showItem}
+                    cartSubmit={this.cartSubmit}
+                    backToSearch={this.backToSearch}
+                    memberId={this.props.currentUser}
+                /> : null 
               }          
             </div>
           </Row>
