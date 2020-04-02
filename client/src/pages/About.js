@@ -1,15 +1,10 @@
 import React, {Component} from "react";
 import Hero from "../components/Hero";
-// import Container from "../components/Container";
-// import Row from "../components/Row";
-// import Col from "../components/Col";
 import Card from "../components/Card";
-import { Row, Col, Container} from 'reactstrap';
+import { Row, Container} from 'reactstrap';
 import ItemsInAbout from "../components/ItemsInAbout";
 import deals from "../pages/deals.json";
 import SearchResults from "../components/SearchResults";
-import ItemDetails from "../components/ItemDetails";
-import Cart from "../pages/Cart";
 import API from "../utils/API";
 
 
@@ -27,11 +22,7 @@ class About extends Component  {
     showItemDetailInAbout: false,
   };
 
-  // componentWillMount() {
-  //   if (this.props.showCartItems === true) {
-  //     this.setState({showItemsSearchInAbout: false, showItemDetailInAbout: false})
-  //   }
-  // }
+ 
 
   shuffle = () => {
     let dealsArray = [...this.state.deals];
@@ -127,18 +118,15 @@ class About extends Component  {
 
   render() { 
     console.log(this.props)
-    const {deals, showItemDetailInAbout, showItem, showItemsSearchInAbout} = this.state   
+    const {deals, showItem, showItemsSearchInAbout} = this.state   
     return (
       <div>
         <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
           <Row style={{color: "white", fontSize: 30, marginLeft: 150}}>          
             <h1> A Personalized e-Commerce StoreFront</h1>       
           </Row>
-
           <Row>
-            <Col>            
-              <Hero />
-          
+            <Hero />
               <>
                 { this.props.itemsInAbout === true ?
                   <Card >
@@ -146,41 +134,21 @@ class About extends Component  {
                     <ItemsInAbout handleShuffleClick={this.shuffle} deals={deals}/>
                   </Card> : null}
               </>
-              <div className="about-col">
-                {  this.props.itemsInAbout === false && showItemsSearchInAbout === true ?
-                    <SearchResults 
-                      items={this.props.Items}
-                      showItem={showItem} 
-                      cartSubmit={this.cartSubmit}  
-                      handleDetailsSubmit={this.handleDetailsSubmit}
-                      memberId={this.props.currentUser} 
-                    /> : null
-                }
-             
-              
-                {/* { this.props.itemDetailInAbout === true || showItemDetailInAbout === true ?
-                    <ItemDetails style={{color: "white", marginLeft: -280}}
-                      showItem={showItem}
-                      cartSubmit={this.cartSubmit}            
-                      backToSearch={this.backToSearch} 
-                      memberId={this.props.currentUser}
-                    /> : null 
-                } */}
-
-                { this.props.showCartItems === true ?          
-                  
-                    <Cart
-                      memberId={this.props.currentUser}
-                    /> : null 
-                }
-              </div> 
-            </Col>
-       
+            <div>
+              {  this.props.itemsInAbout === false && showItemsSearchInAbout === true ?
+                  <SearchResults 
+                    items={this.props.Items}
+                    showItem={showItem} 
+                    cartSubmit={this.cartSubmit}  
+                    handleDetailsSubmit={this.handleDetailsSubmit}
+                    memberId={this.props.currentUser} 
+                  /> : null
+              }          
+            </div>
           </Row>
         </Container>
       </div>
     );
-
   }
 }
 

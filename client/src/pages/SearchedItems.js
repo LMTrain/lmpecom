@@ -123,7 +123,7 @@ class SavedItems extends Component {
     const {useritemSavedCount, userSavedItems, savedItemDetail} = this.state
     return (             
       <>
-        <Card className="saved-item-card">
+        <Card className="saved-card">
           {/* <div className = "saved-item-row-display"> */}
             { userSavedItems.length ?  (
               <div>

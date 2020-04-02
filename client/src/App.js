@@ -10,9 +10,9 @@ import Signin from "./pages/Signin";
 import Getstarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
 import API from "./utils/API";
-import dataSet from "../src/pages/db.json"
-import UserPage from "./pages/UserPage";
-
+import dataSet from "./pages/db.json"
+// import UserPage from "./pages/UserPage";
+// import Cart from "./pages/Cart";
 
 require('dotenv').config();
 
@@ -447,7 +447,7 @@ class App extends React.Component {
             <Route exact path="/" render = { () => <About Items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser} itemDetailInAbout={itemDetailInAbout} showCartItems={showCartItems}/>} />
             <Route exact path="/about" render = { () => <About items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser}/>} />
             <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} setTheme={this.setTheme}/>} />
-            <Route exact path="/Sign out" render = { () => <About setTheme={this.setTheme}/>}/>
+            {/* <Route exact path="/Sign out" render = { () => <About setTheme={this.setTheme}/>}/> */}
             <Route exact path="/Getstarted" render = { () => <Getstarted saveMemberID={this.saveMemberID} />}/>
             <Route exact path="/PersonalizePage" 
               render = { () => 
@@ -457,13 +457,10 @@ class App extends React.Component {
                 />
               } 
             />
-            <Route exact path="/UserPage" 
+            <Route exact path="/Cart" 
               render = { () => 
-                <UserPage
-                  setTheme={this.setTheme} 
-                  logOut={this.logOut} 
-                  saveMemberID={this.saveMemberID} 
-                  currentUser={this.state.currentUser} 
+                <Cart
+                  setTheme={this.setTheme} memberId={this.state.currentUser} saveMemberID={this.saveMemberID}                
                 />
               }
             />
@@ -483,8 +480,6 @@ class App extends React.Component {
                 />
               } 
             />
-
-            <Route exact path="/Cart" component={Cart} />  
             
           </Wrapper>
           <Footer />

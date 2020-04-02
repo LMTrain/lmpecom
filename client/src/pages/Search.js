@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import SearchResults from "../components/SearchResults";
-// import ItemDetails from "../components/ItemDetails";
-import Cart from "./Cart";
+// import Cart from "./Cart";
 import { Redirect } from "react-router-dom";
 import SavedItems from "./SearchedItems";
 import { Row, Col, Container} from 'reactstrap';
@@ -226,47 +225,32 @@ class Search extends Component {
       <div>        
         <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
           <Row>
-            { this.props.currentUser ?
-              <div style={divStyle}><b style={{marginLeft: -350}}> Welcome {membername}!</b></div>: null
-            }
+            <div style={{ marginLeft: 500 }}>
+              { this.props.currentUser ?
+                <div style={divStyle}><b style={{marginLeft: -350}}> Welcome {membername}!</b></div>: null
+              }
+            </div>
           </Row>
+          <Row>
+            {
+              <SavedItems memberId={this.props.currentUser}/>
+            }
 
-          <Row>           
-            <Col className="search-col-md-6">            
-              {
-                <SavedItems memberId={this.props.currentUser}
-                
-                />
-              }
-
-              { this.props.showItemState === true || showSearchItem === true?             
-                
-                <SearchResults 
-                  items={this.props.Items}
-                  showItem={showItem} 
-                  cartSubmit={this.cartSubmit} 
-                  addItemToSaveForLater={this.addItemToSaveForLater}        
-                  handleDetailsSubmit={this.handleDetailsSubmit}
-                  memberId={this.props.currentUser}
-                  userDivStyle={userDivStyle}          
-                /> : null 
-              }
-
-            </Col>
-            <Col className="search-col-md-3r">           
-              <Cart
-                memberId={this.props.currentUser}
-                backToSearch={this.backToSearch} 
-                renderRedirect={this.renderRedirect}
+            { this.props.showItemState === true || showSearchItem === true?             
+              
+              <SearchResults 
+                items={this.props.Items}
+                showItem={showItem} 
+                cartSubmit={this.cartSubmit} 
+                addItemToSaveForLater={this.addItemToSaveForLater}        
                 handleDetailsSubmit={this.handleDetailsSubmit}
-                signOut={this.signOut}
-                userDivStyle={userDivStyle}
-              /> 
-            </Col>                      
+                memberId={this.props.currentUser}
+                userDivStyle={userDivStyle}          
+              /> : null 
+            }
           </Row>
         </Container>         
       </div>
-      
     );
   }
 }

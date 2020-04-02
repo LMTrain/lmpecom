@@ -42,14 +42,15 @@ ul.search-results img {
   background:white;
   border-radius: 32px;
   height: 580px !important; 
-  width: 1400px !important;
+  width: 1310px !important;
   box-shadow: 0 -10px 29px #6f6666, 0 19px 29px #6f6666;
   text-align: left;
   margin-top: 10px; 
-  margin-left: 5px !important; 
+  margin-left: -270px !important; 
   margin-right: -195px !important; 
  
 }
+
 
 
 .item-row-display {
