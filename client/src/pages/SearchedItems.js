@@ -22,8 +22,7 @@ class SavedItems extends Component {
  
 
   componentWillMount() { 
-    mId = this.state.memberId   
-    console.log("THIS IS MID IN SAVED =>", mId) 
+    mId = this.state.memberId       
     this.loadSavedItems();
   }
 

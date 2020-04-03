@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import API from "../utils/API";
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Row, Col, Container} from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, Button, Row, Col, Container} from 'reactstrap';
 import DetailModal from "../components/Modals"
 
 
@@ -31,8 +31,7 @@ class Cart extends Component {
     this.loadCarts();
   }
 
-  loadCarts = () => {
-    console.log(mId)
+  loadCarts = () => {  
     API.getCarts()
       .then(res => {        
         this.setState({ cart: res.data })

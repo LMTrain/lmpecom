@@ -39,7 +39,7 @@ class About extends Component  {
 
   handleDetailsSubmit = (id) => {  
     // Find the id in the state    
-    const item = this.props.Items.find((item) => item.itemId === id);    
+    const item = this.props.Items.find((item) => item.itemId === id);     
     this.setState({showItem: [item], 
                   detailsItem: [item], 
                   showItemDetailInAbout: true,
@@ -118,7 +118,6 @@ class About extends Component  {
   };
 
   render() { 
-    console.log(this.props)
     const {deals, showItem, showItemsSearchInAbout, showItemDetailInAbout} = this.state   
     return (
       <div>

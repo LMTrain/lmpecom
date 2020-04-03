@@ -9,13 +9,14 @@ import Wrapper from "./components/Wrapper";
 import Signin from "./pages/Signin";
 import Getstarted from "./pages/GetStarted";
 import PersonalizePage from "./pages/PersonalizePage";
+import Signout from "./pages/Signout"
 import API from "./utils/API";
 import dataSet from "./pages/db.json"
-// import UserPage from "./pages/UserPage";
 // import Cart from "./pages/Cart";
 
 require('dotenv').config();
 
+var resetAllState = false
 var userArray = [];
 var userTheme = ""
 var memberInfo = ""
@@ -33,10 +34,10 @@ class App extends React.Component {
     itemsInAbout: true,
     itemDetailInAbout: false,
     showItemState: false, 
-    showCartItems: false, 
-     
+    showCartItems: false,         
   }
 
+  
   showUsersCart = () => {
     this.setState({showCartItems: true});    
   };
@@ -245,7 +246,8 @@ class App extends React.Component {
         memberId: mID,
         memberName: mName,
         userName: mID,     
-      })       
+      })
+      resetAllState = false      
       // this.getMemberInfo()
     }
   
@@ -423,7 +425,17 @@ class App extends React.Component {
     })
   }
 
+  resetState = () => {
+    resetAllState = true 
+    console.log("FROM RESET", resetAllState)
+  }
+
   render() {
+    if (resetAllState === true) {
+      window.location.reload(true);
+    }else{
+      console.log("FROM RESET", resetAllState)
+    }
 
     const {theme, memberName, currentUser, search, Items, showItemImage, 
             showItemState, showCartItems, itemsInAbout, itemDetailInAbout, 
@@ -480,7 +492,7 @@ class App extends React.Component {
                 />
               } 
             />
-            
+             <Route exact path="/Signout" render = { () => <Signout resetState={this.resetState} saveMemberID={this.saveMemberID} setTheme={this.setTheme} Items={Items}/>} />
           </Wrapper>
           <Footer />
         </div>

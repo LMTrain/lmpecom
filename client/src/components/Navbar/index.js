@@ -75,8 +75,8 @@ function Navbar(props) {
           </li>         
           <li className="nav-item">
             <Link className="getstarted-in-nav"
-              to="/signin"
-              className={window.location.pathname === "/signin" ? "nav-link active" : "nav-link"}
+              to="/signout"
+              className={window.location.pathname === "/Signout" ? "nav-link active" : "nav-link"}
             >
               Sign Out
             </Link>

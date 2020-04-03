@@ -17,7 +17,6 @@ function truncateString(str, num) {
 
 
 function AboutSearchedResult(props) {
-  console.log("PROPS", props.items ) 
   return (             
     <Row>
       <Card className="card-item-display">

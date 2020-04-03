@@ -4,7 +4,7 @@ import SearchResults from "../components/SearchResults";
 // import Cart from "./Cart";
 import { Redirect } from "react-router-dom";
 import SavedItems from "./SearchedItems";
-import { Row, Col, Container} from 'reactstrap';
+import { Row, Container} from 'reactstrap';
 
 
 
@@ -216,8 +216,8 @@ class Search extends Component {
 
   
   render() {   
-    const {showItem, showItemDetail, showSearchItem,
-            showCartItems, userDivStyle,
+    const {showItem, showSearchItem,
+            userDivStyle,
           } = this.state
    
     

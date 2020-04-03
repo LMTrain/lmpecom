@@ -20,7 +20,7 @@ ul.search-results img {
   .list-group-item:last-child {  
     border-bottom-right-radius: .25rem;
     border-bottom-left-radius: .25rem;  
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     margin-left: -70px;
     border-radius: .95rem;
   }
