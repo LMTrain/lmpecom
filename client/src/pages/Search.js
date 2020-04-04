@@ -74,14 +74,15 @@ class Search extends Component {
   }
 
   userTheme = (id) => { 
+    this.props.setTheme(id)
     divStyle = {
       color: userArray[0].colorDb,
       textAlign: userArray[0].textalignDb,
       fontSize: userArray[0].divfontsizeDb,
       fontFamily: userArray[0].fontfamilyDb,      
     };
-    this.setState({userDivStyle: divStyle})
-    this.props.setTheme(id)    
+    this.setState({userDivStyle: divStyle})    
+    this.props.divStyle(divStyle)   
   }
  
   

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
+import SettingsModal from "../SettingsModal";
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
 
@@ -8,7 +9,7 @@ function Navbar(props) {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <Link className="navbar-brand" to="/">
-        LM Pecom
+        <b>LM PeCom</b>
       </Link>
       <span>
         <form className="search">          
@@ -72,7 +73,19 @@ function Navbar(props) {
             >
               Cart
             </Link>
-          </li>         
+          </li> 
+          <li className="nav-item">
+            <span className="getstarted-in-nav"
+            
+              className={window.location.pathname === "/Settings" ? "nav-link active" : "nav-link"}
+            >
+              <SettingsModal 
+                setTheme={props.setTheme}
+                updateDBtheme={props.updateDBtheme}
+                addPicture={props.addPicture}
+              />
+            </span>
+          </li>                 
           <li className="nav-item">
             <Link className="getstarted-in-nav"
               to="/signout"

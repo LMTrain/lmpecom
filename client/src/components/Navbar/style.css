@@ -20,6 +20,11 @@ nav.navbar.navbar-default {
   margin-left: 200px;
 }
 
+.navbar-brand :hover {
+  color: orangered;
+  cursor: pointer;
+}
+
 .nav-link {
   margin-inline-start: -10px;
   margin-inline-end: 20px;

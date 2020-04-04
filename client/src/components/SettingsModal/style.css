@@ -1,0 +1,27 @@
+ul.search-results img {
+  margin: 0 auto;
+}
+
+.choosemodal-theme {
+ color: whitesmoke;
+ text-align: center;
+ font-size: 32px;
+}
+
+
+.modal-theme {
+  background: #fff;  
+  height: 120px;
+  margin: 0.5rem !important;
+  margin-right: 3rem !important;
+  width: 180px;
+  box-shadow: 0 -3px 15px #6f6666, 0 3px 15px #6f6666;
+  text-align: left;
+}
+
+
+.create-acc-btn {
+  margin-inline-start: -30px;
+  margin-inline-end: 5px;
+ 
+}

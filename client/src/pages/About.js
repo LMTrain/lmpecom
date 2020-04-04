@@ -123,7 +123,9 @@ class About extends Component  {
       <div>
         <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
           <Row style={{color: "white", fontSize: 30, marginLeft: 150}}>          
-            <h1> A Personalized e-Commerce StoreFront</h1>       
+            { this.props.currentUser ?
+              <h1 style={this.props.userDivStyle}> <b>A Personalized e-Commerce StoreFront</b></h1>: <h1> <b>A Personalized e-Commerce StoreFront</b></h1>
+            }      
           </Row>
           <Row>
             <Hero />
@@ -139,6 +141,7 @@ class About extends Component  {
                     items={this.props.Items}
                     cartSubmit={this.cartSubmit}  
                     handleDetailsSubmit={this.handleDetailsSubmit}
+                    addItemToSaveForLater={this.addItemToSaveForLater}
                     memberId={this.props.currentUser} 
                   /> : null
             

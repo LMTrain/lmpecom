@@ -1,10 +1,9 @@
 import React, {Component} from "react";
 import Hero from "../components/Hero";
-import Card from "../components/Card";
 import { Row, Container} from 'reactstrap';
-import ItemsInAbout from "../components/ItemsInAbout";
 import { Redirect } from "react-router-dom";
-
+// import ItemsInAbout from "../components/ItemsInAbout";
+// import Card from "../components/Card";
 
 
 class Signout extends Component  {
@@ -19,7 +18,6 @@ class Signout extends Component  {
   }
 
  
-
   render() { 
     if (this.state.redirect) {
       this.props.resetState();

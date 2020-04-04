@@ -13,9 +13,6 @@ function truncateString(str, num) {
   }    
 }
 
-
-
-
 function AboutSearchedResult(props) {
   return (             
     <Row>

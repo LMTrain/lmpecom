@@ -29,6 +29,7 @@ class App extends React.Component {
     theme: "theme0",
     search: "",
     Items: [],
+    userDivStyle: {},
     memberId: "",
     memberName: "", 
     itemsInAbout: true,
@@ -42,6 +43,9 @@ class App extends React.Component {
     this.setState({showCartItems: true});    
   };
   
+  addPicture = () => {
+    console.log("THIS IS USERS PICTURE")
+  }
 
 
   //UPDATE THEME IN DB
@@ -190,6 +194,14 @@ class App extends React.Component {
           fontfamilyyy = "Bernard MT";
          this.setFinalTheme()
         break;
+        case "theme17":
+          colorrr = "brown";
+          testalignnn = "center";
+          divfontsizeee = "38px";
+          pfontsizeee = "16px";
+          fontfamilyyy = "Bernard MT";
+         this.setFinalTheme()
+        break;
       default:
           colorrr = "White";
           testalignnn = "center";
@@ -326,6 +338,9 @@ class App extends React.Component {
    
   };
 
+  divStyle = (divId) => {
+    this.setState({userDivStyle: divId})
+  }
 
   setTheme = (id) => {      
     switch(id){
@@ -412,7 +427,10 @@ class App extends React.Component {
           userTheme= "theme16"
           this.setFinalTheme()
         break;
-
+        case "theme17":
+          userTheme= "theme17"
+          this.setFinalTheme()
+        break;
       default :
       userTheme= "theme0"
       this.setFinalTheme()
@@ -438,7 +456,7 @@ class App extends React.Component {
     }
 
     const {theme, memberName, currentUser, search, Items, showItemImage, 
-            showItemState, showCartItems, itemsInAbout, itemDetailInAbout, 
+            showItemState, showCartItems, itemsInAbout, itemDetailInAbout, userDivStyle 
             } = this.state;  
     return (
       <Router>
@@ -449,14 +467,14 @@ class App extends React.Component {
               search={search}
               handleFormSubmit={this.handleFormSubmit}
               handleInputChange={this.handleInputChange}
-              showUsersCart={this.showUsersCart}
-              // submit={this.searchForItems} 
-              // setSearch={this.setSearch}
+              setTheme={this.setTheme}
+              updateDBtheme={this.updateDBtheme}
+              addPicture={this.addPicture}
             />
            
           <Wrapper theme={theme}>
     
-            <Route exact path="/" render = { () => <About Items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser} itemDetailInAbout={itemDetailInAbout} showCartItems={showCartItems}/>} />
+            <Route exact path="/" render = { () => <About Items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser} itemDetailInAbout={itemDetailInAbout} showCartItems={showCartItems} userDivStyle={userDivStyle}/>} />
             <Route exact path="/about" render = { () => <About items={Items} itemsInAbout={itemsInAbout} currentUser={this.state.currentUser}/>} />
             <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} setTheme={this.setTheme}/>} />
             {/* <Route exact path="/Sign out" render = { () => <About setTheme={this.setTheme}/>}/> */}
@@ -472,7 +490,7 @@ class App extends React.Component {
             <Route exact path="/Cart" 
               render = { () => 
                 <Cart
-                  setTheme={this.setTheme} memberId={this.state.currentUser} saveMemberID={this.saveMemberID}                
+                  setTheme={this.setTheme} memberId={this.state.currentUser} saveMemberID={this.saveMemberID} userDivStyle={userDivStyle}              
                 />
               }
             />
@@ -489,6 +507,7 @@ class App extends React.Component {
                   showItemImage={showItemImage}
                   showItemState={showItemState}
                   showCartItems={showCartItems}
+                  divStyle={this.divStyle}
                 />
               } 
             />

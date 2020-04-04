@@ -138,7 +138,11 @@ class Cart extends Component {
     return (
       <div>
         <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
-
+          <Row style={{marginLeft: -200}}>          
+            { this.props.memberId ?
+              <h1 style={this.props.userDivStyle}> <b>Cart</b></h1>: <h1> <b>Please Sign In to see your Cart</b></h1>
+            }      
+          </Row>
           { memberId !== null ?
             <Row>
               <Col md="10">              
