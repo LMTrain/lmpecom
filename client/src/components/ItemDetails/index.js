@@ -18,7 +18,7 @@ function Details(props) {
           <span> 
             {/* <button id={itemDetail.etag} type="submit" onClick={() => props.cartSubmit(itemDetail.id)} className="btn btn-success">Add to Favorite
             </button> */}
-            { props.memberId === null || props.memberId === undefined ? "Sign In to Add Book to Favorite" :
+            { props.memberId === null || props.memberId === undefined ? "Sign In to Add Item to Cart" :
               <>
                 <Button  
                   id={itemDetail.itemId} type="submit" onClick={() => props.cartSubmit(itemDetail.itemId)} color="info" size="sm">Add to Cart
