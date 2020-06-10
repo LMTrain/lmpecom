@@ -110,15 +110,12 @@ class SavedItems extends Component {
   
 
   render() {
-    function truncateString(str, num) {    
-      if (str.length > num && num > 3) {
-              return str.slice(0, (num - 3)) + '...';
-          } else if (str.length > num && num <= 3) {
-              return str.slice(0, num) + '...';
-          } else {
-          return str;
-      }    
-    }
+    const shortText = (text, maxLength = 30) => {
+      if (!text) { return ' '}
+      if (text.length <= maxLength) { return text }
+    
+      return text.substr(0, maxLength) + '...'
+    } 
     const {useritemSavedCount, userSavedItems, savedItemDetail} = this.state
     return (             
       <>
@@ -139,7 +136,7 @@ class SavedItems extends Component {
                         <SavedItemModal
                             showCart={savedItemDetail}
                         ></SavedItemModal>
-                        <p>{result.item = truncateString(result.item, 40)} </p>
+                        <p>{shortText(result.item)} </p>
                         <b>Rating :</b> {result.rating} {useritemSavedCount}
                         <p><b>${result.price}</b></p>
                       </div>                              

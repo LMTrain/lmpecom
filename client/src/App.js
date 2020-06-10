@@ -17,8 +17,10 @@ import dataSet from "./pages/db.json"
 require('dotenv').config();
 
 var resetAllState = false
+ // eslint-disable-next-line 
 var userArray = [];
-var userTheme = ""
+var userTheme = "";
+// eslint-disable-next-line 
 var memberInfo = ""
 class App extends React.Component {
   state = {

@@ -3,15 +3,13 @@ import "./style.css";
 import { Card, Row, Col} from 'reactstrap';
 
 
-function truncateString(str, num) {    
-  if (str.length > num && num > 3) {
-          return str.slice(0, (num - 3)) + '...';
-      } else if (str.length > num && num <= 3) {
-          return str.slice(0, num) + '...';
-      } else {
-      return str;
-  }    
-}
+
+const shortText = (text, maxLength = 30) => {
+  if (!text) { return ' '}
+  if (text.length <= maxLength) { return text }
+
+  return text.substr(0, maxLength) + '...'
+} 
 
 function AboutSearchedResult(props) {
   return (             
@@ -27,9 +25,9 @@ function AboutSearchedResult(props) {
                       alt={result.name} width="120" height="160" className="img-fluid" 
                       src={result.largeImage} />
                 </div>                  
-                <div className="content" onClick={() => props.handleDetailsSubmit(result.itemId)} title="See Details">
-               
-                  <p>{result.name = truncateString(result.name, 40)}</p>
+                <div className="content" onClick={() => props.handleDetailsSubmit(result.itemId)} title="See Details">               
+                  
+                  <p>{shortText(result.name)}</p>
                   <b>Rating :</b> {result.customerRating}
                   <p><b>${result.salePrice}</b></p>
                 </div>

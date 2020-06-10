@@ -125,15 +125,12 @@ class Cart extends Component {
   
 
   render() { 
-    function truncateString(str, num) {    
-      if (str.length > num && num > 3) {
-              return str.slice(0, (num - 3)) + '...';
-          } else if (str.length > num && num <= 3) {
-              return str.slice(0, num) + '...';
-          } else {
-          return str;
-      }    
-    }
+    const shortText = (text, maxLength = 180) => {
+      if (!text) { return ' '}
+      if (text.length <= maxLength) { return text }
+    
+      return text.substr(0, maxLength) + '...'
+    } 
     const {useritemCartsCount, showCartItemDetail, showCart, showitemCarts, itemId, userCarts, memberId, totalItemsPrice} = this.state;
     return (
       <div>
@@ -180,7 +177,7 @@ class Cart extends Component {
                                       <p><b>{cart.item}</b></p>
                                       <p>${cart.price} </p> 
                                       <p> <b>QTY :</b> {cart.qty} <b style={{ color: "white"}}>____</b>{" "}<b>Rating :</b> {cart.rating}</p>
-                                      <p><b>Desc :</b>  {cart.description = truncateString(cart.description, 180)}</p>
+                                      <p><b>Desc :</b>{shortText(cart.description)}  </p>
                                     </div>                                    
                                   </div>       
                                 </Col>
