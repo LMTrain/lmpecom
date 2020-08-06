@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import SearchResults from "../components/SearchResults";
 // import Cart from "./Cart";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import SavedItems from "./SearchedItems";
-import { Row, Container} from 'reactstrap';
+import { Row, Container, Button} from 'reactstrap';
 
 
 
@@ -214,7 +214,7 @@ class Search extends Component {
       <div>        
         <Container style={{ marginTop: 120, minHeight: "100%", width: "100%" }}>
           <Row>
-            <div style={{ marginLeft: 500 }}>
+            <div style={{ marginLeft: 500 }}>            
               { this.props.currentUser ?
                 <div style={divStyle}><b style={{marginLeft: -350}}> Welcome {membername}!</b></div>: null
               }
@@ -238,6 +238,7 @@ class Search extends Component {
               /> : null 
             }
           </Row>
+        
         </Container>         
       </div>
     );

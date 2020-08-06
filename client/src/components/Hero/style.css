@@ -62,7 +62,7 @@ img {
   font-size: 24px;  
 }
 
-.hero::after {
+/* .hero::after {
   content: "";
   display: block;
   opacity: .4;
@@ -77,7 +77,7 @@ img {
 .hero * {
   position: relative;
   z-index: 2;
-}
+} */
 
 .hero h1, .hero h2 {
   color: rgb(129, 27, 27);
